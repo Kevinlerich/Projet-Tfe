@@ -70,4 +70,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Announce::class);
     }
+
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    public function disponibilities(): HasMany
+    {
+        return $this->hasMany(Disponibility::class);
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
 }
