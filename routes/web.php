@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AccueilController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AccueilController::class, 'accueil'])->name('accueil');
 
 Route::middleware([
     'auth:sanctum',

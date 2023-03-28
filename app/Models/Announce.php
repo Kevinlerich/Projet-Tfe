@@ -22,4 +22,9 @@ class Announce extends Model
     {
         return $this->hasMany(Gallery::class);
     }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -22,4 +22,9 @@ class Service extends Model
     {
         return $this->hasMany(Portfolio::class);
     }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
