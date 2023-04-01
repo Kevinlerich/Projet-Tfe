@@ -16,6 +16,10 @@ use App\Http\Controllers\AccueilController;
 */
 
 Route::get('/', [AccueilController::class, 'accueil'])->name('accueil');
+Route::get('services', [AccueilController::class, 'services'])->name('services');
+Route::get('service/{id}', [AccueilController::class, 'detail_service'])->name('detail_service');
+
+Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
 
 Route::middleware([
     'auth:sanctum',

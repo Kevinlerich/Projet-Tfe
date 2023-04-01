@@ -124,7 +124,7 @@
                                 </a>
                             </li>
                             <li class="ad aG">
-                                <a href="#about" class="
+                                <a href="{{ route('services') }}" class="
                         menu-scroll
                         aH
                         text-dark
@@ -136,11 +136,11 @@
                         lg:aP lg:aQ
                         xl:aR
                       ">
-                                    About
+                                    Services
                                 </a>
                             </li>
                             <li class="ad aG">
-                                <a href="#pricing" class="
+                                <a href="{{ route('contact') }}" class="
                         menu-scroll
                         aH
                         text-dark
@@ -152,23 +152,7 @@
                         lg:aP lg:aQ
                         xl:aR
                       ">
-                                    Pricing
-                                </a>
-                            </li>
-                            <li class="ad aG">
-                                <a href="#contact" class="
-                        menu-scroll
-                        aH
-                        text-dark
-                        dark:aI
-                        group-hover:aJ
-                        aK
-                        lg:aL lg:aM lg:aN
-                        a8 aO
-                        lg:aP lg:aQ
-                        xl:aR
-                      ">
-                                    Support
+                                    Contactez nous
                                 </a>
                             </li>
                             <li class="ad aG submenu-item">
@@ -196,7 +180,7 @@
                         after:am[-50%]
                         after:a11[-2px]
                       ">
-                                    Pages
+                                    Langues
                                 </a>
                                 <div class="
                         submenu
@@ -220,7 +204,7 @@
                           dark:aI
                           hover:aJ
                         ">
-                                        About Page
+                                        Francais
                                     </a>
                                     <a href="contact.html" class="
                           ah a1b a1c aq[10px] ae
@@ -228,32 +212,9 @@
                           dark:aI
                           hover:aJ
                         ">
-                                        Contact Page
+                                        Anglais
                                     </a>
-                                    <a href="blog-grids.html" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        Blog Grid Page
-                                    </a>
-                                    <a href="blog-sidebar.html" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        Blog Sidebar Page
-                                    </a>
-                                    <a href="blog-details.html" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        Blog Details Page
-                                    </a>
+
                                     <a href="{{ route('login') }}" class="
                           ah a1b a1c aq[10px] ae
                           text-dark
