@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title')
-    Se connecter
+    {{ __('Se connecter') }}
 @endsection
 @section('content')
     <section class="ad a1H a1I[180px] a1J[120px]">
@@ -20,7 +20,7 @@
                   sm:a1O
                   a30 a1M
                 ">
-                            Connectez-vous à votre compte
+                            {{ __('Connectez-vous à votre compte') }}
                         </h3>
                         <p class="
                   a1R
@@ -29,7 +29,7 @@
                   a2F
                   a1M
                 ">
-                            Connectez-vous à votre compte pour accéder à nos services.
+                            {{ __('Connectez-vous à votre compte pour accéder à nos services.') }}
                         </p>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
@@ -40,7 +40,7 @@
                       dark:aI
                       a30
                     ">
-                                    Votre Email
+                                    {{ __('Votre Email') }}
                                 </label>
                                 <input type="email" name="email" placeholder="Entrer votre Email" class="
                       a7 a3l a3m
@@ -63,7 +63,7 @@
                       dark:aI
                       a30
                     ">
-                                    Votre mot de passe
+                                    {{ __('Votre mot de passe') }}
                                 </label>
                                 <input type="password" name="password" placeholder="Enter your Password" class="
                       a7 a3l a3m
@@ -114,7 +114,7 @@
 </span>
                                             </div>
                                         </div>
-                                        Se souvenir de moi
+                                        {{ __('Se souvenir de moi') }}
                                     </label>
                                 </div>
                                 <div>
@@ -122,7 +122,7 @@
                         a1W a1b a1R
                         hover:a2T
                       ">
-                                        Mot de passe oublié ?
+                                        {{ __('Mot de passe oublié ?') }}
                                     </a>
                                 </div>
                             </div>
@@ -141,16 +141,16 @@
                       hover:a1n hover:a2i
                       a1p a1a a2j a13
                     " type="submit">
-                                    Se connecter
+                                    {{ __('Se connecter') }}
                                 </button>
                             </div>
                         </form>
                         <p class="
                   a1R aH a1S a1M
                 ">
-                            Vous avez déjà un compte ?
+                            {{ __('Vous avez déjà un compte ?') }}
                             <a href="{{ route('register') }}" class="a1W hover:a2T">
-                                Créer un compte
+                                {{ __('Créer un compte') }}
                             </a>
                         </p>
                     </div>

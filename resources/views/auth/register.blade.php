@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title')
-    Créer un compte
+    {{ __('Créer un compte') }}
 @endsection
 @section('content')
 
@@ -21,7 +21,7 @@
                   sm:a1O
                   a30 a1M
                 ">
-                        Créez votre compte
+                        {{ __('Créez votre compte') }}
                     </h3>
                     <p class="
                   a1R
@@ -30,7 +30,7 @@
                   a2F
                   a1M
                 ">
-                        C'est totalement gratuit et super facile
+                        {{ __('C\'est totalement gratuit et super facile') }}
                     </p>
 
                     <form>
@@ -40,7 +40,7 @@
                       dark:aI
                       a30
                     ">
-                                Nom complet
+                                {{ __('Nom complet }}
                             </label>
                             <input type="text" name="name" placeholder="Saisissez votre nom complet" class="
                       a7 a3l a3m
@@ -161,7 +161,7 @@ Politique de confidentialité
                       a1m
                       hover:a1n hover:a2i
                       a1p a1a a2j a13
-                    ">
+                    " type="submit">
                                 S'inscrire
                             </button>
                         </div>
