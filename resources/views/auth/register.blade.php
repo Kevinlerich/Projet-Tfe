@@ -16,7 +16,8 @@
                             {{ __('C est totalement gratuit et super facile') }}
                         </p>
 
-                        <form>
+                        <form action="{{ route('register') }}" method="post">
+                            @csrf
                             <div class="a23">
                                 <label for="name" class="ah a1b a1R a1h dark:aIa30">
                                     {{ __('Nom complet') }}
