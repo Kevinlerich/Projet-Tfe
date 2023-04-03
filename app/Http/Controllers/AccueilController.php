@@ -15,4 +15,21 @@ class AccueilController extends Controller
 
         return view('frontend.accueil', compact('annonces', 'services'));
     }
+
+    public function services()
+    {
+        $services = Service::query()->get();
+        return view('frontend.services', compact('services'));
+    }
+
+    public function detail_service($id)
+    {
+        $service = Service::query()->findOrFail($id);
+        return view('frontend.detail_service', compact('service'));
+    }
+
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
 }
