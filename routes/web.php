@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\Photographe\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    /**
+     * Photographe Routes
+     */
+    Route::get('list_services', [ServiceController::class, 'index'])->name('list_service');
+    Route::get('create_service', [ServiceController::class, 'create'])->name('create_service');
+    Route::get('edit_service/{id}', [ServiceController::class, 'edit'])->name('edit_service');
+    Route::delete('delete_service/{id}', [ServiceController::class, 'delete'])->name('delete_service');
 });

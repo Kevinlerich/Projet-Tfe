@@ -19,34 +19,59 @@
                         <form action="{{ route('register') }}" method="post">
                             @csrf
                             <div class="a23">
-                                <label for="name" class="ah a1b a1R a1h dark:aIa30">
+                                <label for="name" class="ah a1b a1R a1h dark:aI a30">
                                     {{ __('Nom complet') }}
                                 </label>
-                                <input type="text" name="name" placeholder="Saisissez votre nom complet" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                                <input type="text" name="name" required placeholder="Saisissez votre nom complet" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                            </div>
+
+                            <div class="a23">
+                                <label for="name" class="ah a1b a1R a1h dark:aI a30">
+                                    {{ __('Ville') }}
+                                </label>
+                                <input type="text" name="ville" placeholder="Saisissez votre ville" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                            </div>
+
+                            <div class="a23">
+                                <label for="telephone" class="ah a1b a1R a1h dark:aI a30">
+                                    {{ __('Telephone') }}
+                                </label>
+                                <input type="tel" name="telephone" placeholder="Saisissez votre telephone" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
                             </div>
                             <div class="a23">
                                 <label for="email" class="ah a1b a1R a1h dark:aI a30">
                                     Email
                                 </label>
-                                <input type="email" name="email" placeholder="Saisissez votre Email" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                                <input type="email" name="email" required placeholder="Saisissez votre Email" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                            </div>
+
+                            <div class="a23">
+                                <label for="email" class="ah a1b a1R a1h dark:aI a30">
+                                    {{ __('Type utilisateur') }}
+                                </label>
+                                <select name="role" required class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                                    <option value="" selected disabled>Sélectionner un rôle</option>
+                                    <option value="2">Photographe</option>
+                                    <option value="3">Client</option>
+                                </select>
                             </div>
                             <div class="a23">
                                 <label for="password" class="ah a1b a1R a1h dark:aI a30">
                                     Votre mot de passe
                                 </label>
-                                <input type="password" name="password" placeholder="Entrez votre mot de passe" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                                <input type="password" name="password" required placeholder="Entrez votre mot de passe" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
+                            </div>
+
+                            <div class="a23">
+                                <label for="password" class="ah a1b a1R a1h dark:aI a30">
+                                    Confirmez votre mot de passe
+                                </label>
+                                <input type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Entrez votre mot de passe" class="a7 a3l a3m dark:a3w[#242B51] a13 a33 dark:a1n a1i az a1S aH a3x a3o focus-visible:aE focus:a3p"/>
                             </div>
                             <div class="a8 a23">
-                                <label for="checkboxLabel" class="
-                      a8
-                      a1r
-                      a1S
-                      a1b
-                      a1R
-                      a48
-                    ">
+                                <label for="checkboxLabel" class="a8 a1r a1S a1b a1R a48">
                                     <div class="ad">
-                                        <input type="checkbox" id="checkboxLabel" class="a1B"/>
+                                        <input type="checkbox" id="checkboxLabel" class="a1B" name="terms" required/>
                                         <div class="
                           box
                           a8
