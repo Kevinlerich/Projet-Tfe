@@ -215,30 +215,7 @@
                                         Anglais
                                     </a>
 
-                                    <a href="{{ route('login') }}" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        Se connecter
-                                    </a>
-                                    <a href="{{ route('register') }}" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        Créer un compte
-                                    </a>
-                                    <a href="404.html" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        404 Page
-                                    </a>
+
                                 </div>
                             </li>
                         </ul>
