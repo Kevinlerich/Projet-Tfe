@@ -20,6 +20,11 @@ class ServiceController extends Controller
         //
     }
 
+    public function store(Request $request)
+    {
+        //
+    }
+
     public function edit($id)
     {
         //

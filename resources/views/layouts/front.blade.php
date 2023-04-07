@@ -50,7 +50,7 @@
             a8 ab[-16px] a9 ac ad
           ">
             <div class="ae af ag">
-                <a href="index.html" class="a7 ah ai header-logo">
+                <a href="/" class="a7 ah ai header-logo">
                     <img src="images/logo/logo-2.svg" alt="logo" class="a7 dark:aj" />
                     <img src="images/logo/logo.svg" alt="logo" class="a7 aj dark:ah" />
                 </a>
@@ -204,7 +204,7 @@
                           dark:aI
                           hover:aJ
                         ">
-                                        Francais
+                                        {{ __('Francais') }}
                                     </a>
                                     <a href="contact.html" class="
                           ah a1b a1c aq[10px] ae
@@ -212,10 +212,8 @@
                           dark:aI
                           hover:aJ
                         ">
-                                        Anglais
+                                        {{ __('Anglais') }}
                                     </a>
-
-
                                 </div>
                             </li>
                         </ul>
@@ -230,7 +228,7 @@
                   hover:aJ
                   a1i a1j
                 ">
-                        Se connecter
+                        {{ __('Se connecter') }}
                     </a>
                     <a href="{{ route('register') }}" class="
                   aj
@@ -247,7 +245,7 @@
                   hover:a1n hover:a1o
                   a13 a1p a1q a1a
                 ">
-                        Créer un compte
+                        {{ __('Créer un compte') }}
                     </a>
                     <div>
                         <label for="darkToggler" class="

@@ -19,13 +19,12 @@ use App\Http\Controllers\Photographe\ServiceController;
 Route::get('/', [AccueilController::class, 'accueil'])->name('accueil');
 Route::get('services', [AccueilController::class, 'services'])->name('services');
 Route::get('service/{id}', [AccueilController::class, 'detail_service'])->name('detail_service');
+Route::get('detail_annonce/{slug}', [AccueilController::class, 'detail_annonce'])->name('detail_annonce');
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
 
     /**
      * Photographe Routes

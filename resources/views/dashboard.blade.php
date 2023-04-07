@@ -1,8 +1,3 @@
-@extends('layouts.front')
-@section('title')
-    Services
-@endsection
-@section('content')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,137 +8,44 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="a8 a1K ab[-16px] a1x">
-                    <div class="a7 md:aU/3 lg:a1_/2 xl:a1_/3 ae">
-                        <div class="
-                ad aw
-                dark:av
-                a33 a13 a2p a1V
-                wow
-                fadeInUp
-              " data-wow-delay=".1s">
-                            <a href="blog-details.html" class="a7 ah ad">
-<span class="
-                    a3
-                    a34
-                    a35
-                    a1k
-                    a1w
-                    aM
-                    a9
-                    a1x
-                    aK
-                    ae
-                    a2P
-                    a1b
-                    aI
-                  ">
-Photographe de portrait
-</span>
 
-                            </a>
-                            <div class="
-                  a36
-                  sm:a2Y
-                  md:ai md:az
-                  lg:a2Y
-                  xl:ai xl:a37
-                  2xl:a2Y
-                ">
-                                <h3>
-                                    <a href="blog-details.html" class="
-                      a1g a1A
-                      dark:aI
-                      a27
-                      sm:a2u
-                      ah a1Q
-                      hover:a1W
-                      dark:hover:a1W
-                    ">
-                                        Zanga R
-                                    </a>
-                                </h3>
-                                <p class="
-                    aH
-                    a1S
-                    a1R
-                    a38
-                    a2E
-                    a2B
-                    a2z
-                    a2M
-                    dark:a2o dark:a2M
-                  ">
-                                    Fores, Belgium, 1190
-                                </p>
-                                <div class="a8 a9">
-                                    <div class="
-                      a8 a9 a39 a2O
-                      xl:a3a
-                      2xl:a39
-                      xl:a2A
-                      2xl:a2O
-                      a3b a2z a2M
-                      dark:a2o dark:a2M
-                    ">
-                                        <div class="
-                        aB[40px]
-                        a7
-                        at[40px]
-                        a1w
-                        a2p
-                        a2G
-                      ">
-
-                                        </div>
-                                        <div class="a7">
-                                            <h4 class="
-                          a1b a1R a1h
-                          dark:aI
-                          a2K
-                        ">
-                                                By
-                                                <a href="javascript:void(0)" class="
-                            a1h
-                            dark:aI
-                            hover:a1W
-                            dark:hover:a1W
-                          ">
-                                                    Le client préfère communiquer via le chat
-                                                </a>
-                                            </h4>
-                                            <p class="a3c a1S">
-                                                100% match
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="a22">
-                                        <h4 class="
-                        a1b a1R a1h
-                        dark:aI
-                        a2K
-                      ">
-                                            Demandé 4hrs • Ce client attend des professionnels comme vous.
-                                        </h4>
-                                        <p class="a3c a1S">Contacté Zango </p>
-                                        <p class="a3c a1S">Pas interesssé  </p>
-
-                                    </div>
+                @foreach($annonces as $annonce)
+                    <div class="flex font-sans">
+                        <div class="flex-none w-56 relative">
+                            <img src="{{ asset('storage/'.$annonce->photo) }}" alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
+                        </div>
+                        <form class="flex-auto p-6">
+                            <div class="flex flex-wrap">
+                                <h1 class="flex-auto font-medium text-slate-900">
+                                    {{ $annonce->titre }}
+                                </h1>
+                                <div class="text-sm font-medium text-slate-400">
+                                    {{ $annonce->category->nom }}
                                 </div>
                             </div>
-                        </div>
+                            <div class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200">
+                                <div class="space-x-2 flex text-sm font-bold">
+                                    <label>
+                                        <input class="sr-only peer" name="size" type="radio" value="xs" checked />
+                                        <div class="w-60 h-9 rounded-full flex items-center justify-center text-violet-400 peer-checked:bg-violet-600 peer-checked:text-white">
+                                            {{ $annonce->etat_annonce == 1 ? __('Annonce validée') : 'Annonce non validée' }}
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="flex space-x-4 mb-5 text-sm font-medium">
+                                <div class="flex-auto flex space-x-4">
+                                    <a href="" class="h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="submit">
+                                        {{ __('Voir annonce') }}
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-500">
+                                {!! $annonce->description !!}
+                            </p>
+                        </form>
                     </div>
-                    <div class="a7 md:aU/3 lg:a1_/2 xl:a1_/3 ae">
-                        <div class="
-                ad aw
-                dark:av
-                a33 a13 a2p a1V
-                wow
-                fadeInUp
-              " data-wow-delay=".15s">
-            </div>
-        </div>
-    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -153,4 +55,3 @@ Photographe de portrait
 
 
 </x-app-layout>
-@endsection
