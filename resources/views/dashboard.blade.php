@@ -74,7 +74,7 @@ Photographe de portrait
                     a2M
                     dark:a2o dark:a2M
                   ">
-                                    Forest, Belgium, 1190
+                                    Fores, Belgium, 1190
                                 </p>
                                 <div class="a8 a9">
                                     <div class="
