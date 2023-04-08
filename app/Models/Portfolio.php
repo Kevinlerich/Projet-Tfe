@@ -22,4 +22,9 @@ class Portfolio extends Model
     {
         return $this->hasMany(Photo::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
