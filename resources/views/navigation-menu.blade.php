@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole('photographe'))
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('list_service') }}" :active="request()->routeIs('list_service')">
                         {{ __('Services') }}
@@ -28,6 +28,14 @@
                         {{ __('My Portfolio') }}
                     </x-nav-link>
                 </div>
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::user()->hasRole('client'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link href="{{ route('my_announces') }}" :active="request()->routeIs('list_portfolio')">
+                            {{ __('My announces') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

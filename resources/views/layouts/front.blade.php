@@ -220,7 +220,8 @@
                     </nav>
                 </div>
                 <div class="a8 a1d a9 a1e lg:a1f">
-                    <a href="{{ route('login') }}" class="
+                    @guest
+                        <a href="{{ route('login') }}" class="
                   aj
                   md:ah
                   aH a1g a1h
@@ -228,9 +229,9 @@
                   hover:aJ
                   a1i a1j
                 ">
-                        {{ __('Se connecter') }}
-                    </a>
-                    <a href="{{ route('register') }}" class="
+                            {{ __('Se connecter') }}
+                        </a>
+                        <a href="{{ route('register') }}" class="
                   aj
                   md:ah
                   aH
@@ -245,8 +246,28 @@
                   hover:a1n hover:a1o
                   a13 a1p a1q a1a
                 ">
-                        {{ __('Créer un compte') }}
-                    </a>
+                            {{ __('Créer un compte') }}
+                        </a>
+                    @endguest
+                    @auth
+                            <a href="{{ route('dashboard') }}" class="
+                              aj
+                              md:ah
+                              aH
+                              a1g
+                              aI
+                              a1k
+                              a1i
+                              a1l
+                              md:a1m
+                              lg:az
+                              xl:a1m
+                              hover:a1n hover:a1o
+                              a13 a1p a1q a1a
+                            ">
+                                {{ __('Tableau de bord') }}
+                            </a>
+                    @endauth
                 </div>
             </div>
         </div>
