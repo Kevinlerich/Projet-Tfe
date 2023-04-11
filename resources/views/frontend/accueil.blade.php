@@ -83,10 +83,7 @@
         <div class="aa">
             <div class="a8 a1K ab[-16px]">
                 <div class="a7 ae">
-                    <div class="
-                a1L aB[570px] a1M a3s[100px]
-                wow
-                fadeInUp
+                    <div class="a1L aB[570px] a1M a3s[100px] wow fadeInUp
               " data-wow-delay=".1s">
                         <h2 class="
                   a1A
