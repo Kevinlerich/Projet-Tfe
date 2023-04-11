@@ -45,10 +45,29 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::put('update_portfolio/{id}', [\App\Http\Controllers\Photographe\PortfolioController::class, 'update'])->name('update_portfolio');
     Route::delete('delete_portfolio/{id}', [\App\Http\Controllers\Photographe\PortfolioController::class, 'delete'])->name('delete_portfolio');
 
+    // Disponibilité route
+    Route::get('my_disponibilities', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'index'])->name('my_disponibilities');
+    Route::get('create_disponibility', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'create'])->name('create_disponibility');
+    Route::get('edit_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'edit'])->name('edit_disponibility');
+    Route::put('update_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'update'])->name('update_disponibility');
+    Route::post('store_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'store'])->name('store_disponibility');
+    Route::delete('delete_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'delete'])->name('delete_disponibility');
+
+    // agenda route
+    Route::get('my_agenda', [\App\Http\Controllers\DisponibilityController::class, 'index'])->name('my_agenda');
+    Route::get('create_agenda', [\App\Http\Controllers\DisponibilityController::class, 'create'])->name('create_agenda');
+    Route::get('edit_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'edit'])->name('edit_agenda');
+    Route::put('update_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'update'])->name('update_agenda');
+    Route::post('store_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'store'])->name('store_agenda');
+    Route::delete('delete_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'delete'])->name('delete_agenda');
+
     /**
      * Client route
      */
     // annonces
     Route::get('my_announces', [\App\Http\Controllers\Client\AnnounceController::class, 'index'])->name('my_announces');
     Route::get('create_annonce', [\App\Http\Controllers\Client\AnnounceController::class, 'create'])->name('create_annonce');
+    Route::get('edit_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'edit'])->name('edit_annonce');
+    Route::put('update_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'update'])->name('update_annonce');
+    Route::delete('delete_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'delete'])->name('delete_annonce');
 });
