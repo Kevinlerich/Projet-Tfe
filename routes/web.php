@@ -50,5 +50,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
      */
     // annonces
     Route::get('my_announces', [\App\Http\Controllers\Client\AnnounceController::class, 'index'])->name('my_announces');
-    Route::get('create_annonce', [\App\Http\Controllers\Client\AnnounceController::class, 'create'])->name('create_annonce');
+    Route::get('create_annonces', [\App\Http\Controllers\Client\AnnounceController::class, 'create'])->name('create_annonces');
 });
