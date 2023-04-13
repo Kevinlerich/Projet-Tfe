@@ -64,4 +64,22 @@ class AnnounceController extends Controller
         $annonce = Announce::query()->findOrFail($id);
         return view('backend.client.annonces.edit', compact('annonce'));
     }
+
+    public function update(Request $request, $id)
+    {
+        Announce::query()->where('id', $id)->update([
+            'user_id' => Auth::user()->id,
+            'category_id' => $request->input('category_id'),
+            'titre' => $request->input('titre'),
+            'slug' => Str::slug($request->input('titre')),
+            'description' => $request->input('description'),
+        ]);
+        return back();
+    }
+
+    public function delete($id)
+    {
+        Announce::query()->findOrFail($id)->delete();
+        return back();
+    }
 }

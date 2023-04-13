@@ -28,6 +28,12 @@
                         {{ __('My Portfolio') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('my_disponibilities') }}" :active="request()->routeIs('my_disponibilities')">
+                        {{ __('My Disponibilities') }}
+                    </x-nav-link>
+                </div>
                 @endif
                 @if(\Illuminate\Support\Facades\Auth::user()->hasRole('client'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -36,6 +42,11 @@
                         </x-nav-link>
                     </div>
                 @endif
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('my_agenda') }}" :active="request()->routeIs('my_agenda')">
+                        {{ __('My Agenda') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
