@@ -56,7 +56,7 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::query()->findOrFail($id);
         $services = Service::query()->where('user_id', Auth::user()->id)->get();
-        return view('backend.photographe.portfolio.edit', compact('portfolio', $services));
+        return view('backend.photographe.portfolio.edit', compact('portfolio', 'services'));
     }
 
     public function update(Request $request, $id)
