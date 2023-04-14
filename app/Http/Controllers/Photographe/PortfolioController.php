@@ -65,7 +65,7 @@ class PortfolioController extends Controller
         $portfolio->service_id = $request->input('service_id');
         $portfolio->description = $request->input('description');
         $portfolio->save();
-        return back();
+        return redirect()->route('list_portfolio');
     }
 
     public function delete($id)
