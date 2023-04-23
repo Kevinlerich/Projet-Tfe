@@ -54,12 +54,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::delete('delete_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'delete'])->name('delete_disponibility');
 
     // agenda route
-    Route::get('my_agenda', [\App\Http\Controllers\DisponibilityController::class, 'index'])->name('my_agenda');
-    Route::get('create_agenda', [\App\Http\Controllers\DisponibilityController::class, 'create'])->name('create_agenda');
-    Route::get('edit_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'edit'])->name('edit_agenda');
-    Route::put('update_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'update'])->name('update_agenda');
-    Route::post('store_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'store'])->name('store_agenda');
-    Route::delete('delete_agenda/{id}', [\App\Http\Controllers\DisponibilityController::class, 'delete'])->name('delete_agenda');
+    Route::get('my_agenda', [\App\Http\Controllers\AgendaController::class, 'index'])->name('my_agenda');
+    Route::get('create_agenda', [\App\Http\Controllers\AgendaController::class, 'create'])->name('create_agenda');
+    Route::get('edit_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'edit'])->name('edit_agenda');
+    Route::put('update_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'update'])->name('update_agenda');
+    Route::post('store_agenda/', [\App\Http\Controllers\AgendaController::class, 'store'])->name('store_agenda');
+    Route::delete('delete_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'delete'])->name('delete_agenda');
 
     /**
      * Client route
