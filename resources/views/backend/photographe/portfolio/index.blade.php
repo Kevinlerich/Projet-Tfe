@@ -26,6 +26,7 @@
                         <th class="px-4 py-2 w-20">No</th>
                         <th class="px-4 py-2">{{ __('Services') }}</th>
                         <th class="px-4 py-2">{{ __('Description') }}</th>
+                        <th class="px-4 py-2">{{ __('Gallery') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
                     </thead>
@@ -35,6 +36,11 @@
                             <td class="px-4 py-2 w-20 text-center">{{ $key+1 }}</td>
                             <td class="px-4 py-2 text-center">{{ $portfolio->service->nom }}</td>
                             <td class="px-4 py-2 text-center">{{ $portfolio->description }}</td>
+                            <td class="px-4 py-2 text-center">
+                                @foreach($portfolio->photos as $pic)
+                                    <img src="{{ asset('storage/portfolios/',$pic->chemin_photo) }}" alt="">
+                                @endforeach
+                            </td>
                             <td class="px-4 py-2 text-center">
                                 <a href="{{ route('edit_portfolio', $portfolio->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     {{ __('Edit') }}

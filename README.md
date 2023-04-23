@@ -9,3 +9,11 @@
 1. `composer install` et `npm install`
 2. `php artisan migrate`
 3. `php artisan optimize:clear` pour nettoyer le système de cache des vues
+
+
+## Portée du projet restant
+1. Gestion des disponibilitées (déjà fait)
+2. Gestion des rendez-vous (clients -> photographe)
+3. Messagerie interne (client -> photographe)
+4. Parcours du site (annonces, services, affichage detail annonce, service et contact de leurs auteurs)
+5. C'est tout !

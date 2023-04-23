@@ -22,12 +22,22 @@ class DisponibilityController extends Controller
 
     public function store(Request $request)
     {
-        //
+        Disponibility::query()->create([
+            'user_id' => Auth::user()->id,
+            'jours' => $request->input('jours'),
+            'mois' => $request->input('mois'),
+            'debut' => $request->input('debut'),
+            'fin' => $request->input('fin'),
+            'etat' => $request->input('etat'),
+        ]);
+        session()->flash('message', 'Vous avez ajouté une nouvelle disponibilité');
+        return redirect()->route('my_disponibilities');
     }
 
     public function edit($id)
     {
-        return view('backend.photographe.disponibility.edit');
+        $disponibility = Disponibility::query()->findOrFail($id);
+        return view('backend.photographe.disponibility.edit', compact('disponibility'));
     }
 
     public function update(Request $request, $id)

@@ -50,7 +50,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('create_disponibility', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'create'])->name('create_disponibility');
     Route::get('edit_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'edit'])->name('edit_disponibility');
     Route::put('update_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'update'])->name('update_disponibility');
-    Route::post('store_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'store'])->name('store_disponibility');
+    Route::post('store_disponibility', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'store'])->name('store_disponibility');
     Route::delete('delete_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'delete'])->name('delete_disponibility');
 
     // agenda route
@@ -67,6 +67,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // annonces
     Route::get('my_announces', [\App\Http\Controllers\Client\AnnounceController::class, 'index'])->name('my_announces');
     Route::get('create_annonce', [\App\Http\Controllers\Client\AnnounceController::class, 'create'])->name('create_annonce');
+    Route::post('store_annonce', [\App\Http\Controllers\Client\AnnounceController::class, 'store'])->name('store_annonce');
     Route::get('edit_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'edit'])->name('edit_annonce');
     Route::put('update_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'update'])->name('update_annonce');
     Route::delete('delete_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'delete'])->name('delete_annonce');

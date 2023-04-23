@@ -9,7 +9,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Image;
+use Intervention\Image\Facades\Image;
 
 class PortfolioController extends Controller
 {
@@ -34,14 +34,14 @@ class PortfolioController extends Controller
         ]);
 
         // store photos
-        $photos = $request->file('photos');
+        $photos = $request->file('chemin_photo');
         if (!Storage::disk('public')->exists('portfolios')) {
             Storage::makeDirectory('public/portfolios', 0777);
         }
         if ($photos) {
             foreach ($photos as $photo) {
                 $path = 'portfolios/' . uniqid() . '.' . $photo->extension();
-                Image::make($request->file('image_path'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
+                Image::make($request->file('chemin_photo'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
                 Photo::query()->create([
                     'portfolio_id' => $portfolio->id,
                     'chemin_photo' => $path
@@ -66,6 +66,13 @@ class PortfolioController extends Controller
         $portfolio->description = $request->input('description');
         $portfolio->save();
         return redirect()->route('list_portfolio');
+    }
+
+    public function show($id)
+    {
+        $portfolio = Portfolio::query()->findOrFail($id);
+        $services = Service::query()->where('user_id', Auth::user()->id)->get();
+        return view('backend.photographe.portfolio.show', compact('portfolio', 'services'));
     }
 
     public function delete($id)
