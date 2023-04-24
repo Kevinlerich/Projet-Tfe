@@ -35,7 +35,7 @@
                             </div>
                             <div class="flex space-x-4 mb-5 text-sm font-medium">
                                 <div class="flex-auto flex space-x-4">
-                                    <a href="" class="h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="submit">
+                                    <a href="{{ route('detail_annonce', $annonce->id) }}" class="h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="submit">
                                         {{ __('Voir annonce') }}
                                     </a>
                                 </div>
