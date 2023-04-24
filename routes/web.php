@@ -73,4 +73,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('edit_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'edit'])->name('edit_annonce');
     Route::put('update_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'update'])->name('update_annonce');
     Route::delete('delete_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'delete'])->name('delete_annonce');
+
+    // Message routes
+    Route::get('my_messages', [\App\Http\Controllers\MessageController::class, 'index'])->name('my_messages');
+    Route::get('reply_message/{id}', [\App\Http\Controllers\MessageController::class, 'reply'])->name('reply_message');
+    Route::put('store_message', [\App\Http\Controllers\MessageController::class, 'store'])->name('store_message');
+    Route::delete('delete_message/{id}', [\App\Http\Controllers\MessageController::class, 'delete'])->name('delete_message');
 });
