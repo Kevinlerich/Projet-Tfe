@@ -224,6 +224,7 @@
         </div>
     </section>
 
+{{--
     <section id="blog" class="bg-primary a1Z a1I[120px] a3A">
         <div class="aa">
             <div class="a8 a1K ab[-16px]">
@@ -372,4 +373,5 @@ Computer
             </div>
         </div>
     </section>
+--}}
 @endsection

@@ -27,8 +27,8 @@ class AgendaController extends Controller
     public function store(Request $request)
     {
         RendezVous::query()->create([
-            'client' => Auth::user()->id,
-            'photographe' => $request->input('photographe_id'),
+            'client_id' => Auth::user()->id,
+            'photographe_id' => $request->input('photographe_id'),
             'jours' => $request->input('jours'),
             'mois' => $request->input('mois'),
             'debut' => $request->input('debut'),
@@ -37,6 +37,14 @@ class AgendaController extends Controller
         ]);
         session()->flash('message', 'Vous avez ajouté un nouvel agenda');
         return redirect()->route('my_agenda');
+    }
+
+    public function confirmer($agenda_id)
+    {
+        $agenda = RendezVous::query()->findOrFail($agenda_id);
+        $agenda->etat = $agenda->etat == 1 ? 0 : 1;
+        $agenda->save();
+        return back();
     }
 
     public function edit($id)

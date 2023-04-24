@@ -23,10 +23,10 @@
     <meta property="twitter:description" content="Startup Tailwind is a complete Tailwind CSS template crafted specially for SaaS, Software Mobile App and Web App Sites. Comes with all essential components and pages you need to kickstart your SaaS websites." />
     <meta property="twitter:image" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="css/glightbox.min.css" />
-    <link rel="stylesheet" href="css/tailwind.css" />
-    <script src="js/wow.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/glightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}" />
+    <script src="{{ asset('js/wow.min.js') }}"></script>
     <script>
         // ===== wow js
         new WOW().init();

@@ -13,7 +13,7 @@
 
 ## Portée du projet restant
 1. Gestion des disponibilitées (déjà fait)
-2. Gestion des rendez-vous (clients -> photographe)
+2. Gestion des rendez-vous (clients -> photographe) (déjà fait)
 3. Messagerie interne (client -> photographe)
-4. Parcours du site (annonces, services, affichage detail annonce, service et contact de leurs auteurs)
+4. Parcours du site (annonces, services, affichage detail annonce, service et contact de leurs auteurs) (deja fait)
 5. C'est tout !

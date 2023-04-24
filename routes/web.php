@@ -18,10 +18,11 @@ use App\Http\Controllers\Photographe\ServiceController;
 
 Route::get('/', [AccueilController::class, 'accueil'])->name('accueil');
 Route::get('services', [AccueilController::class, 'services'])->name('services');
-Route::get('service/{id}', [AccueilController::class, 'detail_service'])->name('detail_service');
+Route::get('detail_service/{id}', [AccueilController::class, 'detail_service'])->name('detail_service');
 Route::get('detail_annonce/{slug}', [AccueilController::class, 'detail_annonce'])->name('detail_annonce');
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
+Route::get('contact_annonce', [AccueilController::class, 'contact_annonce'])->name('contact_annonce');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
@@ -57,6 +58,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('my_agenda', [\App\Http\Controllers\AgendaController::class, 'index'])->name('my_agenda');
     Route::get('create_agenda', [\App\Http\Controllers\AgendaController::class, 'create'])->name('create_agenda');
     Route::get('edit_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'edit'])->name('edit_agenda');
+    Route::get('confirmer_agenda/{agenda_id}', [\App\Http\Controllers\AgendaController::class, 'confirmer'])->name('confirmer_agenda');
     Route::put('update_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'update'])->name('update_agenda');
     Route::post('store_agenda/', [\App\Http\Controllers\AgendaController::class, 'store'])->name('store_agenda');
     Route::delete('delete_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'delete'])->name('delete_agenda');

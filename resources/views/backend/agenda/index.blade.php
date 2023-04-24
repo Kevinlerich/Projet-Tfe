@@ -57,6 +57,9 @@
                                 <a href="{{ route('edit_agenda', $announce->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     {{ __('Modifier') }}
                                 </a>
+                                <a href="{{ route('confirmer_agenda', $announce->id) }}" class="bg-yellow-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    {{ __('Confirmer/Annuler') }}
+                                </a>
                                 <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  onclick="event.preventDefault();
                                                 document.getElementById('del-category-{{ $announce->id }}').submit();">
                                     {{ __('Supprimer') }}
