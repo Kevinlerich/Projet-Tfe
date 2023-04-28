@@ -51,31 +51,22 @@
                     @foreach($services as $service)
                         <div class="flex font-sans">
                             <div class="flex-none w-56 relative">
-                                <img src="{{ asset('storage/'.$service->photo) }}" alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
+                                <img src="{{ asset('storage/'.$service->image_service) }}" alt="" class="absolute inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
                             </div>
                             <form class="flex-auto p-6">
                                 <div class="flex flex-wrap">
                                     <h1 class="flex-auto font-medium text-slate-900">
-                                        {{ $service->titre }}
+                                        {{ $service->nom }}
                                     </h1>
                                     <div class="text-sm font-medium text-slate-400">
                                         {{ $service->category->nom }}
                                     </div>
                                 </div>
-                                <div class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200">
-                                    <div class="space-x-2 flex text-sm font-bold">
-                                        <label>
-                                            <input class="sr-only peer" name="size" type="radio" value="xs" checked />
-                                            <div class="w-60 h-9 rounded-full flex items-center justify-center text-violet-400 peer-checked:bg-violet-600 peer-checked:text-white">
-                                                {{ $service->etat_annonce == 1 ? __('Annonce validée') : 'Annonce non validée' }}
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
+
                                 <div class="flex space-x-4 mb-5 text-sm font-medium">
                                     <div class="flex-auto flex space-x-4">
-                                        <a href="{{ route('detail_annonce', $service->id) }}" class="h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="submit">
-                                            {{ __('Voir annonce') }}
+                                        <a href="{{ route('detail_service', $service->id) }}" class="h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="submit">
+                                            {{ __('Voir service') }}
                                         </a>
                                     </div>
                                 </div>
