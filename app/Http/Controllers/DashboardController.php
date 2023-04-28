@@ -10,6 +10,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $annonces = Announce::query()->get();
-        return view('dashboard', compact('annonces'));
+        $services = Announce::query()->get();
+        return view('dashboard', compact('annonces', 'services'));
     }
 }
