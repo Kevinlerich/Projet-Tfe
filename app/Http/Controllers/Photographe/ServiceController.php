@@ -27,7 +27,7 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $photo = $request->file('image_service');
-        if (!Storage::disk('public')->exists('services')) {
+        if (!Storage::disk('public')->exists( 'services')) {
             Storage::makeDirectory('public/services', 0777);
         }
         $path = 'services/' . uniqid() . '.' . $photo->extension();
