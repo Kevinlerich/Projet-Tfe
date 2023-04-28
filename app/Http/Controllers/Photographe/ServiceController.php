@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ServiceController extends Controller
 {
@@ -24,11 +26,18 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
+        $photo = $request->file('image_service');
+        if (!Storage::disk('public')->exists('services')) {
+            Storage::makeDirectory('public/services', 0777);
+        }
+        $path = 'services/' . uniqid() . '.' . $photo->extension();
+        Image::make($request->file('image_service'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
         Service::query()->create([
             'user_id' => Auth::user()->id,
             'nom' => $request->input('nom'),
             'description' => $request->input('description'),
-            'category_id' => $request->input('category_id')
+            'category_id' => $request->input('category_id'),
+            'image_service' => $path
         ]);
         return redirect()->route('list_service');
     }

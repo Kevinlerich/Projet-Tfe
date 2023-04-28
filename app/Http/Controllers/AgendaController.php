@@ -50,12 +50,23 @@ class AgendaController extends Controller
     public function edit($id)
     {
         $agenda = RendezVous::query()->findOrFail($id);
-        return view('backend.agenda.edit', compact('agenda'));
+        $photographes = User::query()->role('photographe')->get();
+        return view('backend.agenda.edit', compact('agenda', 'photographes'));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        RendezVous::query()->where('id', $id)->update([
+            'client_id' => Auth::user()->id,
+            'photographe_id' => $request->input('photographe_id'),
+            'jours' => $request->input('jours'),
+            'mois' => $request->input('mois'),
+            'debut' => $request->input('debut'),
+            'fin' => $request->input('fin'),
+            'etat' => 0,
+        ]);
+        session()->flash('message', 'Vous avez ajouté un nouvel agenda');
+        return redirect()->route('my_agenda');
     }
 
     public function delete($id)
