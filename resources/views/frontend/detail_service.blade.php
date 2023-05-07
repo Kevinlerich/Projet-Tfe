@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title')
-    Detail annonce
+    Detail service
 @endsection
 @section('content')
     <section class="a1I[180px] a1J[120px]">

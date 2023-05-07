@@ -190,6 +190,7 @@
                 </div>
                 @endforeach
             </div>
+{{--
             <div class="a8 a1K ab[-16px] wow fadeInUp" data-wow-delay=".15s">
                 <div class="a7 ae">
                     <ul class="a8 a9 a3d a1x">
@@ -310,6 +311,7 @@
                     </ul>
                 </div>
             </div>
+--}}
         </div>
     </section>
 @endsection

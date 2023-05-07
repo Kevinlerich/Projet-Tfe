@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Tableau de bord') }}
         </h2>
     </x-slot>
 
@@ -30,6 +30,9 @@
                                             <input class="sr-only peer" name="size" type="radio" value="xs" checked />
                                             <div class="w-60 h-9 rounded-full flex items-center justify-center text-violet-400 peer-checked:bg-violet-600 peer-checked:text-white">
                                                 {{ $annonce->etat_annonce == 1 ? __('Annonce validée') : 'Annonce non validée' }}
+                                            </div>
+                                            <div class="w-60 h-9 rounded-full flex items-center justify-center">
+                                                Ajouté par: {{ $annonce->user->name }}
                                             </div>
                                         </label>
                                     </div>
@@ -67,6 +70,11 @@
                                     <div class="flex-auto flex space-x-4">
                                         <a href="{{ route('detail_service', $service->id) }}" class="h-10 px-6 font-semibold rounded-full bg-violet-600 text-white" type="submit">
                                             {{ __('Voir service') }}
+                                        </a>
+                                    </div>
+                                    <div class="flex-auto flex space-x-4">
+                                        <a href="{{ route('detail_service', $service->id) }}" class="h-10 px-6 font-semibold" type="submit">
+                                            Ajouté par: {{ $service->user->name }}
                                         </a>
                                     </div>
                                 </div>

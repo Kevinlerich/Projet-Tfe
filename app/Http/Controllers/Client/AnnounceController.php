@@ -27,20 +27,12 @@ class AnnounceController extends Controller
 
     public function store(Request $request)
     {
-        // store photos
-        $photo = $request->file('photo');
-        if (!Storage::disk('public')->exists('annonces')) {
-            Storage::makeDirectory('public/annonces', 0777);
-        }
-        $path = 'annonces/' . uniqid() . '.' . $photo->extension();
-        Image::make($request->file('photo'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
         Announce::query()->create([
             'user_id' => Auth::user()->id,
             'category_id' => $request->input('category_id'),
             'titre' => $request->input('titre'),
             'slug' => Str::slug($request->input('titre')),
             'description' => $request->input('description'),
-            'photo' => $path,
             'etat_annonce' => 0,
         ]);
 

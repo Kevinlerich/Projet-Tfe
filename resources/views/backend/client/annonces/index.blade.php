@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('announces') }}
+            {{ __('annonces') }}
         </h2>
     </x-slot>
 
@@ -18,13 +18,13 @@
                     </div>
                 @endif
                 <a href="{{ route('create_annonce') }}" class="btn btn-blue bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 mx-4">
-                    {{ __('Create new announce') }}
+                    {{ __('Ajouter une annonce') }}
                 </a>
                 <table class="table-fixed w-full py-5">
                     <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 w-20">No</th>
-                        <th class="px-4 py-2">{{ __('Name') }}</th>
+                        <th class="px-4 py-2">{{ __('Titre') }}</th>
                         <th class="px-4 py-2">{{ __('Description') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
@@ -37,11 +37,11 @@
                             <td class="px-4 py-2 text-center">{{ $announce->description }}</td>
                             <td class="px-4 py-2 text-center">
                                 <a href="{{ route('edit_service', $announce->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    {{ __('Edit') }}
+                                    {{ __('Modifier') }}
                                 </a>
                                 <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  onclick="event.preventDefault();
                                                 document.getElementById('del-category-{{ $announce->id }}').submit();">
-                                    {{ __('Delete') }}
+                                    {{ __('Supprimer') }}
                                 </a>
                                 <form action="{{route('delete_service', $announce->id)}}" method="POST" id="del-category-{{$announce->id}}" style="display:none;">
                                     @csrf

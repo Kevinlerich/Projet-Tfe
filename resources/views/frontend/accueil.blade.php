@@ -38,7 +38,7 @@
                             C'est une application de prestations de services etc....
                         </p>
                         <div class="a8 a9 a1x">
-                            <a href="#features" class="
+                            <a href="{{ route('services') }}" class="
                     aH
                     a2P
                     aI
@@ -52,9 +52,9 @@
                     a1a
                     a2j
                   ">
-                                Trouver un photographe
+                                Trouver le service d'un photographe
                             </a>
-                            <a href="#about" class="
+                            <a href="{{ route('create_annonce') }}" class="
                     aH
                     a2P
                     a1A
@@ -182,7 +182,7 @@
                             a2p
                             a2G
                           ">
-                                                <img src="{{ $annonce->user->profile_photo_path }}" alt="author" class="a7" />
+                                                <img src="{{ asset('storage/'.$annonce->user->profile_photo_path) }}" alt="author" class="a7" />
                                             </div>
                                             <div class="a7">
                                                 <h4 class="
@@ -190,7 +190,7 @@
                               dark:aI
                               a2K
                             ">
-                                                    {{ __('By') }}
+                                                    {{ __('Par') }}
                                                     <a href="javascript:void(0)" class="
                                 a1h
                                 dark:aI

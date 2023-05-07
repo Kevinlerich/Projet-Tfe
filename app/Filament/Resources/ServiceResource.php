@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Category;
+use App\Filament\Resources\ServiceResource\Pages;
+use App\Filament\Resources\ServiceResource\RelationManagers;
+use App\Models\Service;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,10 +13,10 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CategoryResource extends Resource
+class ServiceResource extends Resource
 {
-    protected static ?string $model = Category::class;
-    protected static ?string $label = 'Catégories';
+    protected static ?string $model = Service::class;
+    protected static ?string $label = 'Services';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -24,9 +24,18 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->required(),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'nom')
+                    ->required(),
                 Forms\Components\TextInput::make('nom')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Textarea::make('description'),
+                Forms\Components\FileUpload::make('image_service')
+                    ->required(),
             ]);
     }
 
@@ -34,11 +43,13 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('category.nom'),
                 Tables\Columns\TextColumn::make('nom'),
+                Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\ImageColumn::make('image_service'),
             ])
             ->filters([
                 //
@@ -61,9 +72,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListServices::route('/'),
+            'create' => Pages\CreateService::route('/create'),
+            'edit' => Pages\EditService::route('/{record}/edit'),
         ];
     }
 }

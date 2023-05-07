@@ -18,7 +18,7 @@
                     </div>
                 @endif
                 <a href="{{ route('create_portfolio') }}" class="btn btn-blue bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 mx-4">
-                    {{ __('Create new portfolio') }}
+                    {{ __('Ajouter un portfolio') }}
                 </a>
                 <table class="table-fixed w-full py-5">
                     <thead>
@@ -26,7 +26,6 @@
                         <th class="px-4 py-2 w-20">No</th>
                         <th class="px-4 py-2">{{ __('Services') }}</th>
                         <th class="px-4 py-2">{{ __('Description') }}</th>
-                        <th class="px-4 py-2">{{ __('Gallery') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
                     </thead>
@@ -37,17 +36,12 @@
                             <td class="px-4 py-2 text-center">{{ $portfolio->service->nom }}</td>
                             <td class="px-4 py-2 text-center">{{ $portfolio->description }}</td>
                             <td class="px-4 py-2 text-center">
-                                @foreach($portfolio->photos as $pic)
-                                    <img src="{{ asset('storage/portfolios/',$pic->chemin_photo) }}" alt="">
-                                @endforeach
-                            </td>
-                            <td class="px-4 py-2 text-center">
                                 <a href="{{ route('edit_portfolio', $portfolio->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    {{ __('Edit') }}
+                                    {{ __('Modifier') }}
                                 </a>
                                 <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  onclick="event.preventDefault();
                                                 document.getElementById('del-category-{{ $portfolio->id }}').submit();">
-                                    {{ __('Delete') }}
+                                    {{ __('Supprimer') }}
                                 </a>
                                 <form action="{{route('delete_portfolio', $portfolio->id)}}" method="POST" id="del-category-{{$portfolio->id}}" style="display:none;">
                                     @csrf

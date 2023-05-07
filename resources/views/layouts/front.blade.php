@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="a0">
 
-<!-- Mirrored from startup-tailwind.preview.uideck.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 Mar 2023 01:24:42 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -139,83 +138,6 @@
                                     Services
                                 </a>
                             </li>
-                            <li class="ad aG">
-                                <a href="{{ route('contact') }}" class="
-                        menu-scroll
-                        aH
-                        text-dark
-                        dark:aI
-                        group-hover:aJ
-                        aK
-                        lg:aL lg:aM lg:aN
-                        a8 aO
-                        lg:aP lg:aQ
-                        xl:aR
-                      ">
-                                    Contactez nous
-                                </a>
-                            </li>
-                            <li class="ad aG submenu-item">
-                                <a href="#" class="
-                        aH
-                        text-dark
-                        dark:aI
-                        group-hover:aJ
-                        aK
-                        lg:aL lg:aM lg:aS lg:aT
-                        a8 aO
-                        lg:aP lg:aQ
-                        xl:aR
-                        ad
-                        after:a3
-                        after:aU
-                        after:aV
-                        after:aW
-                        after:aX
-                        after:aY
-                        after:aZ
-                        lg:after:a_
-                        after:a10
-                        after:al/2
-                        after:am[-50%]
-                        after:a11[-2px]
-                      ">
-                                    Langues
-                                </a>
-                                <div class="
-                        submenu
-                        aj ad
-                        lg:a3
-                        as[250px] aC
-                        lg:a12[110%]
-                        a5 a13
-                        lg:aA
-                        a14
-                        lg:ah lg:a15 lg:a16
-                        group-hover:a17
-                        lg:group-hover:a18 lg:group-hover:aC
-                        aw
-                        dark:av
-                        a19[top] a1a
-                      ">
-                                    <a href="#" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        {{ __('Francais') }}
-                                    </a>
-                                    <a href="#" class="
-                          ah a1b a1c aq[10px] ae
-                          text-dark
-                          dark:aI
-                          hover:aJ
-                        ">
-                                        {{ __('Anglais') }}
-                                    </a>
-                                </div>
-                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -287,7 +209,7 @@
         <div class="a8 a1K ab[-16px]">
             <div class="a7 md:a1_/2 lg:a20/12 xl:a1D/12 ae">
                 <div class="a21 aB[360px]">
-                    <a href="index.html" class="a22 a23">
+                    <a href="/" class="a22 a23">
                         <img src="images/logo/logo-2.svg" alt="logo" class="a7 dark:aj" />
                         <img src="images/logo/logo.svg" alt="logo" class="a7 aj dark:ah" />
                     </a>
@@ -298,8 +220,7 @@
                   a46
                   a1N
                 ">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                        lobortis.
+                        Une application web de prestation de services de photographes et d'annonces.
                     </p>
                     <div class="a8 a9">
                         <a href="javascript:void(0)" aria-label="social-link" class="a24[#CED3F6] hover:a1W a25">
@@ -339,9 +260,10 @@
                   dark:aI
                   a27 a1V
                 ">
-                        Useful Links
+                        Liens Utiles
                     </h2>
                     <ul>
+
                         <li>
                             <a href="javascript:void(0)" class="
                       aH
@@ -351,31 +273,7 @@
                       a1Q
                       hover:a1W
                     ">
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
-                                Pricing
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
-                                About
+                                A propos
                             </a>
                         </li>
                     </ul>
@@ -395,7 +293,7 @@
                   dark:aI
                   a27 a1V
                 ">
-                        Terms
+                        Termes
                     </h2>
                     <ul>
                         <li>
@@ -407,31 +305,7 @@
                       a1Q
                       hover:a1W
                     ">
-                                TOS
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
-                                Refund Policy
+                                Politique de confidentialité
                             </a>
                         </li>
                     </ul>
@@ -444,7 +318,7 @@
                   dark:aI
                   a27 a1V
                 ">
-                        Support & Help
+                        Support
                     </h2>
                     <ul>
                         <li>
@@ -456,31 +330,7 @@
                       a1Q
                       hover:a1W
                     ">
-                                Open Support Ticket
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
                                 Terms of Use
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
-                                About
                             </a>
                         </li>
                     </ul>
@@ -495,7 +345,7 @@
               dark:aI
               aH a1M
             ">
-                &copy; Crafted by UIdeck for You!
+                &copy; {{ date('Y') }} Dévelopé par Kevin
             </p>
         </div>
     </div>
@@ -646,15 +496,6 @@
     }
 
     window.document.addEventListener("scroll", onScroll);
-
-    //========= glightbox
-    GLightbox({
-        href: "https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM",
-        type: "video",
-        source: "youtube", //vimeo, youtube or local
-        width: 900,
-        autoplayVideos: true,
-    });
 </script>
 <script>(function(){var js = "window['__CF$cv$params']={r:'7aec1332bf7a00f2',m:'VBjLJYPTM_wlJ941_5Zag5pWHvhb_zogMV0PzGg2pBc-1679966682-0-AVbrGsXz9f5g5Bm+4y2CAsDLD265AElEjeRc9U3fFE9MZwlh7L+EdRhPeGvq0S8WdwUCF6iUbKbsmWgpJC6ufVcQIWkZtQkEeITpP9BMKvZQLSOpvoX/8aYTvv1wPwNabg==',s:[0x95167b155c,0x65b9d7eac9],u:'/cdn-cgi/challenge-platform/h/b'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='cdn-cgi/challenge-platform/h/b/scripts/alpha/invisible5615.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vb26e4fa9e5134444860be286fd8771851679335129114" integrity="sha512-M3hN/6cva/SjwrOtyXeUa5IuCT0sedyfT+jK/OV+s+D0RnzrTfwjwJHhd+wYfMm9HJSrZ1IKksOdddLuN6KOzw==" data-cf-beacon='{"rayId":"7aec1332bf7a00f2","version":"2023.3.0","r":1,"b":1,"token":"9a6015d415bb4773a0bff22543062d3b","si":100}' crossorigin="anonymous"></script>
 </body>

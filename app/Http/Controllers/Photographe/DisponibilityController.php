@@ -42,12 +42,22 @@ class DisponibilityController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        Disponibility::query()->where('id', $id)->update([
+            'user_id' => Auth::user()->id,
+            'jours' => $request->input('jours'),
+            'mois' => $request->input('mois'),
+            'debut' => $request->input('debut'),
+            'fin' => $request->input('fin'),
+            'etat' => $request->input('etat'),
+        ]);
+        session()->flash('message', 'Vous avez ajouté une nouvelle disponibilité');
+        return redirect()->route('my_disponibilities');
     }
 
     public function delete($id)
     {
         Disponibility::query()->findOrFail($id)->delete();
+        session()->flash('message', 'Disponibilité supprimée avec succès !!!');
         return back();
     }
 }

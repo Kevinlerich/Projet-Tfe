@@ -36,8 +36,8 @@ class AnnounceResource extends Resource
                 ),
                 Forms\Components\RichEditor::make('description')
                     ->required(),
-                Forms\Components\FileUpload::make('photo'),
                 Forms\Components\Toggle::make('etat_annonce')
+                    ->label('Active ou non ?')
                     ->required(),
             ]);
     }

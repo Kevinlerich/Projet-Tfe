@@ -285,4 +285,5 @@
                 </div>
             </div>
         </div>
-    </section>@endsection
+    </section>
+@endsection
