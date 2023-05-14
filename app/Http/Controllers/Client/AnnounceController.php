@@ -7,9 +7,7 @@ use App\Models\Announce;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 
 class AnnounceController extends Controller
 {
@@ -33,7 +31,6 @@ class AnnounceController extends Controller
             'titre' => $request->input('titre'),
             'slug' => Str::slug($request->input('titre')),
             'description' => $request->input('description'),
-            'etat_annonce' => 0,
         ]);
 
         return back();

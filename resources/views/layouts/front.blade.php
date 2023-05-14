@@ -33,25 +33,15 @@
 </head>
 <body class="dark:a1">
 
-<header class="
-        header
-        a2
-        a3
-        a4
-        a5
-        a6
-        a7
-        a8
-        a9
-      ">
+<header class=" header a2 a3 a4 a5 a6 a7 a8 a9">
     <div class="aa">
         <div class="
             a8 ab[-16px] a9 ac ad
           ">
             <div class="ae af ag">
                 <a href="/" class="a7 ah ai header-logo">
-                    <img src="images/logo/logo-2.svg" alt="logo" class="a7 dark:aj" />
-                    <img src="images/logo/logo.svg" alt="logo" class="a7 aj dark:ah" />
+                    <img src="{{ asset('images/logo/logo-2.svg') }}" alt="logo" class="a7 dark:aj" />
+                    <img src="{{ asset('images/logo/logo.svg') }}" alt="logo" class="a7 aj dark:ah" />
                 </a>
             </div>
             <div class="a8 ae ac a9 a7">
@@ -108,33 +98,12 @@
                 ">
                         <ul class="aF lg:a8">
                             <li class="ad aG">
-                                <a href="{{ route('accueil') }}" class="
-                        menu-scroll
-                        aH
-                        text-dark
-                        dark:aI
-                        group-hover:aJ
-                        aK
-                        lg:aL lg:aM lg:aN
-                        a8 aO
-                        lg:aP
-                      ">
+                                <a href="{{ route('accueil') }}" class=" menu-scroll aH text-dark dark:aI group-hover:aJ aK lg:aL lg:aM lg:aN a8 aO lg:aP">
                                     Accueil
                                 </a>
                             </li>
                             <li class="ad aG">
-                                <a href="{{ route('services') }}" class="
-                        menu-scroll
-                        aH
-                        text-dark
-                        dark:aI
-                        group-hover:aJ
-                        aK
-                        lg:aL lg:aM lg:aN
-                        a8 aO
-                        lg:aP lg:aQ
-                        xl:aR
-                      ">
+                                <a href="{{ route('services') }}" class=" menu-scroll aH text-dark dark:aI group-hover:aJ aK lg:aL lg:aM lg:aN a8 aO lg:aP lg:aQ xl:aR">
                                     Services
                                 </a>
                             </li>
@@ -143,50 +112,15 @@
                 </div>
                 <div class="a8 a1d a9 a1e lg:a1f">
                     @guest
-                        <a href="{{ route('login') }}" class="
-                  aj
-                  md:ah
-                  aH a1g a1h
-                  dark:aI
-                  hover:aJ
-                  a1i a1j
-                ">
+                        <a href="{{ route('login') }}" class=" aj md:ah aH a1g a1h dark:aI hover:aJ a1i a1j">
                             {{ __('Se connecter') }}
                         </a>
-                        <a href="{{ route('register') }}" class="
-                  aj
-                  md:ah
-                  aH
-                  a1g
-                  aI
-                  a1k
-                  a1i
-                  a1l
-                  md:a1m
-                  lg:az
-                  xl:a1m
-                  hover:a1n hover:a1o
-                  a13 a1p a1q a1a
-                ">
+                        <a href="{{ route('register') }}" class=" aj md:ah aH a1g aI a1k a1i a1l md:a1m lg:az xl:a1m hover:a1n hover:a1o a13 a1p a1q a1a">
                             {{ __('Créer un compte') }}
                         </a>
                     @endguest
                     @auth
-                            <a href="{{ route('dashboard') }}" class="
-                              aj
-                              md:ah
-                              aH
-                              a1g
-                              aI
-                              a1k
-                              a1i
-                              a1l
-                              md:a1m
-                              lg:az
-                              xl:a1m
-                              hover:a1n hover:a1o
-                              a13 a1p a1q a1a
-                            ">
+                            <a href="{{ route('dashboard') }}" class=" aj md:ah aH a1g aI a1k a1i a1l md:a1m lg:az xl:a1m hover:a1n hover:a1o a13 a1p a1q a1a">
                                 {{ __('Tableau de bord') }}
                             </a>
                     @endauth
@@ -210,16 +144,10 @@
             <div class="a7 md:a1_/2 lg:a20/12 xl:a1D/12 ae">
                 <div class="a21 aB[360px]">
                     <a href="/" class="a22 a23">
-                        <img src="images/logo/logo-2.svg" alt="logo" class="a7 dark:aj" />
-                        <img src="images/logo/logo.svg" alt="logo" class="a7 aj dark:ah" />
+                        <img src="{{ asset('images/logo/logo-2.svg') }}" alt="logo" class="a7 dark:aj" />
+                        <img src="{{ asset('images/logo/logo.svg') }}" alt="logo" class="a7 aj dark:ah" />
                     </a>
-                    <p class="
-                  a1S
-                  aH
-                  a1R
-                  a46
-                  a1N
-                ">
+                    <p class=" a1S aH a1R a46 a1N">
                         Une application web de prestation de services de photographes et d'annonces.
                     </p>
                     <div class="a8 a9">
@@ -246,65 +174,29 @@
                     </div>
                 </div>
             </div>
-            <div class="
-              a7
-              sm:a1_/2
-              md:a1_/2
-              lg:aU/12
-              xl:aU/12
-              ae
-            ">
+            <div class=" a7 sm:a1_/2 md:a1_/2 lg:aU/12 xl:aU/12 ae">
                 <div class="a21">
-                    <h2 class="
-                  a1g a1A
-                  dark:aI
-                  a27 a1V
-                ">
+                    <h2 class=" a1g a1A dark:aI a27 a1V">
                         Liens Utiles
                     </h2>
                     <ul>
 
                         <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
+                            <a href="javascript:void(0)" class=" aH a1R a22 a1S a1Q hover:a1W">
                                 A propos
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="
-              a7
-              sm:a1_/2
-              md:a1_/2
-              lg:aU/12
-              xl:aU/12
-              ae
-            ">
+            <div class=" a7 sm:a1_/2 md:a1_/2 lg:aU/12 xl:aU/12 ae">
                 <div class="a21">
-                    <h2 class="
-                  a1g a1A
-                  dark:aI
-                  a27 a1V
-                ">
+                    <h2 class=" a1g a1A dark:aI a27 a1V">
                         Termes
                     </h2>
                     <ul>
                         <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
+                            <a href="javascript:void(0)" class=" aH a1R a22 a1S a1Q hover:a1W">
                                 Politique de confidentialité
                             </a>
                         </li>
@@ -313,23 +205,12 @@
             </div>
             <div class="a7 md:a1_/2 lg:a20/12 xl:a28/12 ae">
                 <div class="a21">
-                    <h2 class="
-                  a1g a1A
-                  dark:aI
-                  a27 a1V
-                ">
+                    <h2 class=" a1g a1A dark:aI a27 a1V">
                         Support
                     </h2>
                     <ul>
                         <li>
-                            <a href="javascript:void(0)" class="
-                      aH
-                      a1R
-                      a22
-                      a1S
-                      a1Q
-                      hover:a1W
-                    ">
+                            <a href="javascript:void(0)" class=" aH a1R a22 a1S a1Q hover:a1W">
                                 Terms of Use
                             </a>
                         </li>
@@ -340,11 +221,7 @@
     </div>
     <div class="ai a1k a29">
         <div class="aa">
-            <p class="
-              a1S
-              dark:aI
-              aH a1M
-            ">
+            <p class=" a1S dark:aI aH a1M">
                 &copy; {{ date('Y') }} Dévelopé par Kevin
             </p>
         </div>

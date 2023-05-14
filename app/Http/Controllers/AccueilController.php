@@ -12,7 +12,7 @@ class AccueilController extends Controller
 {
     public function accueil()
     {
-        $annonces = Announce::query()->where('etat_annonce', '=', 1)->get();
+        $annonces = Announce::query()->get();
         $services = Service::query()->get();
 
         return view('frontend.accueil', compact('annonces', 'services'));

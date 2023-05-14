@@ -36,9 +36,7 @@ class AnnounceResource extends Resource
                 ),
                 Forms\Components\RichEditor::make('description')
                     ->required(),
-                Forms\Components\Toggle::make('etat_annonce')
-                    ->label('Active ou non ?')
-                    ->required(),
+
             ]);
     }
 
@@ -52,8 +50,6 @@ class AnnounceResource extends Resource
                 Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('photo'),
-                Tables\Columns\IconColumn::make('etat_annonce')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
