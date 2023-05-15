@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Announce;
 use App\Models\Message;
 use App\Models\Service;
+use App\Notifications\Rendezvous;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,12 +44,13 @@ class AccueilController extends Controller
 
     public function contact_annonce(Request $request)
     {
-        Message::query()->create([
+        $sms = Message::query()->create([
             'expediteur_id' => Auth::user()->id,
             'destinataire_id' => $request->destinataire_id,
             'objet' => $request->input('objet'),
             'contenu' => $request->input('contenu')
         ]);
+        $sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
     }
 }
