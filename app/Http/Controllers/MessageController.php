@@ -23,6 +23,27 @@ class MessageController extends Controller
         return view('backend.messages.index', compact('message'));
     }
 
+    public function show($id)
+    {
+        $message = Message::findOrFail($id);
+        if ($message->expediteur_id != Auth::user()->id) {
+            $message->status = 1;
+            $message->save();
+        } elseif ($message->destinataire_id == Auth::user()->id) {
+            $message->status = 1;
+            $message->save();
+        }
+        return view('backend.messages.show', compact('message'));
+    }
+
+    public function edit($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->status = 1;
+        $message->save();
+        return view('backend.messages.reply', compact('message'));
+    }
+
     public function store(Request $request)
     {
         Message::create([
@@ -43,18 +64,6 @@ class MessageController extends Controller
         return view('backend.messages.create', compact('livreurs', 'clients'));
     }
 
-    public function show($id)
-    {
-        $message = Message::findOrFail($id);
-        if ($message->expediteur_id != Auth::user()->id) {
-            $message->status = 1;
-            $message->save();
-        } elseif ($message->destinataire_id == Auth::user()->id) {
-            $message->status = 1;
-            $message->save();
-        }
-        return view('backend.messages.show', compact('message'));
-    }
 
     public function reply_message(Request $request, $id)
     {

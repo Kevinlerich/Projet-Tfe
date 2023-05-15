@@ -44,8 +44,6 @@ class AgendaController extends Controller
         RendezVous::query()->create([
             'client_id' => Auth::user()->id,
             'photographe_id' => $request->input('photographe_id'),
-            'jours' => $request->input('jours'),
-            'mois' => $request->input('mois'),
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'etat' => 0,
@@ -74,8 +72,6 @@ class AgendaController extends Controller
         RendezVous::query()->where('id', $id)->update([
             'client_id' => Auth::user()->id,
             'photographe_id' => $request->input('photographe_id'),
-            'jours' => $request->input('jours'),
-            'mois' => $request->input('mois'),
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'etat' => 0,
