@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RendezVous;
 use App\Models\User;
+use App\Notifications\Rendezvous as NotificationsRendezvous;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +42,15 @@ class AgendaController extends Controller
     }
     public function store(Request $request)
     {
-        RendezVous::query()->create([
+        $rdv = RendezVous::query()->create([
             'client_id' => Auth::user()->id,
             'photographe_id' => $request->input('photographe_id'),
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'etat' => 0,
         ]);
+        $rdv->photographe->notify(new NotificationsRendezvous('Vous avez reçu une nouvelle date de rendez vous avec un client sur notre plateforme.'));
+        $rdv->client->notify(new NotificationsRendezvous('Vous avez programmé un rendezvous avec le photographe '.$rdv->photographe->email));
         session()->flash('message', 'Vous avez ajouté un nouvel agenda');
         return redirect()->route('my_agenda');
     }
@@ -57,6 +60,8 @@ class AgendaController extends Controller
         $agenda = RendezVous::query()->findOrFail($agenda_id);
         $agenda->etat = $agenda->etat == 1 ? 0 : 1;
         $agenda->save();
+        $agenda->photographe->email->notify(new NotificationsRendezvous('Vous avez confirmé un rendez vous avec le client '. $agenda->client->email));
+        $agenda->client->email->notify(new NotificationsRendezvous('Vous rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name));
         return back();
     }
 
