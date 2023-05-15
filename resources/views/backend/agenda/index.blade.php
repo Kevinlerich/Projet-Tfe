@@ -1,15 +1,18 @@
 <x-app-layout>
+    <x-slot name="styles">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    </x-slot>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Agenda') }}
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+            {{ __('Calendrier') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 @if (session()->has('message'))
-                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
+                    <div class="px-4 py-3 my-3 text-teal-900 bg-teal-100 border-t-4 border-teal-500 rounded-b shadow-md" role="alert">
                         <div class="flex">
                             <div>
                                 <p class="text-sm">{{ session('message') }}</p>
@@ -18,18 +21,19 @@
                     </div>
                 @endif
                 @if(auth()->user()->hasRole('client'))
-                        <a href="{{ route('create_agenda') }}" class="btn btn-blue bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 mx-4">
+                        <a href="{{ route('create_agenda') }}" class="px-4 py-2 mx-4 my-3 font-bold text-white bg-blue-500 rounded btn btn-blue hover:bg-blue-700">
                             {{ __('Ajouter un nouvel agenda') }}
                         </a>
                 @endif
-                <table class="table-fixed w-full py-5">
+                <div class="w-full py-5" id="calendar"></div>
+                {{-- <table class="w-full py-5 table-fixed">
                     <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-4 py-2 w-20">No</th>
+                        <th class="w-20 px-4 py-2">No</th>
                         @if(auth()->user()->hasRole('client'))
-                            <th class="px-4 py-2 w-20">Photographe</th>
+                            <th class="w-20 px-4 py-2">Photographe</th>
                         @else
-                            <th class="px-4 py-2 w-20">Client</th>
+                            <th class="w-20 px-4 py-2">Client</th>
                         @endif
                         <th class="px-4 py-2">{{ __('Mois') }}</th>
                         <th class="px-4 py-2">{{ __('Jours') }}</th>
@@ -42,11 +46,11 @@
                     <tbody>
                     @foreach($agendas as $key => $announce)
                         <tr>
-                            <td class="px-4 py-2 w-20 text-center">{{ $key+1 }}</td>
+                            <td class="w-20 px-4 py-2 text-center">{{ $key+1 }}</td>
                             @if(auth()->user()->hasRole('client'))
-                                <td class="px-4 py-2 w-20 text-center">{{ $announce->photographe->name }}</td>
+                                <td class="w-20 px-4 py-2 text-center">{{ $announce->photographe->name }}</td>
                             @else
-                                <td class="px-4 py-2 w-20 text-center">{{ $announce->client->name }}</td>
+                                <td class="w-20 px-4 py-2 text-center">{{ $announce->client->name }}</td>
                             @endif
                             <td class="px-4 py-2 text-center">{{ $announce->mois }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->jours }}</td>
@@ -54,13 +58,13 @@
                             <td class="px-4 py-2 text-center">{{ $announce->fin }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Validé' : 'En attente de confirmation' }}</td>
                             <td class="px-4 py-2 text-center">
-                                <a href="{{ route('edit_agenda', $announce->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <a href="{{ route('edit_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                                     {{ __('Modifier') }}
                                 </a>
-                                <a href="{{ route('confirmer_agenda', $announce->id) }}" class="bg-yellow-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <a href="{{ route('confirmer_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-yellow-300 rounded hover:bg-blue-700">
                                     {{ __('Confirmer/Annuler') }}
                                 </a>
-                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  onclick="event.preventDefault();
+                                <a class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"  onclick="event.preventDefault();
                                                 document.getElementById('del-category-{{ $announce->id }}').submit();">
                                     {{ __('Supprimer') }}
                                 </a>
@@ -73,8 +77,30 @@
                     @endforeach
 
                     </tbody>
-                </table>
+                </table> --}}
             </div>
         </div>
     </div>
+    <x-slot name="script">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            $(function() {
+                $('#calendar').fullCalendar({
+                    locale: 'fr_FR',
+                    events: {{ $calendar_events }},
+                    displayEventTime: true,
+                    eventRender: function (event, element, view) {
+                        if (event.allDay === 'true') {
+                            event.allDay = true;
+                        } else {
+                            event.allDay = false;
+                        }
+                    }
+                });
+            });
+        </script>
+    </x-slot>
 </x-app-layout>

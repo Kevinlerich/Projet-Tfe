@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,8 +12,9 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $messages = Message::query()->where('destinataire_id', Auth::user()->id)->get();
-        return view('backend.messages.index', compact('messages'));
+        $received_messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        $sent_messages = Message::where('expediteur_id', Auth::user()->id)->get();
+        return view('backend.messages.index', compact('received_messages', 'sent_messages'));
     }
 
     public function reply($id)
@@ -22,18 +25,55 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
-        $message = Message::query()->findOrFail($request->input('message_id'));
-        Message::query()->create([
+        Message::create([
             'expediteur_id' => Auth::user()->id,
-            'destinataire_id' => $message->expediteur_id,
-            'objet' => $message->input('objet'),
-            'contenu' => $message->input('message'),
+            'destinataire_id' => $request->input('destinataire_id'),
+            'objet' => $request->input('objet'),
+            'contenu' => $request->input('contenue'),
+            'status' => 0
         ]);
-        session()->flash('message', 'Votre message a été envoyé');
-        return redirect()->route('my_messages');
+        session()->flash('session', __('Message successfully deleted'));
+        return redirect()->route('messages.index');
     }
 
-    public function delete($id)
+    public function create()
+    {
+        $livreurs = User::query()->role('photographe')->get();
+        $clients = User::query()->role('client')->get();
+        return view('backend.messages.create', compact('livreurs', 'clients'));
+    }
+
+    public function show($id)
+    {
+        $message = Message::findOrFail($id);
+        if ($message->expediteur_id != Auth::user()->id) {
+            $message->status = 1;
+            $message->save();
+        } elseif ($message->destinataire_id == Auth::user()->id) {
+            $message->status = 1;
+            $message->save();
+        }
+        return view('backend.messages.show', compact('message'));
+    }
+
+    public function reply_message(Request $request, $id)
+    {
+        try {
+            $message = Message::findOrFail($id);
+            $message->expediteur_id = Auth::user()->id;
+            $message->destinataire_id = $request->input('destinataire_id');
+            $message->contenu = $request->input('contenue');
+            $message->objet = $request->input('objet');
+            $message->status = 0;
+            $message->save();
+            session()->flash('session', __('Message successfully updated'));
+            return redirect()->route('messages.index');
+        } catch (\Exception $exception) {
+            return back()->withInput()->withErrors(['unexpected_error' => __('messages.unexpected_error')]);
+        }
+    }
+
+    public function destroy($id)
     {
         Message::query()->findOrFail($id)->delete();
         session()->flash('message', 'Message supprimé avec succès');

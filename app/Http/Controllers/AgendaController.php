@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RendezVous;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AgendaController extends Controller
@@ -14,7 +15,21 @@ class AgendaController extends Controller
         $agendas = Auth::user()->hasRole('photographe') ?
             RendezVous::query()->where('photographe_id', Auth::user()->id)->get() :
             RendezVous::query()->where('client_id', Auth::user()->id)->get();
-        return view('backend.agenda.index', compact('agendas'));
+            $calendar_events = [];
+
+            // Prepare JSON array for calender for use in the calender part of client and photographer
+            foreach($agendas as $agenda) {
+            $calendar_events = [
+                'user' => Auth::user()->hasRole('photographe') ? $agenda->photographe->email : $agenda->client->email,
+                'start' => $agenda->debut,
+                'end' => $agenda->fin,
+                'color' => '#4E558F',
+            ];
+        }
+        $data = [
+            'calendar_events' => json_encode($calendar_events)
+        ];
+        return view('backend.agenda.index', $data);
     }
 
     public function create()
