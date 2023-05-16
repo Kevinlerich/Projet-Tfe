@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,7 @@ class RendezVous extends Model
 
     protected $guarded = [];
     protected $dates = ['created_at', 'updated_at', 'debut', 'fin'];
+    protected $dateFormat = DateTime::ISO8601;
 
     public function client(): BelongsTo
     {
@@ -24,4 +26,14 @@ class RendezVous extends Model
     {
         return $this->belongsTo(User::class, 'photographe_id', 'id');
     }
+/*
+    public function getDebutAttribute()
+    {
+        return $this->debut->format('c');
+    }
+
+    public function getFinAttribute()
+    {
+        return $this->fin->format('c');
+    } */
 }

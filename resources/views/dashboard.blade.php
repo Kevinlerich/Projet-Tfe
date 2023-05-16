@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
+            {{-- <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
 
                 @if(auth()->user()->hasRole('photographe'))
                     @foreach($annonces as $annonce)
@@ -79,6 +79,53 @@
                         </div>
                     @endforeach
                 @endif
+            </div> --}}
+            <div class="py-24 bg-white sm:py-32">
+                @if (Auth::user()->hasRole('client'))
+                <div class="grid px-6 mx-auto max-w-7xl gap-x-8 gap-y-20 lg:px-8 xl:grid-cols-3">
+                    <div class="max-w-2xl">
+                      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Les annonces de la plateforme</h2>
+                    </div>
+                    <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+                      @foreach($annonces as $annonce)
+                        <li>
+                        <div class="flex items-center gap-x-6">
+                          <div>
+                            <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                                <a href="{{ route('detail_annonce', $annonce->slug) }}">{{ $annonce->titre }}</a>
+                            </h3>
+                            <p class="text-sm font-semibold leading-6 text-gray-600">{!! ($annonce->description) !!}</p>
+                            <p class="text-sm font-semibold leading-6 text-indigo-600">Par: {{ $annonce->user->name }} {{ $annonce->created_at->diffForHumans() }}</p>
+                          </div>
+                        </div>
+                      </li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @else
+                <div class="grid px-6 mx-auto max-w-7xl gap-x-8 gap-y-20 lg:px-8 xl:grid-cols-3">
+                    <div class="max-w-2xl">
+                      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Les services</h2>
+                      <p class="mt-6 text-lg leading-8 text-gray-600">Services des photographes présents dans la plateforme</p>
+                    </div>
+                    <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+                      @foreach ($services as $service)
+                      <li>
+                        <div class="flex items-center gap-x-6">
+                          <img class="w-16 h-16 rounded-full" src="{{ asset('storage/'.$service->image_service) }}" alt="">
+                          <div>
+                            <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                                <a href="{{ route('detail_service',$service->id) }}">{{ $service->nom }}</a>
+                            </h3>
+                            <p class="text-sm font-semibold leading-6 text-indigo-600">{{ Str::substr($service->description, 0, 10) }}</p>
+                          </div>
+                        </div>
+                      </li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
+
             </div>
         </div>
     </div>
