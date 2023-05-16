@@ -33,12 +33,7 @@
                                                 {{ $livreur->email }}
                                             </option>
                                         @endforeach
-                                        <option value="" selected disabled>Clients</option>
-                                        @foreach ($clients as $client)
-                                            <option value="{{ $client->id}}">
-                                            {{ $client->email }}
-                                        </option>
-                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
