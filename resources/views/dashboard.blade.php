@@ -17,6 +17,7 @@
                                     <h1 class="flex-auto font-medium text-slate-900">
                                         {{ $annonce->titre }}
                                     </h1>
+
                                     <div class="text-sm font-medium text-slate-400">
                                         {{ $annonce->category->nom }}
                                     </div>
@@ -24,8 +25,6 @@
                                 <div class="flex items-baseline pb-6 mt-4 mb-6 border-b border-slate-200">
                                     <div class="flex space-x-2 text-sm font-bold">
                                         <label>
-                                            <input class="sr-only peer" name="size" type="radio" value="xs" checked />
-
                                             <div class="flex items-center justify-center rounded-full w-60 h-9">
                                                 Ajouté par: {{ $annonce->user->name }}
                                             </div>
