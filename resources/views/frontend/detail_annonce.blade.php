@@ -93,7 +93,7 @@
                             <form route="{{ route('contact_annonce') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="destinataire_id" value="{{ $annonce->user_id }}">
-                                <input name="objet" placeholder="objet" class="
+                                <input type="hidden" name="objet" value="{{ $annonce->titre }}" class="
                     a7
                     a3l
                     a2z
@@ -113,6 +113,8 @@
                     focus:a3p focus:a3y
                     a1Q
                   " />
+                  <label for="contenu" class=" a1A dark:aI a1g a2u a2D a1Q">Votre message ici</label>
+
                                 <textarea name="contenu" class="
                     a7
                     a3l

@@ -53,4 +53,16 @@ class AccueilController extends Controller
         $sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
     }
+
+    public function contact_service(Request $request)
+    {
+        $sms = Message::query()->create([
+            'expediteur_id' => Auth::user()->id,
+            'destinataire_id' => $request->destinataire_id,
+            'objet' => $request->input('objet'),
+            'contenu' => $request->input('contenu')
+        ]);
+        $sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
+        return back();
+    }
 }

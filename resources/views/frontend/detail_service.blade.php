@@ -8,29 +8,10 @@
             <div class="a8 a1K ab[-16px]">
                 <div class="a7 lg:a2q/12 ae">
                     <div>
-                        <h2 class="
-                  a1g a1A
-                  dark:aI
-                  a1O
-                  sm:a1P
-                  a2D
-                  sm:a2D
-                  a23
-                ">
+                        <h2 class=" a1g a1A dark:aI a1O sm:a1P a2D sm:a2D a23">
                             {{ $service->nom }}
                         </h2>
-                        <div class="
-                  a8
-                  a1K
-                  a9
-                  ac
-                  a2L
-                  a1V
-                  a2B
-                  a2z
-                  a2M
-                  dark:a2o dark:a2M
-                ">
+                        <div class=" a8 a1K a9 ac a2L a1V a2B a2z a2M dark:a2o dark:a2M">
                             <div class="a8 a1K a9">
                                 <div class="a8 a9 a2N a2v">
                                     <div class="
@@ -44,9 +25,7 @@
                                         <img src="{{ asset('storage/'.$service->user->profile_photo_path) }}" alt="author" class="a7" />
                                     </div>
                                     <div class="a7">
-                                        <h4 class="
-                          aH a1R a1S a2K
-                        ">
+                                        <h4 class=" aH a1R a1S a2K">
                                             Par
                                             <a href="javascript:void(0)" class="a1S hover:a1W">
                                                 {{ $service->user->name }}
@@ -55,14 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="a8 a9 a2v">
-                                    <p class="
-                        a8
-                        a9
-                        aH
-                        a1S
-                        a1R
-                        a2O
-                      ">
+                                    <p class=" a8 a9 aH a1S a1R a2O">
 <span class="a2A">
 <svg width="15" height="15" viewBox="0 0 15 15" class="a26">
 <path d="M3.89531 8.67529H3.10666C2.96327 8.67529 2.86768 8.77089 2.86768 8.91428V9.67904C2.86768 9.82243 2.96327 9.91802 3.10666 9.91802H3.89531C4.03871 9.91802 4.1343 9.82243 4.1343 9.67904V8.91428C4.1343 8.77089 4.03871 8.67529 3.89531 8.67529Z" />
@@ -82,33 +54,13 @@
                                 </div>
                             </div>
                             <div class="a2v">
-<span class="
-                      a1k
-                      a1w
-                      aM
-                      a9
-                      a1x
-                      aK
-                      ae
-                      a2P
-                      a1b
-                      aI
-                    ">
+<span class=" a1k a1w aM a9 a1x aK ae a2P a1b aI">
 {{ $service->category->nom }}
 </span>
                             </div>
                         </div>
                         <div>
-                            <p class="
-                    a1R a1S aH
-                    sm:a1T
-                    lg:aH
-                    xl:a1T
-                    sm:a1U
-                    lg:a1U
-                    xl:a1U
-                    a1U a1V
-                    ">
+                            <p class=" a1R a1S aH sm:a1T lg:aH xl:a1T sm:a1U lg:a1U xl:a1U a1U a1V">
                                 {!! $service->description !!}
                             </p>
                             <div class="a7 a1c a2p a1V">
@@ -135,32 +87,17 @@
                 fadeInUp
               " data-wow-delay=".2s
               ">
-                        <h3 class="
-                  a1A
-                  dark:aI
-                  a1g a2u a2D a1Q
-                ">
-                            Contactez l'annonceur
+                        <h3 class=" a1A dark:aI a1g a2u a2D a1Q">
+                            Contactez le photographe
                         </h3>
-                        <p class="
-                  a1R
-                  aH
-                  a1S
-                  a1U
-                  a3u
-                  a2F
-                  a2B
-                  a2z
-                  a3v
-                  dark:a2o dark:a3v
-                ">
-                            Ecrire à l'annonceur
+                        <p class=" a1R aH a1S a1U a3u a2F a2B a2z a3v dark:a2o dark:a3v">
+                            Ecrire à {{ $service->user->name }}
                         </p>
                         @auth
-                            <form route="{{ route('contact_annonce') }}" method="post">
+                            <form route="{{ route('contact_service') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="destinataire_id" value="{{ $service->user_id }}">
-                                <input name="objet" placeholder="objet" class="
+                                <input type="hidden" value="{{ $service->nom }}" name="objet" class="
                     a7
                     a3l
                     a2z
@@ -180,6 +117,7 @@
                     focus:a3p focus:a3y
                     a1Q
                   " />
+                  <label for="contenu" class=" a1A dark:aI a1g a2u a2D a1Q">Votre message ici</label>
                                 <textarea name="contenu" class="
                     a7
                     a3l
@@ -201,31 +139,8 @@
                     a1Q
                   " ></textarea>
 
-                                <input type="submit" value="Envoyer" class="
-                    a7
-                    a3l
-                    a3p
-                    a1k
-                    a13
-                    a1i
-                    az
-                    a1R
-                    aI
-                    aH
-                    a1M
-                    a3o
-                    a1r
-                    focus-visible:aE
-                    hover:a1n hover:a2i
-                    a1p a3z a2j a1Q
-                  " />
-                                <p class="
-                    aH
-                    a1S
-                    a1M
-                    a1R
-                    a1U
-                  ">
+                                <input type="submit" value="Envoyer" class=" a7 a3l a3p a1k a13 a1i az a1R aI aH a1M a3o a1r focus-visible:aE hover:a1n hover:a2i a1p a3z a2j a1Q" />
+                                <p class=" aH a1S a1M a1R a1U">
                                     Pas de spam guarantie.
                                 </p>
                             </form>
