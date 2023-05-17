@@ -72,20 +72,7 @@
                                 <label for="checkboxLabel" class="a8 a1r a1S a1b a1R a48">
                                     <div class="ad">
                                         <input type="checkbox" id="checkboxLabel" class="a1B" name="terms" required/>
-                                        <div class="
-                          box
-                          a8
-                          a9
-                          a1x
-                          a1D
-                          a1E
-                          a1c
-                          a3l
-                          a2z
-                          a49
-                          dark:a2o dark:a2M
-                          a2G a4a
-                        ">
+                                        <div class=" box a8 a9 a1x a1D a1E a1c a3l a2z a49 dark:a2o dark:a2M a2G a4a">
 <span class="a15">
 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path
@@ -108,30 +95,15 @@ Politique de confidentialité
                                 </label>
                             </div>
                             <div class="a2E">
-                                <button class="
-                      a7
-                      a8
-                      a9
-                      a1x
-                      aH
-                      a1R
-                      aI
-                      a1k
-                      a3q
-                      a1m
-                      hover:a1n hover:a2i
-                      a1p a1a a2j a13
-                    " type="submit">
+                                <button class=" a7 a8 a9 a1x aH a1R aI a1k a3q a1m hover:a1n hover:a2i a1p a1a a2j a13" type="submit">
                                     S'inscrire
                                 </button>
                             </div>
                         </form>
-                        <p class="
-                  a1R aH a1S a1M
-                ">
+                        <p class=" a1R aH a1S a1M">
                             Vous utilisez déjà Startup ?
-                            <a href="signin.html" class="a1W hover:a2T">
-                                S'inscrire
+                            <a href="{{ route('login') }}" class="a1W hover:a2T">
+                                Se connecter
                             </a>
                         </p>
                     </div>
