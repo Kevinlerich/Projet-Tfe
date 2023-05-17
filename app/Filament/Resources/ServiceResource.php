@@ -12,6 +12,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Camya\Filament\Forms\Components\TitleWithSlugInput;
 
 class ServiceResource extends Resource
 {
@@ -30,9 +31,10 @@ class ServiceResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'nom')
                     ->required(),
-                Forms\Components\TextInput::make('nom')
-                    ->required()
-                    ->maxLength(255),
+                    TitleWithSlugInput::make(
+                        fieldTitle: 'nom', // The name of the field in your model that stores the title.
+                        fieldSlug: 'slug', // The name of the field in your model that will store the slug.
+                    ),
                 Forms\Components\Textarea::make('description'),
                 Forms\Components\FileUpload::make('image_service')
                     ->required(),

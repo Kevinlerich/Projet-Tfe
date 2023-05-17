@@ -8,13 +8,7 @@
             <div class="a8 a1K a9 ab[-16px]">
                 <div class="a7 md:a2q/12 lg:a2r/12 ae">
                     <div class="aB[570px] a2s md:a2t">
-                        <h1 class="
-                  a1g a1A
-                  dark:aI
-                  a2u
-                  sm:a1O
-                  a2v
-                ">
+                        <h1 class=" a1g a1A dark:aI a2u sm:a1O a2v">
                             Services
                         </h1>
                         <p class="a1R aH a1S a1U">
@@ -75,77 +69,24 @@
             <div class="a8 a1K ab[-16px] a1x">
                 @foreach($services as $service)
                 <div class="a7 md:aU/3 lg:a1_/2 xl:a1_/3 ae">
-                    <div class="
-                ad aw
-                dark:av
-                a33 a13 a2p a1V
-                wow
-                fadeInUp
-              " data-wow-delay=".1s">
-                        <a href="{{ route('detail_service', $service->id) }}" class="a7 ah ad">
-<span class="
-                    a3
-                    a34
-                    a35
-                    a1k
-                    a1w
-                    aM
-                    a9
-                    a1x
-                    aK
-                    ae
-                    a2P
-                    a1b
-                    aI
-                  ">
+                    <div class=" ad aw dark:av a33 a13 a2p a1V wow fadeInUp" data-wow-delay=".1s">
+                        <a href="{{ route('detail_service', $service->slug) }}" class="a7 ah ad">
+<span class=" a3 a34 a35 a1k a1w aM a9 a1x aK ae a2P a1b aI">
 {{ $service->category->nom }}
 </span>
                             <img src="{{ asset('storage/'.$service->image_service) }}" alt="image" class="a7" />
                         </a>
-                        <div class="
-                  a36
-                  sm:a2Y
-                  md:ai md:az
-                  lg:a2Y
-                  xl:ai xl:a37
-                  2xl:a2Y
-                ">
+                        <div class=" a36 sm:a2Y md:ai md:az lg:a2Y xl:ai xl:a37 2xl:a2Y">
                             <h3>
-                                <a href="{{ route('detail_service', $service->id) }}" class="
-                      a1g a1A
-                      dark:aI
-                      a27
-                      sm:a2u
-                      ah a1Q
-                      hover:a1W
-                      dark:hover:a1W
-                    ">
+                                <a href="{{ route('detail_service', $service->slug) }}" class=" a1g a1A dark:aI a27 sm:a2u ah a1Q hover:a1W dark:hover:a1W">
                                     {!! $service->nom !!}
                                 </a>
                             </h3>
-                            <p class="
-                    aH
-                    a1S
-                    a1R
-                    a38
-                    a2E
-                    a2B
-                    a2z
-                    a2M
-                    dark:a2o dark:a2M
-                  ">
+                            <p class=" aH a1S a1R a38 a2E a2B a2z a2M dark:a2o dark:a2M">
                                 {!! $service->description !!}
                             </p>
                             <div class="a8 a9">
-                                <div class="
-                      a8 a9 a39 a2O
-                      xl:a3a
-                      2xl:a39
-                      xl:a2A
-                      2xl:a2O
-                      a3b a2z a2M
-                      dark:a2o dark:a2M
-                    ">
+                                <div class=" a8 a9 a39 a2O xl:a3a 2xl:a39 xl:a2A 2xl:a2O a3b a2z a2M dark:a2o dark:a2M">
                                     <div class="
                         aB[40px]
                         a7
@@ -157,29 +98,16 @@
                                         <img src="{{ asset('storage/'.$service->user->profile_photo_path) }}" alt="author" class="a7" />
                                     </div>
                                     <div class="a7">
-                                        <h4 class="
-                          a1b a1R a1h
-                          dark:aI
-                          a2K
-                        ">
+                                        <h4 class=" a1b a1R a1h dark:aI a2K">
                                             Par
-                                            <a href="javascript:void(0)" class="
-                            a1h
-                            dark:aI
-                            hover:a1W
-                            dark:hover:a1W
-                          ">
+                                            <a href="javascript:void(0)" class=" a1h dark:aI hover:a1W dark:hover:a1W">
                                                 {{ $service->user->name }}
                                             </a>
                                         </h4>
                                     </div>
                                 </div>
                                 <div class="a22">
-                                    <h4 class="
-                        a1b a1R a1h
-                        dark:aI
-                        a2K
-                      ">
+                                    <h4 class=" a1b a1R a1h dark:aI a2K">
                                         Date
                                     </h4>
                                     <p class="a3c a1S">{{ $service->created_at->format('d, M Y') }}</p>

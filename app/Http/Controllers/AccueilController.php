@@ -25,9 +25,15 @@ class AccueilController extends Controller
         return view('frontend.services', compact('services'));
     }
 
-    public function detail_service($id)
+    public function annonces()
     {
-        $service = Service::query()->findOrFail($id);
+        $annonces = Announce::query()->orderBy('created_at', 'desc')->get();
+        return view('frontend.annonces', compact('annonces'));
+    }
+
+    public function detail_service($slug)
+    {
+        $service = Service::query()->where('slug', $slug)->first();
         return view('frontend.detail_service', compact('service'));
     }
 
@@ -62,7 +68,8 @@ class AccueilController extends Controller
             'objet' => $request->input('objet'),
             'contenu' => $request->input('contenu')
         ]);
-        $sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
+        dd($sms);
+        //$sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
     }
 }

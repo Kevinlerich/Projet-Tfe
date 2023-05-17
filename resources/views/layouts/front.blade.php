@@ -104,7 +104,12 @@
                             </li>
                             <li class="ad aG">
                                 <a href="{{ route('services') }}" class=" menu-scroll aH text-dark dark:aI group-hover:aJ aK lg:aL lg:aM lg:aN a8 aO lg:aP lg:aQ xl:aR">
-                                    Services
+                                    Les services
+                                </a>
+                            </li>
+                            <li class="ad aG">
+                                <a href="{{ route('annonces') }}" class=" menu-scroll aH text-dark dark:aI group-hover:aJ aK lg:aL lg:aM lg:aN a8 aO lg:aP lg:aQ xl:aR">
+                                    Les annonces
                                 </a>
                             </li>
                         </ul>

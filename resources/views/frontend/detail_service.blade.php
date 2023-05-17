@@ -22,7 +22,6 @@
                         a2p
                         a2G
                       ">
-                                        <img src="{{ asset('storage/'.$service->user->profile_photo_path) }}" alt="author" class="a7" />
                                     </div>
                                     <div class="a7">
                                         <h4 class=" aH a1R a1S a2K">
@@ -139,7 +138,9 @@
                     a1Q
                   " ></textarea>
 
-                                <input type="submit" value="Envoyer" class=" a7 a3l a3p a1k a13 a1i az a1R aI aH a1M a3o a1r focus-visible:aE hover:a1n hover:a2i a1p a3z a2j a1Q" />
+                                <button type="submit" value="Envoyer" class=" a7 a3l a3p a1k a13 a1i az a1R aI aH a1M a3o a1r focus-visible:aE hover:a1n hover:a2i a1p a3z a2j a1Q" />
+                                Envoyer
+                            </button>
                                 <p class=" aH a1S a1M a1R a1U">
                                     Pas de spam guarantie.
                                 </p>

@@ -115,9 +115,11 @@
                           <img class="w-16 h-16 rounded-full" src="{{ asset('storage/'.$service->image_service) }}" alt="">
                           <div>
                             <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                                <a href="{{ route('detail_service',$service->id) }}">{{ $service->nom }}</a>
+                                <a href="{{ route('detail_service',$service->slug) }}">{{ $service->nom }}</a>
+                                <p class="text-gray-600">Ajouté par:
+                                    {{ Auth::user()->name == $service->user->name ? 'Vous' :  $service->user->name }}
+                                </p>
                             </h3>
-                            <p class="text-sm font-semibold leading-6 text-indigo-600">{{ Str::substr($service->description, 0, 10) }}</p>
                           </div>
                         </div>
                       </li>
