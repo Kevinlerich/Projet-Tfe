@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Announce;
 use App\Models\Category;
+use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -20,7 +21,9 @@ class AnnounceController extends Controller
     public function create()
     {
         $categories = Category::query()->get();
-        return view('backend.client.annonces.create', compact('categories'));
+        $villes = Ville::query()->get();
+        return view('backend.client.annonces.create',
+         compact('categories', 'villes'));
     }
 
     public function store(Request $request)
@@ -31,6 +34,7 @@ class AnnounceController extends Controller
             'titre' => $request->input('titre'),
             'slug' => Str::slug($request->input('titre')),
             'description' => $request->input('description'),
+            'ville_id' => $request->input('ville_id'),
         ]);
 
         return back();
@@ -39,7 +43,9 @@ class AnnounceController extends Controller
     public function edit($id)
     {
         $annonce = Announce::query()->findOrFail($id);
-        return view('backend.client.annonces.edit', compact('annonce'));
+        $villes = Ville::query()->get();
+        return view('backend.client.annonces.edit',
+         compact('annonce', 'villes'));
     }
 
     public function update(Request $request, $id)
@@ -50,6 +56,7 @@ class AnnounceController extends Controller
             'titre' => $request->input('titre'),
             'slug' => Str::slug($request->input('titre')),
             'description' => $request->input('description'),
+            'ville_id' => $request->input('ville_id'),
         ]);
         return back();
     }

@@ -4,225 +4,149 @@
 @endsection
 
 @section('content')
-<section class="ad a1H aq[120px]">
-    <div class="aa">
-    <div class="a8 a1K ab[-16px]">
-    <div class="a7 ae">
-    <div class="
-                    a1L aB[570px] a1M a3I
-                    wow
-                    fadeInUp
-                  " data-wow-delay=".1s">
-    <h2 class="
-                      a1A
-                      dark:aI
-                      a1g a1O
-                      sm:a1P
-                      md:a24[45px]
-                      a1Q
-                    ">
-                    Bienvenu, Welcome
-    </h2>
-    <p class=" a1S aH md:a1T a1U md:a1U">
-        Startup, une application d'annonces et de prestation de services de photographe.
+<!--===============================
+=            Hero Area            =
+================================-->
 
-    </p>
-    </div>
-    </div>
-    </div>
-    <div class="a8 a1K ab[-16px]">
-    <div class="a7 ae">
-    <div class="
-                    a1L aB[770px] a13 a2p
-                    wow
-                    fadeInUp
-                  " data-wow-delay=".15s">
-    <div class="ad a9 a1x">
-    <img src="images/video/video.jpg" alt="video image" class="a7 a2Q a2R a2S" />
-    <div class=" a3 a7 a2Q a4 a_ a8 a9 a1x">
-    <a href="javascript:void(0)" class="
-                          glightbox
-                          as[70px]
-                          at[70px]
-                          a1w
-                          a8
-                          a9
-                          a1x
-                          aw
-                          a3J
-                          a1W
-                          hover:a31
-                          a1p
-                        ">
-    <svg width="16" height="18" viewBox="0 0 16 18" class="a26">
-    <path d="M15.5 8.13397C16.1667 8.51888 16.1667 9.48112 15.5 9.86602L2 17.6603C1.33333 18.0452 0.499999 17.564 0.499999 16.7942L0.5 1.20577C0.5 0.43597 1.33333 -0.0451549 2 0.339745L15.5 8.13397Z" />
-    </svg>
-    </a>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="a3 a1X a5 a_ a1Y[-1]">
-    <img src="images/video/shape.svg" alt="shape" class="a7" />
-    </div>
-    </section>
+<section class="text-center hero-area bg-1 overly">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Header Contetnt -->
+				<div class="content-block">
+					<h1>Découvrez nos professionnels près de chez vous 📍 </h1>
+					<p>Trouvez facilement des photographes pour votre prochain shooting.</p>
+					<div class="text-center short-popular-category-list">
+						<h2>Catégories les plus populaires</h2>
+						<ul class="list-inline">
+                            @foreach ($categories as $category)
+                            <li class="list-inline-item">
+								<a href="{{ route('category_service', $category->slug) }}"><i class="fa fa-bed"></i> {{ $category->nom }}</a>
+                            </li>
+                            @endforeach
+						</ul>
+					</div>
 
-    <section id="blog" class="bg-primary a1Z a1I[50px] a3A">
-        <div class="aa">
-            <div class="a8 a1K ab[-16px]">
-                <div class="a7 ae">
-                    <div class="a1L aB[570px] a1M a3s[100px] wow fadeInUp
-              " data-wow-delay=".1s">
-                        <h2 class="
-                  a1A
-                  dark:aI
-                  a1g a1O
-                  sm:a1P
-                  md:a24[45px]
-                  a1Q
-                ">
-                            Les annonces
-                        </h2>
-                        <p class=" a1S aH md:a1T a1U md:a1U">
-                            Les différentes annonces des clients
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="a8 a1K ab[-16px] a1x">
-                @foreach($annonces as $annonce)
-                    <div class="a7 md:aU/3 lg:a1_/2 xl:a1_/3 ae">
-                        <div class="ad aw dark:av a33 a13 a2p a1V wowfadeInUp" data-wow-delay=".1s">
-                                <a href="{{ route('detail_annonce', $annonce->slug) }}" class="a7 ah ad">
-    <span class=" a3 a34 a35 a1k a1w aM a9 a1x aK ae a2P a1b aI">
-    {{ $annonce->category->nom }}
-    </span>
-                                </a>
-                                <div class=" a36 sm:a2Y md:ai md:az lg:a2Y xl:ai xl:a37 2xl:a2Y">
-                                    <h3>
-                                        <a href="{{ route('detail_annonce', $annonce->slug) }}" class=" a1g a1A dark:aI a27 sm:a2u ah a1Q hover:a1W dark:hover:a1W">
-                                            {{ $annonce->titre }}
-                                        </a>
-                                    </h3>
-                                    <p class=" aH a1S a1R a38 a2E a2B a2z a2M dark:a2o dark:a2M">
-                                       {!! $annonce->description !!}
+				</div>
+				<!-- Advance Search -->
+				<div class="advance-search">
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-lg-12 col-md-12 align-content-center">
+								<form method="get" action="{{ route('search') }}">
+                                    @csrf
+									<div class="form-row">
+										<div class="form-group col-xl-4 col-lg-3 col-md-6">
+											<input name="text" type="text" class="my-2 form-control my-lg-1" id="inputtext4"
+												placeholder="What are you looking for">
+										</div>
+										<div class="form-group col-lg-3 col-md-6">
+											<select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">
+												<option>Categories</option>
+												@foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                                                @endforeach
+											</select>
+										</div>
+										<div class="form-group col-lg-3 col-md-6">
+                                            <select name="ville_id" class="w-100 form-control mt-lg-1 mt-md-2">
+												<option>Villes</option>
+												@foreach ($villes as $ville)
+                                                    <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
+                                                @endforeach
+											</select>										</div>
+										<div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
+											<button type="submit" class="btn btn-primary active w-100">Rechercher</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
+
+
+<!--===========================================
+=            Popular deals section            =
+============================================-->
+
+<section class="popular-deals section bg-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-title">
+					<h2>Les services disponibles</h2>
+					<p>Les services disponibles</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- offer 01 -->
+			<div class="col-lg-12">
+				<div class="trending-ads-slide">
+					@foreach ($services as $service)
+                    <div class="col-sm-12 col-lg-4">
+						<!-- product card -->
+                        <div class="product-item bg-light">
+                            <div class="card">
+                                <div class="thumb-content">
+                                    <!-- <div class="price">$200</div> -->
+                                    <a href="{{ route('detail_service', $service->slug) }}">
+                                        <img class="card-img-top img-fluid" src="{{ asset('storage/'.$service->image_service) }}" alt="Card image cap">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title"><a href="{{ route('detail_service', $service->slug) }}">{{ $service->nom }}</a></h4>
+                                    <ul class="list-inline product-meta">
+                                        <li class="list-inline-item">
+                                            <a href="{{ route('category_service', $service->category->slug) }}"><i class="fa fa-folder-open-o"></i>
+                                                {{ $service->category->nom }}
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="category.html"><i class="fa fa-calendar"></i>{{ $service->created_at->diffForHumans() }}</a>
+                                        </li>
+                                    </ul>
+                                    <p class="card-text">
+                                        {!! $service->description !!}
                                     </p>
-                                    <div class="a8 a9">
-                                        <div class=" a8 a9 a39 a2O xl:a3a 2xl:a39 xl:a2A 2xl:a2O a3b a2z a2M dark:a2o dark:a2M">
-                                            <div class="
-                            aB[40px]
-                            a7
-                            at[40px]
-                            a1w
-                            a2p
-                            a2G
-                          ">
-                                            </div>
-                                            <div class="a7">
-                                                <h4 class=" a1b a1R a1h dark:aI a2K">
-                                                    {{ __('Par') }}
-                                                    <a href="javascript:void(0)" class=" a1h dark:aI hover:a1W dark:hover:a1W">
-                                                        {{ $annonce->user->name }}
-                                                    </a>
-                                                </h4>
-                                                <p class="a3c a1S">
-                                                    {{ $annonce->user->ville }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="a22">
-                                            <h4 class=" a1b a1R a1h dark:aI a2K">
-                                                Date
-                                            </h4>
-                                            <p class="a3c a1S">{{ $annonce->created_at->format('d, M Y') }}</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="bg-primary a1Z a1I[50px] a3A">
-        <div class="aa">
-            <div class="a8 a1K ab[-16px]">
-                <div class="a7 ae">
-                    <div class="a1L aB[570px] a1M a3s[100px] wow fadeInUp
-              " data-wow-delay=".1s">
-                        <h2 class="
-                  a1A
-                  dark:aI
-                  a1g a1O
-                  sm:a1P
-                  md:a24[45px]
-                  a1Q
-                ">
-                            Les services
-                        </h2>
-                        <p class=" a1S aH md:a1T a1U md:a1U">
-                            Les différents services des photographes
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="a8 a1K ab[-16px] a1x">
-                @foreach($services as $service)
-                    <div class="a7 md:aU/3 lg:a1_/2 xl:a1_/3 ae">
-                        <div class="ad aw dark:av a33 a13 a2p a1V wowfadeInUp" data-wow-delay=".1s">
-                                <a href="{{ route('detail_service', $service->slug) }}" class="a7 ah ad">
-    <span class=" a3 a34 a35 a1k a1w aM a9 a1x aK ae a2P a1b aI">
-    {{ $service->category->nom }}
-    </span>
-    <img src="{{ asset('storage/'.$service->image_service) }}" alt="image" class="a7" />
-
-                                </a>
-                                <div class=" a36 sm:a2Y md:ai md:az lg:a2Y xl:ai xl:a37 2xl:a2Y">
-                                    <h3>
-                                        <a href="{{ route('detail_service', $service->slug) }}" class=" a1g a1A dark:aI a27 sm:a2u ah a1Q hover:a1W dark:hover:a1W">
-                                            {{ $service->nom }}
-                                        </a>
-                                    </h3>
-                                    <p class=" aH a1S a1R a38 a2E a2B a2z a2M dark:a2o dark:a2M">
-                                       {!! $service->description !!}
-                                    </p>
-                                    <div class="a8 a9">
-                                        <div class=" a8 a9 a39 a2O xl:a3a 2xl:a39 xl:a2A 2xl:a2O a3b a2z a2M dark:a2o dark:a2M">
-                                            <div class="
-                            aB[40px]
-                            a7
-                            at[40px]
-                            a1w
-                            a2p
-                            a2G
-                          ">
-                                            </div>
-                                            <div class="a7">
-                                                <h4 class=" a1b a1R a1h dark:aI a2K">
-                                                    {{ __('Par') }}
-                                                    <a href="javascript:void(0)" class=" a1h dark:aI hover:a1W dark:hover:a1W">
-                                                        {{ $service->user->name }}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                        <div class="a22">
-                                            <h4 class=" a1b a1R a1h dark:aI a2K">
-                                                Date
-                                            </h4>
-                                            <p class="a3c a1S">{{ $service->created_at->format('d, M Y') }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+                        </div>
+					</div>
+                    @endforeach
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 
+<!--====================================
+=            Call to Action            =
+=====================================-->
+
+<section class="call-to-action overly bg-3 section-sm">
+	<!-- Container Start -->
+	<div class="container">
+		<div class="text-center row justify-content-md-center">
+			<div class="col-md-8">
+				<div class="content-holder">
+					<h2>Commencez dès aujourd'hui à vous faire connaître et à développer votre activité</h2>
+					<ul class="list-inline mt-30">
+						<li class="list-inline-item"><a class="btn btn-main" href="{{ route('create_annonce') }}">Ajouter une annonce</a></li>
+						<li class="list-inline-item"><a class="btn btn-secondary" href="{{ route('services') }}">Parcourir les services</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Container End -->
+</section>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Photographe;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,9 @@ class ServiceController extends Controller
     public function create()
     {
         $categories = Category::query()->get();
-        return view('backend.photographe.services.create', compact('categories'));
+        $villes = Ville::query()->get();
+        return view('backend.photographe.services.create',
+         compact('categories', 'villes'));
     }
 
     public function store(Request $request)
@@ -37,7 +40,8 @@ class ServiceController extends Controller
             'nom' => $request->input('nom'),
             'description' => $request->input('description'),
             'category_id' => $request->input('category_id'),
-            'image_service' => $path
+            'image_service' => $path,
+            'ville_id' => $request->input('ville_id'),
         ]);
         return redirect()->route('list_service');
     }
@@ -46,7 +50,9 @@ class ServiceController extends Controller
     {
         $service = Service::query()->findOrFail($id);
         $categories = Category::query()->get();
-        return view('backend.photographe.services.edit', compact('categories', 'service'));
+        $villes = Ville::query()->get();
+        return view('backend.photographe.services.edit',
+         compact('categories', 'service', 'villes'));
     }
 
     public function update(Request $request, $id)
@@ -55,6 +61,7 @@ class ServiceController extends Controller
         $service->category_id = $request->input('category_id');
         $service->nom = $request->input('nom');
         $service->description = $request->input('description');
+        $service->ville_id = $request->input('ville_id');
         $service->save();
         return redirect()->route('list_service');
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Announce;
 use App\Models\Category;
 use App\Models\Message;
+use App\Models\Photo;
+use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\Ville;
 use App\Notifications\Rendezvous;
@@ -25,9 +27,15 @@ class AccueilController extends Controller
             'categories', 'villes'));
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        //
+        $text = $request->input('text');
+        $services = Service::query()->where('nom', 'like', '%'.$text.'%')
+        ->orWhere('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('search', compact('services'));
     }
 
     public function category_service($category_slug)
@@ -51,7 +59,11 @@ class AccueilController extends Controller
     public function detail_service($slug)
     {
         $service = Service::query()->where('slug', $slug)->first();
-        return view('frontend.detail_service', compact('service'));
+        $portfolio = Portfolio::query()->where('service_id','=', $service->id)->first();
+        $categories = Category::query()->inRandomOrder()->get();
+        $villes = Ville::query()->inRandomOrder()->get();
+        return view('frontend.detail_service',
+         compact('service','categories', 'villes', 'portfolio'));
     }
 
     public function detail_annonce($slug)
