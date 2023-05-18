@@ -12,6 +12,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Camya\Filament\Forms\Components\TitleWithSlugInput;
+
 
 class CategoryResource extends Resource
 {
@@ -24,9 +26,10 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nom')
-                    ->required()
-                    ->maxLength(255),
+                    TitleWithSlugInput::make(
+                        fieldTitle: 'nom', // The name of the field in your model that stores the title.
+                        fieldSlug: 'slug', // The name of the field in your model that will store the slug.
+                    ),
             ]);
     }
 

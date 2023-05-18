@@ -52,6 +52,15 @@ class AccueilController extends Controller
         return view('frontend.services', compact('services', 'categories', 'villes'));
     }
 
+    public function category_annonce($category_slug)
+    {
+        $categories = Category::query()->get();
+        $villes = Ville::query()->get();
+        $category = Category::query()->where('slug', $category_slug)->first();
+        $annonces = Announce::query()->where('category_id', '=', $category->id)->orderBy('created_at', 'desc')->get();
+        return view('frontend.annonces', compact('annonces', 'categories', 'villes'));
+    }
+
     public function services()
     {
         $services = Service::query()->get();
@@ -66,7 +75,8 @@ class AccueilController extends Controller
         $annonces = Announce::query()->orderBy('created_at', 'desc')->get();
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
-        return view('frontend.annonces', compact('annonces', 'categories', 'villes'));
+        return view('frontend.annonces', compact('annonces',
+         'categories', 'villes'));
     }
 
     public function detail_service($slug)
@@ -98,7 +108,10 @@ class AccueilController extends Controller
     public function detail_annonce($slug)
     {
         $annonce = Announce::query()->where('slug', $slug)->first();
-        return view('frontend.detail_annonce', compact('annonce'));
+        $categories = Category::query()->inRandomOrder()->get();
+        $villes = Ville::query()->inRandomOrder()->get();
+        return view('frontend.detail_annonce',
+        compact('annonce', 'villes', 'categories'));
     }
 
     public function contact()
@@ -106,16 +119,15 @@ class AccueilController extends Controller
         return view('frontend.contact');
     }
 
-    public function contact_annonce($id)
+    public function contact_annonce(Request $request)
     {
-        /*$sms = Message::query()->create([
+        $sms = Message::query()->create([
             'expediteur_id' => Auth::user()->id,
-            'destinataire_id' => $request->destinataire_id,
+            'destinataire_id' => $request->input('destinataire_id'),
             'objet' => $request->input('objet'),
-            'contenu' => $request->input('contenu')
-        ]);*/
-        $sms = Service::query()->findOrFail($id);
-        $sms->user->notify(new Rendezvous('Vous avez reçu un message.'));
+            'contenu' => $request->input('message')
+        ]);
+        //$sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
     }
 
@@ -135,7 +147,8 @@ class AccueilController extends Controller
                     'photographe_id' => $request->photographe_id,
                      'debut' => $request->start,
                      'fin' => $request->end,
-                     'message' => $request->message
+                     'message' => $request->message,
+                     'etat' => 0
                  ]);
                  $event->photographe->notify(new RendezVous('Vous avez un nouveau rendez-vous dans la plateforme.'));
 
@@ -146,7 +159,8 @@ class AccueilController extends Controller
                  $event = ModelsRendezVous::query()->findOrFail($request->id)->update([
                      'debut' => $request->start,
                      'fin' => $request->end,
-                     'message' => $request->message
+                     'message' => $request->message,
+                     'etat' => 0
                  ]);
 
                  return response()->json($event);

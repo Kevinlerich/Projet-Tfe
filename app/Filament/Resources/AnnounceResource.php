@@ -27,6 +27,10 @@ class AnnounceResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
+
+                Forms\Components\Select::make('ville_id')
+                ->relationship('ville', 'nom')
+                ->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'nom')
                     ->required(),

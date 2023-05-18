@@ -14,23 +14,9 @@ class AgendaController extends Controller
     public function index()
     {
         $agendas = Auth::user()->hasRole('photographe') ?
-            RendezVous::query()->where('photographe_id', Auth::user()->id)->first() :
-            RendezVous::query()->where('client_id', Auth::user()->id)->first();
-            $calendar_events = [];
-
-            // Prepare JSON array for calender for use in the calender part of client and photographer
-            foreach($agendas as $agenda) {
-            $calendar_events = [
-                //'user' => Auth::user()->hasRole('photographe') ? $agenda->photographe->email : $agenda->client->email,
-                'start' => $agenda->debut_8601,
-                'end' => $agenda->fin_8601,
-                'color' => '#4E558F',
-            ];
-        }
-        $data = [
-            'calendar_events' => json_encode($calendar_events)
-        ];
-        return view('backend.agenda.index', $data);
+            RendezVous::query()->where('photographe_id', Auth::user()->id)->get() :
+            RendezVous::query()->where('client_id', Auth::user()->id)->get();
+        return view('backend.agenda.index', compact('agendas'));
     }
 
     public function create()

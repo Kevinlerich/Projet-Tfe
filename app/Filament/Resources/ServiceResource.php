@@ -28,13 +28,16 @@ class ServiceResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
+                    Forms\Components\Select::make('ville_id')
+                ->relationship('ville', 'nom')
+                ->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'nom')
                     ->required(),
-                    TitleWithSlugInput::make(
-                        fieldTitle: 'nom', // The name of the field in your model that stores the title.
-                        fieldSlug: 'slug', // The name of the field in your model that will store the slug.
-                    ),
+                TitleWithSlugInput::make(
+                    fieldTitle: 'nom', // The name of the field in your model that stores the title.
+                    fieldSlug: 'slug', // The name of the field in your model that will store the slug.
+                ),
                 Forms\Components\Textarea::make('description'),
                 Forms\Components\FileUpload::make('image_service')
                     ->required(),

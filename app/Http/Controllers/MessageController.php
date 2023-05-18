@@ -25,7 +25,7 @@ class MessageController extends Controller
 
     public function show($id)
     {
-        $message = Message::findOrFail($id);
+        $message = Message::query()->findOrFail($id);
         if ($message->expediteur_id != Auth::user()->id) {
             $message->status = 1;
             $message->save();
@@ -38,7 +38,7 @@ class MessageController extends Controller
 
     public function edit($id)
     {
-        $message = Message::findOrFail($id);
+        $message = Message::query()->findOrFail($id);
         $message->status = 1;
         $message->save();
         return view('backend.messages.reply', compact('message'));

@@ -1,6 +1,11 @@
 <x-app-layout>
     <x-slot name="styles">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     </x-slot>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
@@ -26,19 +31,16 @@
                         </a>
                 @endif
                 <div class="w-full py-5" id="calendar"></div>
-                {{-- <table class="w-full py-5 table-fixed">
+                <table class="w-full py-5 table-fixed">
                     <thead>
                     <tr class="bg-gray-100">
-                        <th class="w-20 px-4 py-2">No</th>
                         @if(auth()->user()->hasRole('client'))
                             <th class="w-20 px-4 py-2">Photographe</th>
                         @else
                             <th class="w-20 px-4 py-2">Client</th>
                         @endif
-                        <th class="px-4 py-2">{{ __('Mois') }}</th>
-                        <th class="px-4 py-2">{{ __('Jours') }}</th>
-                        <th class="px-4 py-2">{{ __('Début heure') }}</th>
-                        <th class="px-4 py-2">{{ __('Fin heure') }}</th>
+                        <th class="px-4 py-2">{{ __('Début') }}</th>
+                        <th class="px-4 py-2">{{ __('Fin') }}</th>
                         <th class="px-4 py-2">{{ __('Etat') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
@@ -46,14 +48,11 @@
                     <tbody>
                     @foreach($agendas as $key => $announce)
                         <tr>
-                            <td class="w-20 px-4 py-2 text-center">{{ $key+1 }}</td>
                             @if(auth()->user()->hasRole('client'))
                                 <td class="w-20 px-4 py-2 text-center">{{ $announce->photographe->name }}</td>
                             @else
                                 <td class="w-20 px-4 py-2 text-center">{{ $announce->client->name }}</td>
                             @endif
-                            <td class="px-4 py-2 text-center">{{ $announce->mois }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->jours }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->debut }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->fin }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Validé' : 'En attente de confirmation' }}</td>
@@ -77,30 +76,9 @@
                     @endforeach
 
                     </tbody>
-                </table> --}}
+                </table>
             </div>
         </div>
     </div>
-    <x-slot name="script">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script>
-            $(function() {
-                $('#calendar').fullCalendar({
-                    locale: 'fr_FR',
-                    events: {!! $calendar_events !!},
-                    displayEventTime: true,
-                    eventRender: function (event, element, view) {
-                        if (event.allDay === 'true') {
-                            event.allDay = true;
-                        } else {
-                            event.allDay = false;
-                        }
-                    }
-                });
-            });
-        </script>
-    </x-slot>
+
 </x-app-layout>
