@@ -25,8 +25,8 @@ Route::get('detail_annonce/{slug}', [AccueilController::class, 'detail_annonce']
 Route::get('category_service/{category_slug}', [AccueilController::class, 'category_service'])->name('category_service');
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
-Route::post('post_contact_annonce', [AccueilController::class, 'contact_annonce'])->name('contact_annonce');
-Route::any('post_contact_service', [AccueilController::class, 'contact_service'])->name('contact_service');
+Route::get('post_contact_annonce', [AccueilController::class, 'contact_annonce'])->name('contact_annonce')->middleware('auth');;
+Route::get('post_contact_service/{id}', [AccueilController::class, 'contact_service'])->name('contact_service')->middleware('auth');;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');

@@ -77,27 +77,30 @@ class AccueilController extends Controller
         return view('frontend.contact');
     }
 
-    public function contact_annonce(Request $request)
+    public function contact_annonce($id)
     {
-        $sms = Message::query()->create([
+        /*$sms = Message::query()->create([
             'expediteur_id' => Auth::user()->id,
             'destinataire_id' => $request->destinataire_id,
             'objet' => $request->input('objet'),
             'contenu' => $request->input('contenu')
-        ]);
-        $sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
+        ]);*/
+        $sms = Service::query()->findOrFail($id);
+        $sms->user->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
     }
 
-    public function contact_service(Request $request)
+    public function contact_service($id)
     {
-        $sms = Message::query()->create([
+        /*$sms = Message::query()->create([
             'expediteur_id' => Auth::user()->id,
             'destinataire_id' => $request->destinataire_id,
             'objet' => $request->input('objet'),
             'contenu' => $request->input('contenu')
         ]);
-        dd($sms);
+        dd($sms);*/
+        $sms = Service::query()->findOrFail($id);
+        $sms->user->notify(new Rendezvous('Vous avez reçu un message.'));
         //$sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
     }

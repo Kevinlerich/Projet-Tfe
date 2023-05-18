@@ -24,8 +24,6 @@ class DisponibilityController extends Controller
     {
         Disponibility::query()->create([
             'user_id' => Auth::user()->id,
-            'jours' => $request->input('jours'),
-            'mois' => $request->input('mois'),
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'etat' => $request->input('etat'),
@@ -44,8 +42,6 @@ class DisponibilityController extends Controller
     {
         Disponibility::query()->where('id', $id)->update([
             'user_id' => Auth::user()->id,
-            'jours' => $request->input('jours'),
-            'mois' => $request->input('mois'),
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'etat' => $request->input('etat'),
