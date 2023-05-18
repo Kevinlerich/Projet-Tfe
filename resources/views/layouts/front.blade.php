@@ -12,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="author" content="Themefisher">
   <meta name="generator" content="Themefisher Classified Marketplace Template v1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <!-- theme meta -->
   <meta name="theme-name" content="classimax" />
@@ -54,17 +55,24 @@
 								<a class="nav-link" href="/">Accueil</a>
 							</li>
                             <li class="nav-item {{ Request::is('services') ? 'active' : '' }}">
-								<a class="nav-link" href="/">Services</a>
+								<a class="nav-link" href="{{ route('services') }}">Services</a>
 							</li>
                             <li class="nav-item {{ Request::is('annonces') ? 'active' : '' }}">
-								<a class="nav-link" href="/">Annonces</a>
+								<a class="nav-link" href="{{ route('annonces') }}">Annonces</a>
 							</li>
 
 						</ul>
 						<ul class="mt-10 ml-auto navbar-nav">
-							<li class="nav-item">
+							@guest
+                            <li class="nav-item">
 								<a class="nav-link login-button" href="{{ route('login') }}">Connexion</a>
 							</li>
+                            @endguest
+                            @auth
+                            <li class="nav-item">
+								<a class="nav-link login-button" href="{{ route('dashboard') }}">Mon espace</a>
+							</li>
+                            @endauth
 						</ul>
 					</div>
 				</nav>
@@ -114,8 +122,10 @@
 <!--
 Essential Scripts
 =====================================-->
-{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
- --}}<script src="{{ asset('plugins/bootstrap/popper.min.js') }}"></script>
+@if (Request::is('/'))
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+@endif
+<script src="{{ asset('plugins/bootstrap/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/bootstrap-slider.js') }}"></script>
 <script src="{{ asset('plugins/tether/js/tether.min.js') }}"></script>

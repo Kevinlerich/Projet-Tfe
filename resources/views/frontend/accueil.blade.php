@@ -110,7 +110,7 @@
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="category.html"><i class="fa fa-calendar"></i>{{ $service->created_at->diffForHumans() }}</a>
+                                            <a href="#"><i class="fa fa-calendar"></i>{{ $service->created_at->diffForHumans() }}</a>
                                         </li>
                                     </ul>
                                     <p class="card-text">

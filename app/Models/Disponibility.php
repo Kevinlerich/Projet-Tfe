@@ -11,7 +11,7 @@ class Disponibility extends Model
 {
     use HasFactory;
 
-    protected $dates = ['debut', 'fin', 'created_at', 'updated_at'];
+    protected $dates = ['debut', 'fin'];
     protected $dateFormat = DateTime::ISO8601;
 
     protected $guarded = [];

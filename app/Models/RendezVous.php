@@ -14,8 +14,7 @@ class RendezVous extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $dates = ['created_at', 'updated_at', 'debut', 'fin'];
-    protected $dateFormat = DateTime::ISO8601;
+    protected $dates = ['debut', 'fin'];
 
     public function client(): BelongsTo
     {

@@ -122,20 +122,23 @@
                         selectable: true,
                         selectHelper: true,
                         select: function (start, end, allDay) {
-                            var title = prompt('Event Title:');
+                            var title = prompt('Votre message:');
                             if (title) {
+                                var photographe_id = {{$service->user->id}};
                                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                                 var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
                                 $.ajax({
                                     url: SITEURL + "/fullcalenderAjax",
                                     data: {
+                                        photographe_id: photographe_id,
+                                        message: title,
                                         start: start,
                                         end: end,
                                         type: 'add'
                                     },
                                     type: "POST",
                                     success: function (data) {
-                                        displayMessage("Event Created Successfully");
+                                        displayMessage("Rendez-vous créer avec succès !!!");
 
                                         calendar.fullCalendar('renderEvent',
                                             {
@@ -157,6 +160,8 @@
                             $.ajax({
                                 url: SITEURL + '/fullcalenderAjax',
                                 data: {
+                                    photographe_id: photographe_id,
+                                    message: title,
                                     start: start,
                                     end: end,
                                     id: event.id,
@@ -164,12 +169,12 @@
                                 },
                                 type: "POST",
                                 success: function (response) {
-                                    displayMessage("Rendez vous Updated Successfully");
+                                    displayMessage("Rendez vous mis à jour avec succès");
                                 }
                             });
                         },
                         eventClick: function (event) {
-                            var deleteMsg = confirm("Do you really want to delete?");
+                            var deleteMsg = confirm("Voulez-vous vraiment supprimé ce rendez-vous?");
                             if (deleteMsg) {
                                 $.ajax({
                                     type: "POST",
@@ -180,7 +185,7 @@
                                     },
                                     success: function (response) {
                                         calendar.fullCalendar('removeEvents', event.id);
-                                        displayMessage("Event Deleted Successfully");
+                                        displayMessage("Rendez vous supprimé avec succès");
                                     }
                                 });
                             }
