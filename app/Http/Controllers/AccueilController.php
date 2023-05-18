@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Message;
 use App\Models\Photo;
 use App\Models\Portfolio;
+use App\Models\RendezVous as ModelsRendezVous;
 use App\Models\Service;
 use App\Models\Ville;
 use App\Notifications\Rendezvous;
@@ -103,5 +104,38 @@ class AccueilController extends Controller
         $sms->user->notify(new Rendezvous('Vous avez reçu un message.'));
         //$sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
         return back();
+    }
+
+    public function ajax(Request $request)
+    {
+        switch ($request->type) {
+            case 'add':
+                 $event = ModelsRendezVous::create([
+                     'debut' => $request->start,
+                     'fin' => $request->end,
+                 ]);
+
+                 return response()->json($event);
+             break;
+
+             case 'update':
+                 $event = ModelsRendezVous::query()->findOrFail($request->id)->update([
+                     'debut' => $request->start,
+                     'fin' => $request->end,
+                 ]);
+
+                 return response()->json($event);
+             break;
+
+             case 'delete':
+                 $event = ModelsRendezVous::query()->findOrFail($request->id)->delete();
+
+                 return response()->json($event);
+             break;
+
+             default:
+             # code...
+             break;
+         }
     }
 }

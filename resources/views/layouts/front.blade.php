@@ -30,7 +30,7 @@
   <link href="{{ asset('plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
 
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+@yield('styles')
 </head>
 
 <body class="body-wrapper">
@@ -122,7 +122,7 @@ Essential Scripts
 <script src="{{ asset('plugins/raty/jquery.raty-fa.js') }}"></script>
 <script src="{{ asset('plugins/slick/slick.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
-
+@yield('scripts')
 <script src="{{ asset('js/script.js') }}"></script>
 
 </body>
