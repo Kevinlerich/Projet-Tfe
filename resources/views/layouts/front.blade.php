@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 
   <!-- ** Basic Page Needs ** -->
   <meta charset="utf-8">
-  <title>@yield('title') | StartUp Service</title>
+  <title>@yield('title') | Star Of Service</title>
 
   <!-- ** Mobile Specific Metas ** -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,7 @@
   <meta name="theme-name" content="classimax" />
 
   <!-- favicon -->
-  <link href="images/favicon.png" rel="shortcut icon">
+  <link href="{{ asset('images/logo.jpg') }}" rel="shortcut icon">
 
   <!--
   Essential stylesheets
@@ -41,8 +41,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
+					<a class="navbar-brand" href="/">
+						<img src="{{ asset('images/logo.jpg') }}" width="140px" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,75 +50,20 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="ml-auto navbar-nav main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="index.html">Home</a>
+							<li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+								<a class="nav-link" href="/">Accueil</a>
 							</li>
-							<li class="nav-item dropdown dropdown-slide @@dashboard">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!">Dashboard<span><i class="fa fa-angle-down"></i></span>
-								</a>
-
-								<!-- Dropdown list -->
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item @@dashboardPage" href="dashboard.html">Dashboard</a></li>
-									<li><a class="dropdown-item @@dashboardMyAds" href="dashboard-my-ads.html">Dashboard My Ads</a></li>
-									<li><a class="dropdown-item @@dashboardFavouriteAds" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a></li>
-									<li><a class="dropdown-item @@dashboardArchivedAds" href="dashboard-archived-ads.html">Dashboard Archived Ads</a></li>
-									<li><a class="dropdown-item @@dashboardPendingAds" href="dashboard-pending-ads.html">Dashboard Pending Ads</a></li>
-
-									<li class="dropdown dropdown-submenu dropright">
-										<a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0501" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
-
-										<ul class="dropdown-menu" aria-labelledby="dropdown0501">
-											<li><a class="dropdown-item" href="index.html">Submenu 01</a></li>
-											<li><a class="dropdown-item" href="index.html">Submenu 02</a></li>
-										</ul>
-									</li>
-								</ul>
+                            <li class="nav-item {{ Request::is('services') ? 'active' : '' }}">
+								<a class="nav-link" href="/">Services</a>
 							</li>
-							<li class="nav-item dropdown dropdown-slide @@pages">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item @@about" href="about-us.html">About Us</a></li>
-									<li><a class="dropdown-item @@contact" href="contact-us.html">Contact Us</a></li>
-									<li><a class="dropdown-item @@profile" href="user-profile.html">User Profile</a></li>
-									<li><a class="dropdown-item @@404" href="404.html">404 Page</a></li>
-									<li><a class="dropdown-item @@package" href="package.html">Package</a></li>
-									<li><a class="dropdown-item @@singlePage" href="single.html">Single Page</a></li>
-									<li><a class="dropdown-item @@store" href="store.html">Store Single</a></li>
-									<li><a class="dropdown-item @@blog" href="blog.html">Blog</a></li>
-									<li><a class="dropdown-item @@singleBlog" href="single-blog.html">Blog Details</a></li>
-									<li><a class="dropdown-item @@terms" href="terms-condition.html">Terms &amp; Conditions</a></li>
-								</ul>
+                            <li class="nav-item {{ Request::is('annonces') ? 'active' : '' }}">
+								<a class="nav-link" href="/">Annonces</a>
 							</li>
-							<li class="nav-item dropdown dropdown-slide @@listing">
-								<a class="nav-link dropdown-toggle" href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item @@category" href="category.html">Ad-Gird View</a></li>
-									<li><a class="dropdown-item @@listView" href="ad-list-view.html">Ad-List View</a></li>
 
-									<li class="dropdown dropdown-submenu dropleft">
-										<a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0201" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
-
-										<ul class="dropdown-menu" aria-labelledby="dropdown0201">
-											<li><a class="dropdown-item" href="index.html">Submenu 01</a></li>
-											<li><a class="dropdown-item" href="index.html">Submenu 02</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
 						</ul>
 						<ul class="mt-10 ml-auto navbar-nav">
 							<li class="nav-item">
-								<a class="nav-link login-button" href="login.html">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="text-white nav-link add-button" href="ad-listing.html"><i class="fa fa-plus-circle"></i> Add Listing</a>
+								<a class="nav-link login-button" href="{{ route('login') }}">Connexion</a>
 							</li>
 						</ul>
 					</div>
@@ -139,25 +84,16 @@
 			<div class="col-md-12">
 				<!-- Header Contetnt -->
 				<div class="content-block">
-					<h1>Buy & Sell Near You </h1>
-					<p>Join the millions who buy and sell from each other <br> everyday in local communities around the world</p>
+					<h1>Découvrez nos professionnels près de chez vous 📍 </h1>
+					<p>Trouvez facilement des photographes pour votre prochain shooting.</p>
 					<div class="text-center short-popular-category-list">
-						<h2>Popular Category</h2>
+						<h2>Catégories les plus populaires</h2>
 						<ul class="list-inline">
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-bed"></i> Hotel</a></li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-grav"></i> Fitness</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-car"></i> Cars</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-cutlery"></i> Restaurants</a>
-							</li>
-							<li class="list-inline-item">
-								<a href="category.html"><i class="fa fa-coffee"></i> Cafe</a>
-							</li>
+                            @foreach ($categories as $category)
+                            <li class="list-inline-item">
+								<a href="{{ route('category_service', $category->slug) }}"><i class="fa fa-bed"></i> {{ $category->nom }}</a>
+                            </li>
+                            @endforeach
 						</ul>
 					</div>
 

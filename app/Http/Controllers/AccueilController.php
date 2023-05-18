@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announce;
+use App\Models\Category;
 use App\Models\Message;
 use App\Models\Service;
 use App\Notifications\Rendezvous;
@@ -15,8 +16,16 @@ class AccueilController extends Controller
     {
         $annonces = Announce::query()->get();
         $services = Service::query()->get();
+        $categories = Category::query()->inRandomOrder()->get();
 
-        return view('frontend.accueil', compact('annonces', 'services'));
+        return view('frontend.accueil', compact(
+            'annonces', 'services', 'categories'));
+    }
+
+    public function category_service($category_slug)
+    {
+        $services = Service::query()->where('category_id', '=', $category_slug)->orderBy('created_at', 'desc')->get();
+        return view('services', compact('services'));
     }
 
     public function services()

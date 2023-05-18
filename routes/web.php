@@ -21,6 +21,7 @@ Route::get('services', [AccueilController::class, 'services'])->name('services')
 Route::get('annonces', [AccueilController::class, 'annonces'])->name('annonces');
 Route::get('detail_service/{slug}', [AccueilController::class, 'detail_service'])->name('detail_service');
 Route::get('detail_annonce/{slug}', [AccueilController::class, 'detail_annonce'])->name('detail_annonce');
+Route::get('category_service/{category_slug}', [AccueilController::class, 'category_service'])->name('category_service');
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
 Route::post('post_contact_annonce', [AccueilController::class, 'contact_annonce'])->name('contact_annonce');
