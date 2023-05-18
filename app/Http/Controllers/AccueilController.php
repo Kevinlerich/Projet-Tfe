@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announce;
 use App\Models\Category;
+use App\Models\Disponibility;
 use App\Models\Message;
 use App\Models\Photo;
 use App\Models\Portfolio;
@@ -11,6 +12,7 @@ use App\Models\RendezVous as ModelsRendezVous;
 use App\Models\Service;
 use App\Models\Ville;
 use App\Notifications\Rendezvous;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,8 +65,24 @@ class AccueilController extends Controller
         $portfolio = Portfolio::query()->where('service_id','=', $service->id)->first();
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
-        return view('frontend.detail_service',
-         compact('service','categories', 'villes', 'portfolio'));
+        $disponibilities = Disponibility::query()->where('user_id', '=', $service->user->id)->get();
+        $calendar_books = [];
+        foreach($disponibilities as $dispo)
+        {
+            $calendar_books[] = [
+                'start' => Carbon::parse($dispo->debut),
+                'end' => Carbon::parse($dispo->fin)
+            ];
+        }
+        $data = [
+            'categories' => $categories,
+            'villes' => $villes,
+            'service' => $service,
+            'disponibilities' => json_encode($calendar_books),
+            'portfolio' => $portfolio
+        ];
+        //dd($data);
+        return view('frontend.detail_service', $data);
     }
 
     public function detail_annonce($slug)
@@ -111,6 +129,8 @@ class AccueilController extends Controller
         switch ($request->type) {
             case 'add':
                  $event = ModelsRendezVous::create([
+                    'client_id'=> Auth::user()->id,
+                    'photographe_id' => $request->photographe_id,
                      'debut' => $request->start,
                      'fin' => $request->end,
                  ]);

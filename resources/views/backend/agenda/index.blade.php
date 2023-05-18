@@ -90,7 +90,7 @@
             $(function() {
                 $('#calendar').fullCalendar({
                     locale: 'fr_FR',
-                    events: {{ $calendar_events }},
+                    events: {!! $calendar_events !!},
                     displayEventTime: true,
                     eventRender: function (event, element, view) {
                         if (event.allDay === 'true') {

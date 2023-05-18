@@ -21,7 +21,7 @@ class AgendaController extends Controller
             // Prepare JSON array for calender for use in the calender part of client and photographer
             foreach($agendas as $agenda) {
             $calendar_events = [
-                'user' => Auth::user()->hasRole('photographe') ? $agenda->photographe->email : $agenda->client->email,
+                //'user' => Auth::user()->hasRole('photographe') ? $agenda->photographe->email : $agenda->client->email,
                 'start' => $agenda->debut_8601,
                 'end' => $agenda->fin_8601,
                 'color' => '#4E558F',

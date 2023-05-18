@@ -114,8 +114,8 @@
 <!--
 Essential Scripts
 =====================================-->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap/popper.min.js') }}"></script>
+{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+ --}}<script src="{{ asset('plugins/bootstrap/popper.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/bootstrap-slider.js') }}"></script>
 <script src="{{ asset('plugins/tether/js/tether.min.js') }}"></script>

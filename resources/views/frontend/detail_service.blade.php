@@ -84,7 +84,7 @@
 						</ul>
 					</div>
                     <div class="widget disclaimer">
-						<h5 class="widget-header">Safety Tips</h5>
+						<h5 class="widget-header">Prise de rendez-vous</h5>
 						<div id="calendar"></div>
 					</div>
 
@@ -109,7 +109,7 @@
         });
         var calendar = $('#calendar').fullCalendar({
                         editable: true,
-                        events: SITEURL + "/fullcalender",
+                        events: {!! $disponibilities !!},
                         displayEventTime: false,
                         editable: true,
                         eventRender: function (event, element, view) {
