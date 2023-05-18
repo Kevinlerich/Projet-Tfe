@@ -6,6 +6,7 @@ use App\Models\Announce;
 use App\Models\Category;
 use App\Models\Message;
 use App\Models\Service;
+use App\Models\Ville;
 use App\Notifications\Rendezvous;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,18 @@ class AccueilController extends Controller
     public function accueil()
     {
         $annonces = Announce::query()->get();
-        $services = Service::query()->get();
+        $services = Service::query()->orderBy('created_at', 'desc')->get();
         $categories = Category::query()->inRandomOrder()->get();
+        $villes = Ville::query()->inRandomOrder()->get();
 
         return view('frontend.accueil', compact(
-            'annonces', 'services', 'categories'));
+            'annonces', 'services',
+            'categories', 'villes'));
+    }
+
+    public function search()
+    {
+        //
     }
 
     public function category_service($category_slug)

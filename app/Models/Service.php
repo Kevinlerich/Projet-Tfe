@@ -27,4 +27,9 @@ class Service extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function ville(): BelongsTo
+    {
+        return $this->belongsTo(Ville::class);
+    }
 }
