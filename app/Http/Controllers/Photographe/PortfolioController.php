@@ -29,7 +29,6 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::query()->create([
             'service_id' => $request->input('service_id'),
-            'description' => $request->input('description'),
             'user_id' => Auth::user()->id
         ]);
 
@@ -63,7 +62,6 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::query()->findOrFail($id);
         $portfolio->service_id = $request->input('service_id');
-        $portfolio->description = $request->input('description');
         $portfolio->save();
         return redirect()->route('list_portfolio');
     }
