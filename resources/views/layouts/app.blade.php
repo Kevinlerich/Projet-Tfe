@@ -44,7 +44,7 @@
 
         @livewireScripts
         @if(isset($scripts))
-        {{ $script }}
+        {{ $scripts }}
         @endif
 
     </body>
