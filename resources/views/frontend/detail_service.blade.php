@@ -40,13 +40,13 @@
 					<div class="product-slider">
                         @if ($portfolio?->photos != null)
                             @foreach ($portfolio?->photos as $photo)
-                                <div class="my-4 product-slider-item" data-image="{{ asset('storage/'.$photo->chemin_photo) }}">
-                                    <img class="img-fluid w-100" src="{{ asset('storage/'.$photo->chemin_photo) }}" alt="product-img">
+                                <div class="my-4 product-slider-item" data-image="{{ asset('storage/services/'.$photo->chemin_photo) }}">
+                                    <img class="img-fluid w-100" src="{{ asset('storage/services/'.$photo->chemin_photo) }}" alt="product-img">
                                 </div>
                             @endforeach
                         @else
-                            <div class="my-4 product-slider-item" data-image="{{ asset('storage/'.$service->image_service) }}">
-                                <img class="img-fluid w-100" src="{{ asset('storage/'.$service->image_service) }}" alt="product-img">
+                            <div class="my-4 product-slider-item" data-image="{{ asset('storage/services/'.$service->image_service) }}">
+                                <img class="img-fluid w-100" src="{{ asset('storage/services/'.$service->image_service) }}" alt="product-img">
                             </div>
                         @endif
 					</div>

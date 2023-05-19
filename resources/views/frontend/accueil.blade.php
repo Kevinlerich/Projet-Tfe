@@ -114,7 +114,7 @@
                                         </li>
                                     </ul>
                                     <p class="card-text">
-                                        {!! $service->description !!}
+                                        {!! Str::substr($service->description, 0, 10) !!}
                                     </p>
                                 </div>
                             </div>
