@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -38,6 +39,7 @@ class ServiceController extends Controller
         Service::query()->create([
             'user_id' => Auth::user()->id,
             'nom' => $request->input('nom'),
+            'slug' => Str::slug($request->input('nom')),
             'description' => $request->input('description'),
             'category_id' => $request->input('category_id'),
             'image_service' => $path,
@@ -60,6 +62,7 @@ class ServiceController extends Controller
         $service = Service::query()->findOrFail($id);
         $service->category_id = $request->input('category_id');
         $service->nom = $request->input('nom');
+        $service->slug = Str::slug($request->input('nom'));
         $service->description = $request->input('description');
         $service->ville_id = $request->input('ville_id');
         $service->save();
