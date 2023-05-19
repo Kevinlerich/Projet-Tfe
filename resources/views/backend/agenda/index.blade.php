@@ -60,7 +60,7 @@
                                 <a href="{{ route('edit_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                                     {{ __('Modifier') }}
                                 </a>
-                                @if (Auth::hasRole('photographe'))
+                                @if (Auth::user()->hasRole('photographe'))
                                     <a href="{{ route('confirmer_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-yellow-300 rounded hover:bg-blue-700">
                                         {{ __('Confirmer/Annuler') }}
                                     </a>
