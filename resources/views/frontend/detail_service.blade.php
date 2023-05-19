@@ -45,8 +45,8 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="my-4 product-slider-item" data-image="{{ asset('storage/services/'.$service->image_service) }}">
-                                <img class="img-fluid w-100" src="{{ asset('storage/services/'.$service->image_service) }}" alt="product-img">
+                            <div class="my-4 product-slider-item" data-image="{{ asset('storage/'.$service->image_service) }}">
+                                <img class="img-fluid w-100" src="{{ asset('storage/'.$service->image_service) }}" alt="product-img">
                             </div>
                         @endif
 					</div>
