@@ -21,6 +21,7 @@
                 <div class="mt-5 mb-4 ml-5">
                     <form action="{{ route('update_annonce', $annonce->id) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                             <div class="sm:col-span-3">
