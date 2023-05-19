@@ -67,6 +67,24 @@ class PortfolioController extends Controller
         $portfolio = Portfolio::query()->findOrFail($id);
         $portfolio->service_id = $request->input('service_id');
         $portfolio->save();
+        // store photos
+        $photos = $request->file('chemin_photo');
+        if (!Storage::disk('public')->exists('portfolios')) {
+            Storage::makeDirectory('public/portfolios', 0777);
+        }
+        if ($photos) {
+            foreach ($photos as $imagegallery) {
+                $currentDate = Carbon::now()->toDateString();
+                $gallery_name = $currentDate.'-'.uniqid().'.'.$imagegallery->getClientOriginalExtension();
+
+                $path = Image::make($imagegallery)->save($gallery_name, 90);
+                Storage::disk('public')->put('portfolios/'.$gallery_name, $path);
+                $photo = new Photo();
+                $photo->portfolio_id = $portfolio->id;
+                $photo->chemin_photo = $gallery_name;
+                $photo->save();
+            }
+        }
         return redirect()->route('list_portfolio');
     }
 
