@@ -34,8 +34,8 @@ class AccueilController extends Controller
     {
         $text = $request->input('text');
         $services = Service::query()->where('nom', 'like', '%'.$text.'%')
-        ->orWhere('category_id', '=',$request->input('category_id'))
-        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->Where('category_id', '=',$request->input('category_id'))
+        ->Where('ville_id', '=',$request->input('ville_id'))
         ->orderBy('created_at', 'desc')
         ->get();
         $categories = Category::query()->get();
