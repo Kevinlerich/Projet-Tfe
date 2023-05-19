@@ -140,7 +140,16 @@
 				<div class="content-holder">
 					<h2>Commencez dès aujourd'hui à vous faire connaître et à développer votre activité</h2>
 					<ul class="list-inline mt-30">
-						<li class="list-inline-item"><a class="btn btn-main" href="{{ route('create_annonce') }}">Ajouter une annonce</a></li>
+                        @auth
+                            @if(Auth::user()->hasRole('client'))
+                            <li class="list-inline-item"><a class="btn btn-main" href="{{ route('create_annonce') }}">Ajouter une annonce</a></li>
+                            @else
+                            <li class="list-inline-item"><a class="btn btn-main" href="{{ route('create_service') }}">Ajouter un service</a></li>
+                            @endif
+                        @endauth
+                        @guest
+                        <li class="list-inline-item"><a class="btn btn-main" href="{{ route('create_annonce') }}">Ajouter une annonce</a></li>
+                        @endguest
 						<li class="list-inline-item"><a class="btn btn-secondary" href="{{ route('services') }}">Parcourir les services</a></li>
 					</ul>
 				</div>
