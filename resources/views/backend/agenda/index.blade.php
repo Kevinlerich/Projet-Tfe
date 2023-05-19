@@ -60,9 +60,11 @@
                                 <a href="{{ route('edit_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                                     {{ __('Modifier') }}
                                 </a>
-                                <a href="{{ route('confirmer_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-yellow-300 rounded hover:bg-blue-700">
-                                    {{ __('Confirmer/Annuler') }}
-                                </a>
+                                @if (Auth::hasRole('photographe'))
+                                    <a href="{{ route('confirmer_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-yellow-300 rounded hover:bg-blue-700">
+                                        {{ __('Confirmer/Annuler') }}
+                                    </a>
+                                @endif
                                 <a class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"  onclick="event.preventDefault();
                                                 document.getElementById('del-category-{{ $announce->id }}').submit();">
                                     {{ __('Supprimer') }}

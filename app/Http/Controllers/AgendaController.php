@@ -46,8 +46,8 @@ class AgendaController extends Controller
         $agenda = RendezVous::query()->findOrFail($agenda_id);
         $agenda->etat = $agenda->etat == 1 ? 0 : 1;
         $agenda->save();
-        $agenda->photographe->email->notify(new NotificationsRendezvous('Vous avez confirmé un rendez vous avec le client '. $agenda->client->email));
-        $agenda->client->email->notify(new NotificationsRendezvous('Vous rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name));
+        $agenda->photographe->notify(new NotificationsRendezvous('Vous avez confirmé un rendez vous avec le client '. $agenda->client->email));
+        $agenda->client->notify(new NotificationsRendezvous('Vous rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name));
         return back();
     }
 

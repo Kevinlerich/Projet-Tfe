@@ -19,7 +19,7 @@
                 @endif
                 <a href="{{ route('my_agenda') }}" class="px-4 py-2 mx-4 my-3 mt-3 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">{{ __('Back') }}</a>
                 <div class="mt-5 mb-4 ml-5">
-                    <form action="{{ route('update_agenda', $annonce->id) }}" method="post">
+                    <form action="{{ route('update_agenda', $agenda->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
