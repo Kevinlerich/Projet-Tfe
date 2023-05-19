@@ -32,4 +32,9 @@ class Service extends Model
     {
         return $this->belongsTo(Ville::class);
     }
+
+    public function rendezvous(): HasMany
+    {
+        return $this->hasMany(RendezVous::class);
+    }
 }

@@ -141,12 +141,14 @@
                             var title = prompt('Votre message:');
                             if (title) {
                                 var photographe_id = {{$service->user->id}};
+                                var service_id = {{$service->id}};
                                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                                 var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
                                 $.ajax({
                                     url: SITEURL + "/fullcalenderAjax",
                                     data: {
                                         photographe_id: photographe_id,
+                                        service_id: service_id,
                                         message: title,
                                         start: start,
                                         end: end,
@@ -177,6 +179,7 @@
                                 url: SITEURL + '/fullcalenderAjax',
                                 data: {
                                     photographe_id: photographe_id,
+                                    service_id: service_id,
                                     message: title,
                                     start: start,
                                     end: end,

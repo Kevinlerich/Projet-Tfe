@@ -144,6 +144,7 @@ class AccueilController extends Controller
                  $event = ModelsRendezVous::create([
                     'client_id'=> Auth::user()->id,
                     'photographe_id' => $request->photographe_id,
+                    'service_id' => $request->service_id,
                      'debut' => $request->start,
                      'fin' => $request->end,
                      'message' => $request->message,

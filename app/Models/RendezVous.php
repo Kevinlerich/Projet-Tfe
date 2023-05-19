@@ -25,6 +25,11 @@ class RendezVous extends Model
     {
         return $this->belongsTo(User::class, 'photographe_id', 'id');
     }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
 /*
     public function getDebutAttribute()
     {
