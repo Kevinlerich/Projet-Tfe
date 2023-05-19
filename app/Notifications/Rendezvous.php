@@ -37,7 +37,7 @@ class Rendezvous extends Notification
     {
         return (new MailMessage)
                     ->line($this->notification)
-                    ->action('Lien du site', url('/'))
+                    ->action('Lien du site', url('/messages'))
                     ->line('Merci d\'avoir utilisé notre application');
     }
 
