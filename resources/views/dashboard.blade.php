@@ -81,7 +81,7 @@
                 @endif
             </div> --}}
             <div class="py-24 bg-white sm:py-32">
-                @if (Auth::user()->hasRole('client'))
+                @if (Auth::user()->hasRole('photographe'))
                 <div class="grid px-6 mx-auto max-w-7xl gap-x-8 gap-y-20 lg:px-8 xl:grid-cols-3">
                     <div class="max-w-2xl">
                       <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Les annonces de la plateforme</h2>

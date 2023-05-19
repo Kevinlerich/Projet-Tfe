@@ -24,7 +24,8 @@
 						<li class="text-center list-inline-item"><a class="fa fa-linkedin" target="_blank" href="https://www.linkedin.com/share?url={{ route('detail_annonce', $annonce->slug) }}"></a></li>
 					</ul>
 				</article>
-				<div class="block comment">
+				@if ($annonce->user_id != Auth::user()->id)
+                <div class="block comment">
 					@auth
                     <h4>Laisser un message</h4>
 					<form action="{{ route('contact_annonce') }}" method="post">
@@ -43,6 +44,7 @@
                         <h4>Connectez-vous pour contacter cet annonceur</h4>
                     @endguest
 				</div>
+                @endif
 			</div>
 		</div>
 	</div>
