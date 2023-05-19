@@ -78,14 +78,24 @@
 					<!-- User Profile widget -->
 					<div class="text-center widget user">
 						<h4><a href="user-profile.html">{{ $service->user->name }}</a></h4>
-						<p class="member-time">Membre depuis {{ $service->user->created_at->diffForHumans() }}</p>
+						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
 						<ul class="mt-20 list-inline">
-							<li class="list-inline-item"><a href="{{ route('contact_service', $service->id) }}" class="my-1 btn btn-contact d-inline-block btn-primary px-lg-5 px-md-3">Contact</a></li>
+                            @auth
+                            <li class="list-inline-item"><a href="{{ route('contact_service', $service->id) }}" class="my-1 btn btn-contact d-inline-block btn-primary px-lg-5 px-md-3">Contact</a></li>
+                            @endauth
+                            @guest
+                            <li class="list-inline-item">Connectez-vous pour contacter</li>
+                            @endguest
 						</ul>
 					</div>
                     <div class="widget disclaimer">
 						<h5 class="widget-header">Prise de rendez-vous</h5>
-						<div id="calendar"></div>
+						@auth
+                        <div id="calendar"></div>
+                        @endauth
+                        @guest
+                            Connectez-vous pour prendre rendez-vous.
+                        @endguest
 					</div>
 
 				</div>
