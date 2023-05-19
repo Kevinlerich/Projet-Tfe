@@ -25,11 +25,11 @@
                         </div>
                     </div>
                 @endif
-                @if(auth()->user()->hasRole('client'))
+                {{-- @if(auth()->user()->hasRole('client'))
                         <a href="{{ route('create_agenda') }}" class="px-4 py-2 mx-4 my-3 font-bold text-white bg-blue-500 rounded btn btn-blue hover:bg-blue-700">
                             {{ __('Ajouter un nouvel agenda') }}
                         </a>
-                @endif
+                @endif --}}
                 <div class="w-full py-5" id="calendar"></div>
                 <table class="w-full py-5 table-fixed">
                     <thead>
