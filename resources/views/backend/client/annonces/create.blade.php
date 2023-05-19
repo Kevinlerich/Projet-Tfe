@@ -56,10 +56,7 @@
 
                             <div class="sm:col-span-3">
                                 <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description <em>Lieu : Intérieur ou extérieur
-                                    Date de l'événement : [Date spécifique]
-                                    Durée estimée de l'événement : [Nombre d'heures]
-                                    Nombre d'heures de prestations pour le photographe : [Nombre d'heures]
-                                    Informations supplémentaires pertinentes pour le photographe : [Veuillez fournir des détails spécifiques sur l'événement, tel que le type d'événement, le thème, les moments clés à capturer, les exigences particulières, etc.]</em></label>
+                                    Date de l'événement : <em>(Donner plus de détail possible)</em></label>
                                 <div class="mt-2">
                                     <textarea name="description" id="description" autocomplete="description" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     </textarea>
