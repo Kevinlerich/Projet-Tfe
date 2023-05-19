@@ -81,7 +81,9 @@
 						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
 						<ul class="mt-20 list-inline">
                             @auth
+                            @if ($service->user_id != auth()->user()->id)
                             <li class="list-inline-item"><a href="{{ route('contact_service', $service->id) }}" class="my-1 btn btn-contact d-inline-block btn-primary px-lg-5 px-md-3">Contact</a></li>
+                            @endif
                             @endauth
                             @guest
                             <li class="list-inline-item">Connectez-vous pour contacter</li>
@@ -91,7 +93,11 @@
                     <div class="widget disclaimer">
 						<h5 class="widget-header">Prise de rendez-vous</h5>
 						@auth
+                        @if ($service->user_id != auth()->user()->id)
                         <div id="calendar"></div>
+                        @else
+
+                        @endif
                         @endauth
                         @guest
                             Connectez-vous pour prendre rendez-vous.
