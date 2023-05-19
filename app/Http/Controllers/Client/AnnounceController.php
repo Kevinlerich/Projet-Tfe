@@ -59,7 +59,7 @@ class AnnounceController extends Controller
             'description' => $request->input('description'),
             'ville_id' => $request->input('ville_id'),
         ]);
-        return back();
+        return redirect()->route('my_announces');
     }
 
     public function delete($id)
