@@ -39,24 +39,16 @@ class PortfolioController extends Controller
             Storage::makeDirectory('public/portfolios', 0777);
         }
         if ($photos) {
-            /* foreach ($photos as $photo) {
-                $path = 'portfolios/' . uniqid() . '.' . $photo->extension();
-                Image::make($request->file('chemin_photo'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
-                Photo::query()->create([
-                    'portfolio_id' => $portfolio->id,
-                    'chemin_photo' => $path
-                ]);
-            } */
             foreach ($photos as $imagegallery) {
                 $currentDate = Carbon::now()->toDateString();
                 $gallery_name = $currentDate.'-'.uniqid().'.'.$imagegallery->getClientOriginalExtension();
 
                 $path = Image::make($imagegallery)->save($gallery_name, 90);
                 Storage::disk('public')->put('portfolios/'.$gallery_name, $path);
-                Photo::query()->create([
-                    'portfolio_id' => $portfolio->id,
-                    'chemin_photo' => $path
-                ]);
+                $photo = new Photo();
+                $photo->portfolio_id = $portfolio->id;
+                $photo->chemin_photo = $path;
+                $photo->save();
             }
         }
 
