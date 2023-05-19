@@ -28,10 +28,10 @@ class PortfolioController extends Controller
 
     public function store(Request $request)
     {
-        $portfolio = Portfolio::query()->create([
-            'service_id' => $request->input('service_id'),
-            'user_id' => Auth::user()->id
-        ]);
+        $portfolio = new Portfolio();
+        $portfolio->service_id = $request->input('service_id');
+        $portfolio->user_id = Auth::user()->id;
+        $portfolio->save();
 
         // store photos
         $photos = $request->file('chemin_photo');
@@ -47,7 +47,7 @@ class PortfolioController extends Controller
                 Storage::disk('public')->put('portfolios/'.$gallery_name, $path);
                 $photo = new Photo();
                 $photo->portfolio_id = $portfolio->id;
-                $photo->chemin_photo = $path;
+                $photo->chemin_photo = $gallery_name;
                 $photo->save();
             }
         }
