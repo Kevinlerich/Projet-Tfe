@@ -8,8 +8,8 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-xl-4 col-lg-3 col-md-6">
-                                <input name="text" type="text" class="my-2 form-control my-lg-1" id="inputtext4"
-                                    placeholder="What are you looking for">
+                                <input name="text" disabled type="text" class="my-2 form-control my-lg-1" id="inputtext4"
+                                    placeholder="Que recherchez-vous ?">
                             </div>
                             <div class="form-group col-lg-3 col-md-6">
                                 <select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">

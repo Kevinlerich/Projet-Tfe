@@ -53,7 +53,7 @@
                                 <div class="card">
                                     <div class="thumb-content">
                                         <!-- <div class="price">$200</div> -->
-                                        <a href="single.html">
+                                        <a href="{{ route('detail_service', $service->slug) }}">
                                             <img class="card-img-top img-fluid" src="{{ asset('storage/'.$service->image_service) }}" alt="Card image cap">
                                         </a>
                                     </div>

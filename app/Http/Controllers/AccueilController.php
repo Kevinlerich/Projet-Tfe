@@ -33,9 +33,8 @@ class AccueilController extends Controller
     public function search(Request $request)
     {
         $text = $request->input('text');
-        $services = Service::query()->where('nom', 'like', '%'.$text.'%')
-        ->Where('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
+        $services = Service::query()->where('category_id', '=',$request->input('category_id'))
+        ->where('ville_id', '=',$request->input('ville_id'))
         ->orderBy('created_at', 'desc')
         ->get();
         $categories = Category::query()->get();
