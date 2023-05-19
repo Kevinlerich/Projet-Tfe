@@ -43,9 +43,10 @@ class AnnounceController extends Controller
     public function edit($id)
     {
         $annonce = Announce::query()->findOrFail($id);
+        $categories = Category::query()->get();
         $villes = Ville::query()->get();
         return view('backend.client.annonces.edit',
-         compact('annonce', 'villes'));
+         compact('annonce', 'villes','categories'));
     }
 
     public function update(Request $request, $id)
