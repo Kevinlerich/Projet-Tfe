@@ -37,7 +37,7 @@
                         <tr>
                             <td class="w-20 px-4 py-2 text-center">{{ $key+1 }}</td>
                             <td class="px-4 py-2 text-center">{{ $message->expediteur->email }}</td>
-                            <td class="px-4 py-2 text-center">{{ Str::substr($message->contenue, 0, 10) }}</td>
+                            <td class="px-4 py-2 text-center">{{ Str::substr($message->contenu, 0, 10) }}</td>
                             <td class="px-4 py-2 text-center">{{ $message->objet }}</td>
                             <td class="px-4 py-2 text-center">{{ $message->created_at->diffForHumans() }}</td>
                             <td class="px-4 py-2 text-center">
