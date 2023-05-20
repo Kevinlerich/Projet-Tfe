@@ -30,7 +30,7 @@
                                     <select name="category_id" id="category_id" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option selected disabled>{{ __('Select a category') }}</option>
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id == $annonce->category_id ? 'selected' : '' }}">{{ $category->nom }}</option>
+                                            <option value="{{ $category->id }}" {{ $category->id == $annonce->category_id ? 'selected' : '' }}>{{ $category->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -50,7 +50,7 @@
                                     <select name="ville_id" id="ville_id" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option selected disabled>{{ __('Selectionner une ville') }}</option>
                                         @foreach($villes as $ville)
-                                            <option value="{{ $ville->id == $annonce->ville_id ? 'selected' : '' }}">{{ $ville->nom }}</option>
+                                            <option value="{{ $ville->id }}" {{ $ville->id == $annonce->ville_id ? 'selected' : '' }}>{{ $ville->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
