@@ -104,25 +104,27 @@
                         @endguest
 					</div>
                     <div class="widget disclaimer">
+                        @auth
                         @if ($service->user_id != Auth::user()->id)
-                            @auth
-                            <h5 class="widget-header">Laisser un message</h5>
-                                <form action="{{ route('contact_service') }}" method="post">
-                                    @csrf
-                                    <!-- Message -->
-                                    <div class="form-group mb-30">
-                                        <input type="hidden" name="destinataire_id" value="{{ $service->user->id }}">
-                                        <input type="hidden" name="objet" value="{{ $service->id }}">
-                                        <label for="message">Message</label>
-                                        <textarea class="form-control" name="contenu" id="contenu" rows="8" required></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-transparent">Laisser mon message</button>
-                                </form>
-                            @endauth
-                            @guest
-                                <h4>Connectez-vous pour contacter cet annonceur</h4>
-                            @endguest
-                        @endif
+                        @auth
+                        <h5 class="widget-header">Laisser un message</h5>
+                            <form action="{{ route('contact_service') }}" method="post">
+                                @csrf
+                                <!-- Message -->
+                                <div class="form-group mb-30">
+                                    <input type="hidden" name="destinataire_id" value="{{ $service->user->id }}">
+                                    <input type="hidden" name="objet" value="{{ $service->id }}">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" name="contenu" id="contenu" rows="8" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-transparent">Laisser mon message</button>
+                            </form>
+                        @endauth
+                        @guest
+                            <h4>Connectez-vous pour contacter cet annonceur</h4>
+                        @endguest
+                    @endif
+                        @endauth
                     </div>
 
 				</div>

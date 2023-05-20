@@ -24,7 +24,8 @@
 						<li class="text-center list-inline-item"><a class="fa fa-linkedin" target="_blank" href="https://www.linkedin.com/share?url={{ route('detail_annonce', $annonce->slug) }}"></a></li>
 					</ul>
 				</article>
-				@if ($annonce->user_id != Auth::user()->id)
+				@auth
+                @if ($annonce->user_id != Auth::user()->id)
                 <div class="block comment">
 					@auth
                     <h4>Laisser un message</h4>
@@ -45,6 +46,7 @@
                     @endguest
 				</div>
                 @endif
+                @endauth
 			</div>
 		</div>
 	</div>
