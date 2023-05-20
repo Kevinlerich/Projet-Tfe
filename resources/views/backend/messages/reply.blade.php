@@ -23,7 +23,6 @@
                         @csrf
                         <input type="hidden" name="expediteur_id" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
                         <div class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <input type="hidden" class="form-control" name="destinataire_id" value="{{ $message->expediteur_id }}">
                             <input type="hidden" value="{{ $message->objet }}" name="objet">
 
                             <div class="sm:col-span-3">

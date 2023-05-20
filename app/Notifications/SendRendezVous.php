@@ -39,7 +39,7 @@ class SendRendezVous extends Notification
     {
         return (new MailMessage)
                     ->line($this->notification)
-                    ->action('Detail du service', url('detail_service/'.$this->service_slug))
+                    ->action('Votre calendrier', url('my_agenda'))
                     ->line('Thank you for using our application!');
     }
 
