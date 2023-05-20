@@ -41,12 +41,13 @@
 						<button type="submit" class="btn btn-transparent">Laisser mon message</button>
 					</form>
                     @endauth
-                    @guest
-                        <h4>Connectez-vous pour contacter cet annonceur</h4>
-                    @endguest
+
 				</div>
                 @endif
                 @endauth
+                @guest
+                        <h4>Connectez-vous pour contacter cet annonceur</h4>
+                    @endguest
 			</div>
 		</div>
 	</div>

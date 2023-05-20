@@ -120,13 +120,13 @@
                                 <button type="submit" class="btn btn-transparent">Laisser mon message</button>
                             </form>
                         @endauth
-                        @guest
-                            <h4>Connectez-vous pour contacter cet annonceur</h4>
-                        @endguest
+
                     @endif
                         @endauth
                     </div>
-
+                    @guest
+                    <h4>Connectez-vous pour contacter cet annonceur</h4>
+                @endguest
 				</div>
 			</div>
 
@@ -161,8 +161,8 @@
                         selectable: true,
                         selectHelper: true,
                         select: function (start, end, allDay) {
-                            var title = prompt('Votre message:');
-                            if (title) {
+                            var message = prompt('Votre message:');
+                            if (message) {
                                 var photographe_id = {{$service->user->id}};
                                 var service_id = {{$service->id}};
                                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
@@ -172,7 +172,7 @@
                                     data: {
                                         photographe_id: photographe_id,
                                         service_id: service_id,
-                                        message: title,
+                                        message: message,
                                         start: start,
                                         end: end,
                                         type: 'add'
@@ -203,7 +203,7 @@
                                 data: {
                                     photographe_id: photographe_id,
                                     service_id: service_id,
-                                    message: title,
+                                    message: message,
                                     start: start,
                                     end: end,
                                     id: event.id,

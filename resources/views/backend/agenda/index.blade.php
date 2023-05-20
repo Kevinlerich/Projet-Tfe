@@ -42,6 +42,7 @@
                         <th class="px-4 py-2">{{ __('Début') }}</th>
                         <th class="px-4 py-2">{{ __('Fin') }}</th>
                         <th class="px-4 py-2">{{ __('Service') }}</th>
+                        <th class="px-4 py-2">{{ __('Message') }}</th>
                         <th class="px-4 py-2">{{ __('Etat') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
@@ -57,6 +58,7 @@
                             <td class="px-4 py-2 text-center">{{ $announce->debut }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->fin }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->service->nom }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->message }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Validé' : 'En attente de confirmation' }}</td>
                             <td class="px-4 py-2 text-center">
                                 <a href="{{ route('edit_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
