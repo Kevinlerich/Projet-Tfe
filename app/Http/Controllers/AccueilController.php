@@ -129,7 +129,7 @@ class AccueilController extends Controller
             'objet' => $annonce->titre,
             'contenu' => $request->input('message')
         ]);
-        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message.', $sms->id));
+        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
         return back();
     }
 
@@ -142,7 +142,7 @@ class AccueilController extends Controller
             'objet' => $service->nom,
             'contenu' => $request->input('contenu')
         ]);
-        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message.', $sms->id));
+        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
         return back();
     }
 
