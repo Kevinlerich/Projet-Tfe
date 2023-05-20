@@ -33,7 +33,7 @@
 						<!-- Message -->
 						<div class="form-group mb-30">
                             <input type="hidden" name="destinataire_id" value="{{ $annonce->user->id }}">
-                            <input type="hidden" name="objet" value="{{ $annonce->titre }}">
+                            <input type="hidden" name="objet" value="{{ $annonce->id }}">
 							<label for="message">Message</label>
 							<textarea class="form-control" name="message" id="message" rows="8" required></textarea>
 						</div>

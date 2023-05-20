@@ -12,6 +12,8 @@ use App\Models\RendezVous as ModelsRendezVous;
 use App\Models\Service;
 use App\Models\Ville;
 use App\Notifications\Rendezvous;
+use App\Notifications\SendMessage;
+use App\Notifications\SendRendezVous;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -120,20 +122,27 @@ class AccueilController extends Controller
 
     public function contact_annonce(Request $request)
     {
+        $annonce = Announce::query()->findOrFail($request->input('objet'));
         $sms = Message::query()->create([
             'expediteur_id' => Auth::user()->id,
             'destinataire_id' => $request->input('destinataire_id'),
-            'objet' => $request->input('objet'),
+            'objet' => $annonce->titre,
             'contenu' => $request->input('message')
         ]);
-        //$sms->destinataire->notify(new Rendezvous('Vous avez reçu un message.'));
+        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message.', $sms->id));
         return back();
     }
 
-    public function contact_service($id)
+    public function contact_service(Request $request)
     {
-        $sms = Service::query()->findOrFail($id);
-        $sms->user->notify(new Rendezvous('Vous avez reçu un message.'));
+        $service = Service::query()->findOrFail($request->input('objet'));
+        $sms = Message::query()->create([
+            'expediteur_id' => Auth::user()->id,
+            'destinataire_id' => $request->input('destinataire_id'),
+            'objet' => $service->nom,
+            'contenu' => $request->input('message')
+        ]);
+        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message.', $sms->id));
         return back();
     }
 
@@ -150,7 +159,8 @@ class AccueilController extends Controller
                      'message' => $request->message,
                      'etat' => 0
                  ]);
-                 $event->photographe->notify(new RendezVous('Vous avez un nouveau rendez-vous dans la plateforme.'));
+                 $service = Service::query()->findOrFail($request->service_id);
+                 $event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
 
                  return response()->json($event);
              break;

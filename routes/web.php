@@ -29,7 +29,7 @@ Route::post('fullcalenderAjax', [AccueilController::class, 'ajax'])->name('full_
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
 Route::post('post_contact_annonce', [AccueilController::class, 'contact_annonce'])->name('contact_annonce')->middleware('auth');;
-Route::get('post_contact_service/{id}', [AccueilController::class, 'contact_service'])->name('contact_service')->middleware('auth');;
+Route::post('post_contact_service', [AccueilController::class, 'contact_service'])->name('contact_service')->middleware('auth');;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
