@@ -12,7 +12,7 @@
                 <div class="mt-5 mb-4 ml-5">
                     <dt>Expediteur</dt>: <b>{{ $message->expediteur->name }}</b>
                     <dt>Objet</dt> <b>{{ $message->objet }}</b>
-                    <dt>Contenue</dt>: <b>{{ $message->contenue }}</b>
+                    <dt>Contenue</dt>: <b>{{ $message->contenu }}</b>
                 </div>
             </div>
         </div>
