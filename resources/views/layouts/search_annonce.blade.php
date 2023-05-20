@@ -4,7 +4,7 @@
 			<div class="col-md-12">
 				<!-- Advance Search -->
 				<div class="advance-search nice-select-white">
-					<form method="get" action="{{ route('search') }}">
+					<form method="get" action="{{ route('search_annonce') }}">
                         @csrf
                         <div class="form-row">
                             {{-- <div class="form-group col-xl-4 col-lg-3 col-md-6">

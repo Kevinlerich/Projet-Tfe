@@ -18,6 +18,7 @@ use App\Http\Controllers\Photographe\ServiceController;
 
 Route::get('/', [AccueilController::class, 'accueil'])->name('accueil');
 Route::get('search/', [AccueilController::class, 'search'])->name('search');
+Route::get('search_annonce/', [AccueilController::class, 'search_annonce'])->name('search_annonce');
 Route::get('services', [AccueilController::class, 'services'])->name('services');
 Route::get('annonces', [AccueilController::class, 'annonces'])->name('annonces');
 Route::get('detail_service/{slug}', [AccueilController::class, 'detail_service'])->name('detail_service');
