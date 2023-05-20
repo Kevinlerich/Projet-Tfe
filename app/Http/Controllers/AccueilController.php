@@ -140,7 +140,7 @@ class AccueilController extends Controller
             'expediteur_id' => Auth::user()->id,
             'destinataire_id' => $request->input('destinataire_id'),
             'objet' => $service->nom,
-            'contenu' => $request->input('message')
+            'contenu' => $request->input('contenu')
         ]);
         $sms->destinataire->notify(new SendMessage('Vous avez reçu un message.', $sms->id));
         return back();

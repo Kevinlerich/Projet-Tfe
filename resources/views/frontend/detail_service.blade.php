@@ -114,7 +114,7 @@
                                         <input type="hidden" name="destinataire_id" value="{{ $service->user->id }}">
                                         <input type="hidden" name="objet" value="{{ $service->id }}">
                                         <label for="message">Message</label>
-                                        <textarea class="form-control" name="message" id="message" rows="8" required></textarea>
+                                        <textarea class="form-control" name="contenu" id="contenu" rows="8" required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-transparent">Laisser mon message</button>
                                 </form>
