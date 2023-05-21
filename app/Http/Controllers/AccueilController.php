@@ -48,14 +48,16 @@ class AccueilController extends Controller
     public function search_annonce(Request $request)
     {
         $text = $request->input('text');
-        $services = Announce::query()->where('category_id', '=',$request->input('category_id'))
+        $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
         ->where('ville_id', '=',$request->input('ville_id'))
         ->orderBy('created_at', 'desc')
         ->get();
         $categories = Category::query()->get();
         $villes = Ville::query()->get();
         session()->flashInput($request->input());
-        return view('frontend.search_annonce', compact('services', 'categories', 'villes'));
+        return view('frontend.search_annonce',
+         compact('annonces', 'categories',
+          'villes'));
     }
 
     public function category_service($category_slug)
