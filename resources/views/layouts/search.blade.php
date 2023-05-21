@@ -15,7 +15,7 @@
                                 <select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">
                                     <option>Categories</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ old('category_id', $category->id) == Request::old('category_id') ? 'selected' : ''}}>{{ $category->nom }}</option>
+                                        <option value="{{ $category->id }}" {{ $category->id == Request::query('category_id') ? 'selected' : ''}}>{{ $category->nom }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -23,7 +23,7 @@
                                 <select name="ville_id" class="w-100 form-control mt-lg-1 mt-md-2">
                                     <option>Villes</option>
                                     @foreach ($villes as $ville)
-                                        <option value="{{ $ville->id }}" {{ old('ville_id', $ville->id) == Request::old('ville_id') ? 'selected' : '' }}>{{ $ville->nom }}</option>
+                                        <option value="{{ $ville->id }}" {{ $ville->id == Request::query('ville_id') ? 'selected' : '' }}>{{ $ville->nom }}</option>
                                     @endforeach
                                 </select>										</div>
                             <div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
