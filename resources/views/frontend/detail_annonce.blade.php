@@ -4,7 +4,6 @@
 @endsection
 
 @section('content')
-@include('layouts.search')
 
 <section class="blog single-blog section">
 	<div class="container">

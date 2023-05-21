@@ -48,12 +48,18 @@ class AccueilController extends Controller
     {
         $text = $request->input('text');
         $startWeek = Carbon::now()->subWeek()->startOfWeek();
+        $month = Carbon::now()->subMonth();
         $endWeek = Carbon::now()->subWeek()->endOfWeek();
         if ($request->input('date') == 'one week')
         {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
         ->where('ville_id', '=',$request->input('ville_id'))
         ->WhereBetween('created_at', [$startWeek, $endWeek])
+        ->get();
+        } elseif($request->input('date') == 'one month') {
+            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+        ->where('ville_id', '=',$request->input('ville_id'))
+        ->where('created_at', '<', $month)
         ->get();
         } else {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))

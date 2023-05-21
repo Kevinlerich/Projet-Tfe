@@ -33,6 +33,7 @@
                                     <option value="{{ Carbon\Carbon::today() }}">Aujourd'hui</option>
                                     <option value="{{ Carbon\Carbon::yesterday() }}">Hier</option>
                                     <option value="one week">1 semaine</option>
+                                    <option value="one month">1 mois</option>
                                 </select>
                             </div>
                             <div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
