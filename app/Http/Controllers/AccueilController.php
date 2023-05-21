@@ -66,7 +66,7 @@ class AccueilController extends Controller
         } elseif($request->input('date') == 'today') {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
         ->where('ville_id', '=',$request->input('ville_id'))
-        ->where('created_at', '=', $today)
+        ->where('created_at', '<=', $today)
         ->get();
         } elseif($request->input('date') == 'yesterday') {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
