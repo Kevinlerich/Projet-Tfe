@@ -49,6 +49,8 @@ class AccueilController extends Controller
         $text = $request->input('text');
         $startWeek = Carbon::now()->subWeek()->startOfWeek();
         $month = Carbon::now()->subMonth();
+        $yesterday = Carbon::yesterday();
+        $today = Carbon::today();
         $endWeek = Carbon::now()->subWeek()->endOfWeek();
         if ($request->input('date') == 'one week')
         {
@@ -61,10 +63,15 @@ class AccueilController extends Controller
         ->where('ville_id', '=',$request->input('ville_id'))
         ->where('created_at', '<', $month)
         ->get();
-        } else {
+        } elseif($request->input('date') == 'today') {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
         ->where('ville_id', '=',$request->input('ville_id'))
-        ->where('created_at', '=', $request->input('date'))
+        ->where('created_at', '=', $today)
+        ->get();
+        } elseif($request->input('date') == 'yesterday') {
+            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+        ->where('ville_id', '=',$request->input('ville_id'))
+        ->where('created_at', '<=', $yesterday)
         ->get();
         }
 

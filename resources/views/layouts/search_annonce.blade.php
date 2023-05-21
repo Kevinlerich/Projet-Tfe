@@ -30,8 +30,8 @@
                             <div class="form-group col-lg-3 col-md-6">
                                 <select name="date" class="w-100 form-control mt-lg-1 mt-md-2">
                                     <option selected disabled>Date</option>
-                                    <option value="{{ Carbon\Carbon::today() }}">Aujourd'hui</option>
-                                    <option value="{{ Carbon\Carbon::yesterday() }}">Hier</option>
+                                    <option value="today">Aujourd'hui</option>
+                                    <option value="yesterday">Hier</option>
                                     <option value="one week">1 semaine</option>
                                     <option value="one month">1 mois</option>
                                 </select>
