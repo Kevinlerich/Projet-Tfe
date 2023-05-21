@@ -53,7 +53,7 @@ class AccueilController extends Controller
         {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
         ->where('ville_id', '=',$request->input('ville_id'))
-        ->WhereBetween('date', [$startWeek, $endWeek])
+        ->WhereBetween('created_at', [$startWeek, $endWeek])
         ->get();
         } else {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
