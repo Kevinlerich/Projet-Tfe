@@ -17,7 +17,6 @@ use App\Notifications\SendRendezVous;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class AccueilController extends Controller
 {
     public function accueil()
