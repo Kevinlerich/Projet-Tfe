@@ -48,10 +48,21 @@ class AccueilController extends Controller
     public function search_annonce(Request $request)
     {
         $text = $request->input('text');
-        $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+        $startWeek = Carbon::now()->subWeek()->startOfWeek();
+        $endWeek = Carbon::now()->subWeek()->endOfWeek();
+        if ($request->input('date') == 'one week')
+        {
+            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
         ->where('ville_id', '=',$request->input('ville_id'))
-        ->orderBy('created_at', 'desc')
+        ->WhereBetween('date', [$startWeek, $endWeek])
         ->get();
+        } else {
+            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+        ->where('ville_id', '=',$request->input('ville_id'))
+        ->where('created_at', '=', $request->input('date'))
+        ->get();
+        }
+
         $categories = Category::query()->get();
         $villes = Ville::query()->get();
         session()->flashInput($request->input());

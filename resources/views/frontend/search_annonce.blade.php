@@ -23,7 +23,7 @@
                                             <a href="{{ route('detail_annonce', $annonce->slug) }}" class="font-weight-bold">{{ $annonce->titre }}</a>
                                         </div>
                                         <ul class="mt-2 mb-3 list-inline">
-                                            <li class="list-inline-item"><a href="{{ route('category_annonce', $annonce->category->slug) }}"> <i class="fa fa-folder-open-o"></i> {{ $annonce->category->titre }}</a></li>
+                                            <li class="list-inline-item"><a href="{{ route('category_annonce', $annonce->category->slug) }}"> <i class="fa fa-folder-open-o"></i> {{ $annonce->category->nom }}</a></li>
                                             <li class="list-inline-item"><a href="{{ route('category_annonce', $annonce->category->slug) }}"><i class="fa fa-calendar"></i>{{ $annonce->created_at->diffForHumans() }}</a></li>
                                         </ul>
                                         <p class="pr-5">
