@@ -73,6 +73,10 @@ class AccueilController extends Controller
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhere('created_at', '<=', $yesterday)
         ->get();
+        } else {
+            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->get();
         }
 
         $categories = Category::query()->get();
