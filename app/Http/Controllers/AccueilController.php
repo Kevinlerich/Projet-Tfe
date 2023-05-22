@@ -34,8 +34,8 @@ class AccueilController extends Controller
     public function search(Request $request)
     {
         $text = $request->input('text');
-        $services = Service::query()->where('category_id', '=',$request->input('category_id'))
-        ->where('ville_id', '=',$request->input('ville_id'))
+        $services = Service::query()->orWhere('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orderBy('created_at', 'desc')
         ->get();
         $categories = Category::query()->get();
@@ -55,23 +55,23 @@ class AccueilController extends Controller
         if ($request->input('date') == 'one week')
         {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
-        ->where('ville_id', '=',$request->input('ville_id'))
-        ->WhereBetween('created_at', [$startWeek, $endWeek])
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhereBetween('created_at', [$startWeek, $endWeek])
         ->get();
         } elseif($request->input('date') == 'one month') {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
-        ->where('ville_id', '=',$request->input('ville_id'))
-        ->where('created_at', '<', $month)
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhere('created_at', '<', $month)
         ->get();
         } elseif($request->input('date') == 'today') {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
-        ->where('ville_id', '=',$request->input('ville_id'))
-        ->where('created_at', '<=', $today)
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhere('created_at', '<=', $today)
         ->get();
         } elseif($request->input('date') == 'yesterday') {
             $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
-        ->where('ville_id', '=',$request->input('ville_id'))
-        ->where('created_at', '<=', $yesterday)
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhere('created_at', '<=', $yesterday)
         ->get();
         }
 
