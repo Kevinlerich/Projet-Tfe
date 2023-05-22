@@ -52,29 +52,32 @@ class AccueilController extends Controller
         $yesterday = Carbon::yesterday();
         $today = Carbon::today();
         $endWeek = Carbon::now()->subWeek()->endOfWeek();
+        $category = $request->input('category_id');
+        $ville = $request->input('ville_id');
+
         if ($request->input('date') == 'one week')
         {
-            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhereBetween('created_at', [$startWeek, $endWeek])
         ->get();
         } elseif($request->input('date') == 'one month') {
-            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhere('created_at', '<', $month)
         ->get();
         } elseif($request->input('date') == 'today') {
-            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhere('created_at', '<=', $today)
         ->get();
         } elseif($request->input('date') == 'yesterday') {
-            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhere('created_at', '<=', $yesterday)
         ->get();
         } else {
-            $annonces = Announce::query()->where('category_id', '=',$request->input('category_id'))
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->get();
         }
