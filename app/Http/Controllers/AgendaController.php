@@ -14,8 +14,8 @@ class AgendaController extends Controller
     public function index()
     {
         $agendas = Auth::user()->hasRole('photographe') ?
-            RendezVous::query()->where('photographe_id', Auth::user()->id)->order_by('debut','desc')->get() :
-            RendezVous::query()->where('client_id', Auth::user()->id)->order_by('debut','desc')->get();
+            RendezVous::query()->where('photographe_id', Auth::user()->id)->orderBy('debut','desc')->get() :
+            RendezVous::query()->where('client_id', Auth::user()->id)->orderBy('debut','desc')->get();
         return view('backend.agenda.index', compact('agendas'));
     }
 
