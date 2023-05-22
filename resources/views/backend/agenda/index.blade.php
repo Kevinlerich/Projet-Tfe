@@ -57,13 +57,16 @@
                             @endif
                             <td class="px-4 py-2 text-center">{{ $announce->debut }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->fin }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->service->nom }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->service?->nom }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->message }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Validé' : 'En attente de confirmation' }}</td>
                             <td class="px-4 py-2 text-center">
+                                @if (Auth::user()->hasRole('client'))
                                 <a href="{{ route('edit_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                                     {{ __('Modifier') }}
                                 </a>
+                                @endif
+
                                 @if (Auth::user()->hasRole('photographe'))
                                     <a href="{{ route('confirmer_agenda', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-yellow-300 rounded hover:bg-blue-700">
                                         {{ __('Confirmer/Annuler') }}

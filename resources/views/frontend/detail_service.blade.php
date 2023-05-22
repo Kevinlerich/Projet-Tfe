@@ -146,10 +146,10 @@
             }
         });
         var calendar = $('#calendar').fullCalendar({
-                        editable: true,
+                        editable: false,
                         events: {!! $disponibilities !!},
                         displayEventTime: false,
-                        editable: true,
+                        editable: false,
                         eventRender: function (event, element, view) {
                             if (event.allDay === 'true') {
                                     event.allDay = true;
@@ -160,10 +160,14 @@
                         selectable: true,
                         selectHelper: true,
                         select: function (start, end, allDay) {
+                            if(allDay.isBefore(moment())){
+                                $("#calendar").fullCalendar('unselect');
+                                return false;
+                            }
                             var message = prompt('Votre message:');
                             if (message) {
                                 var photographe_id = {{$service->user->id}};
-                                var service_id = {{$service->id}};
+                                var service_id = {{ $service->id }};
                                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                                 var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
                                 $.ajax({
@@ -194,6 +198,7 @@
                             }
                         },
                         eventDrop: function (event, delta) {
+
                             var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
                             var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
 
@@ -215,6 +220,43 @@
                             });
                         },
                         eventClick: function (event) {
+                            if(event.isBefore(moment())){
+                                $("#calendar").fullCalendar('unselect');
+                            } else {
+                                var message = prompt('Votre message:');
+                            if (message) {
+                                var photographe_id = {{$service->user->id}};
+                                var service_id = {{ $service->id }};
+                                var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                                var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+                                $.ajax({
+                                    url: SITEURL + "/fullcalenderAjax",
+                                    data: {
+                                        photographe_id: photographe_id,
+                                        service_id: service_id,
+                                        message: message,
+                                        start: start,
+                                        end: end,
+                                        type: 'add'
+                                    },
+                                    type: "POST",
+                                    success: function (data) {
+                                        displayMessage("Rendez-vous créer avec succès !!!");
+
+                                        calendar.fullCalendar('renderEvent',
+                                            {
+                                                id: data.id,
+                                                start: start,
+                                                end: end,
+                                                event: event
+                                            },true);
+
+                                        calendar.fullCalendar('unselect');
+                                    }
+                                });
+                            }
+                            }
+                            /* calendar.fullCalendar('unselect');
                             var deleteMsg = confirm("Voulez-vous vraiment supprimé ce rendez-vous?");
                             if (deleteMsg) {
                                 $.ajax({
@@ -229,7 +271,7 @@
                                         displayMessage("Rendez vous supprimé avec succès");
                                     }
                                 });
-                            }
+                            } */
                         }
 
                     });
