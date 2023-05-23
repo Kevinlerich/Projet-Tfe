@@ -31,7 +31,7 @@ class DisponibilityController extends Controller
             'fin' => $request->input('fin'),
             'jours' => $request->input('jours'),
             'jours_end' => $request->input('jours_end'),
-            'duration' => $request->input('duration'),
+            'duration' => '01:00:00',
         ]);
 
         // Creation of a scheduler for the given disponibility
@@ -83,7 +83,7 @@ class DisponibilityController extends Controller
             'fin' => $request->input('fin'),
             'jours' => $request->input('jours'),
             'jours_end' => $request->input('jours_end'),
-            'duration' => $request->input('duration'),
+            'duration' => '01:00:00',
         ]);
         self::createSchedule($disponibility);
         session()->flash('message', 'Vous avez ajouté une nouvelle disponibilité');
