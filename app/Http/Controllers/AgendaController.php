@@ -63,7 +63,7 @@ class AgendaController extends Controller
         $agenda->save();
         $agenda->photographe->notify(new NotificationsRendezvous('Le client '. $agenda->client->email.' a accepté le contrat'));
         $agenda->client->notify(new NotificationsRendezvous('Vous avez confirmé votre rendez-vous avec  '.$agenda->photographe->email));
-        return back();
+        return redirect('my_agenda');
     }
 
     public function edit($id)
