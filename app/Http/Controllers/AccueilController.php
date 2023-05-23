@@ -238,15 +238,15 @@ class AccueilController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $appointments = ModelsRendezVous::query()
-            ->where('date_appointment', $request->date)
-            ->pluck('scheduler_id');
+        $disponibilities = Disponibility::query()
+            ->where('jours', $request->date)
+            ->pluck('id');
 
-        if ($appointments->count() === 0)
+        if ($disponibilities->count() === 0)
             $data = Scheduler::all();
         else
             $data = Scheduler::query()
-                ->whereNotIn('id', $appointments)
+                ->whereNotIn('id', $disponibilities)
                 ->get();
 
         if ($request->date == now()->format('Y-m-d')) {
@@ -296,5 +296,19 @@ class AccueilController extends Controller
             return response()->json([]);
         }
 
+    }
+
+    public function store_rdv(Request $request)
+    {
+        $event = ModelsRendezVous::create([
+            'client_id'=> Auth::user()->id,
+            'photographe_id' => $request->photographe_id,
+            'service_id' => $request->service_id,
+             'date_appointment' => $request->date_appointment,
+             'message' => $request->message,
+             'etat' => 0
+         ]);
+        $service = Service::query()->findOrFail($request->service_id);
+        $event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
     }
 }

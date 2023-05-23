@@ -100,8 +100,8 @@
                         </div>
 
                         <div id="schedule"></div>
-                        <div id="calendar">
-
+                        <div class="form-group">
+                            <div id="button_submit"></div>
                         </div>
                         @else
 
@@ -173,8 +173,10 @@ $(document).ready(function(){
                     })
 
                     let html3 = '</select> </div>'
+                    let html4 = '<button id="takeRdv" type="submit" class="form-control btn btn-primary">Prendre le rendez vous</button>'
 
-                    $('#plage').html('' + html1 + html2 + html3)
+                    $('#schedule').html('' + html1 + html2 + html3)
+                    $("#button_submit").html(html4)
                 } else {
                     alert("Pas de plage Horaire disponible à cette date")
                     $('#statut_select').val("RDV à planifier").change()
@@ -185,7 +187,35 @@ $(document).ready(function(){
             }
         });
     }
+    function displayMessage(message) {
+        toastr.success(message, 'Event');
+    }
     $("#date_appointment").on('change', dateChange);
+    $("#button_submit").on('click', function(e){
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var date_appointment = $("#date_appointment").val();
+        var schedule = $("#schedule_id").val();
+        var photographe_id = {{$service->user->id}};
+        var service_id = {{ $service->id }};
+        $.ajax({
+            type: "POST",
+            url: "{{route('store_rdv')}}",
+            data: {
+                date_appointment: date_appointment,
+                schedule: schedule,
+                photographe_id: photographe_id,
+                service_id: service_id
+            },
+            success: function (data) {
+                displayMessage('Rendez-vous pris avec succès');
+            }
+        });
+    })
 });
 </script>
 <script type="text/javascript">

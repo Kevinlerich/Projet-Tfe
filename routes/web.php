@@ -28,6 +28,7 @@ Route::get('category_annonce/{category_slug}', [AccueilController::class, 'categ
 
 Route::post('fullcalenderAjax', [AccueilController::class, 'ajax'])->name('full_calendar');
 Route::post('schedule/appointment', [AccueilController::class, 'index'])->name('available.schedule');
+Route::post('store/rdv', [AccueilController::class, 'store_rdv'])->name('store_rdv');
 Route::get('appointment/calender', [AccueilController::class, 'calenderView']);
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
