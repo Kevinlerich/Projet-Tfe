@@ -149,7 +149,7 @@
 $(document).ready(function(){
     function dateChange(date_appointment) {
         //$("#loading").show();
-
+        date_appointment = $("#date_appointment").val();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

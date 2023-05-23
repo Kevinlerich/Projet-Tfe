@@ -238,18 +238,21 @@ class AccueilController extends Controller
 
     public function index(Request $request): JsonResponse
     {
+        $data_date=Carbon::createFromFormat('Y-m-d',$request->date)->format('Y-m-d');
         $disponibilities = Disponibility::query()
-            ->where('jours', $request->date)
+            ->where('jours','=', $request->date)
             ->pluck('id');
+            //dd($disponibilities);
 
-        if ($disponibilities->count() === 0)
-            $data = Scheduler::all();
-        else
+        if ($disponibilities->count() == 0){
+            $data = [];//Scheduler::query()->get();
+        } else {
             $data = Scheduler::query()
-                ->whereNotIn('id', $disponibilities)
+                ->where('disponibility_id','=', $disponibilities)
                 ->get();
+        }
 
-        if ($request->date == now()->format('Y-m-d')) {
+        if ($data_date == now()->format('Y-m-d')) {
             $hn = now()->format('H');
 
             $return = [];
@@ -263,39 +266,6 @@ class AccueilController extends Controller
         } else {
             return response()->json($data);
         }
-    }
-
-    public function calenderView(Request $request): JsonResponse
-    {
-
-        try {
-            $appointments = ModelsRendezVous::query()
-                ->whereNotNull('date_appointment')
-                ->with('scheduler')
-                ->whereDate('date_appointment', '>=', $request->start)
-                ->whereDate('date_appointment', '<=', $request->end)
-                ->get();
-
-            $return = [];
-            foreach ($appointments as $appointment) {
-                $return[] = [
-                    'id' => $appointment->id,
-                    'title' => 'Nom: ' . $appointment->name . ' subject: ' . $appointment->subject,
-                    'start' => $appointment->date_appointment . ' ' . $appointment->plage?->start,
-                    'end' => $appointment->date_appointment . ' ' . $appointment->plage?->end,
-                    'allDay' => false,
-                    'textColor' => $appointment->etat === 1 ? 'black' : '',
-                    'backgroundColor' => $appointment->etat === 1 ?
-                        'rgba(4,186,4,0.4)' :
-                        ($appointment->etat === 2 ? 'rgb(157,4,4)' : '')
-                ];
-            }
-
-            return response()->json($return);
-        } catch (\Exception $ex) {
-            return response()->json([]);
-        }
-
     }
 
     public function store_rdv(Request $request)

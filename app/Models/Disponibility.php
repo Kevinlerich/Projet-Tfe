@@ -12,7 +12,7 @@ class Disponibility extends Model
 {
     use HasFactory;
 
-    //protected $dates = ['debut', 'fin'];
+    protected $dates = ['jours'];
 
     protected $guarded = [];
 
