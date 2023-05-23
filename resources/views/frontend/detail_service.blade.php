@@ -175,7 +175,7 @@ $(document).ready(function(){
 
                     let html3 = '</select> </div>'
                     let html11 = '<div class="form-group">' +
-                        '<label for="schedule">Heure debut</label>' +
+                        '<label for="schedule">Heure fin</label>' +
                         '<select name="schedule_id" id="schedule" class="form-control">'
 
                     let html22 = ''

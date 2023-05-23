@@ -279,6 +279,6 @@ class AccueilController extends Controller
              'etat' => 0
          ]);
         $service = Service::query()->findOrFail($request->service_id);
-        //$event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
+        $event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
     }
 }
