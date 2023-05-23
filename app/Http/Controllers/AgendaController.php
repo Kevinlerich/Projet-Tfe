@@ -52,7 +52,7 @@ class AgendaController extends Controller
         $agenda->photographe->notify(new NotificationsRendezvous('Vous avez confirmé un rendez vous avec le client '. $agenda->client->email));
         $agenda->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $agenda->id));
 
-        //$agenda->client->notify(new NotificationsRendezvous('Votre rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name. '. Confirmer votre participation en cliquant sur le bouton ci-dessous.'));
+        $agenda->client->notify(new NotificationsRendezvous('Votre rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name. '. Confirmer votre participation en cliquant sur le bouton ci-dessous.'));
         return back();
     }
 

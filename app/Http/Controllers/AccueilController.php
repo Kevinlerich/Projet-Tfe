@@ -285,6 +285,6 @@ class AccueilController extends Controller
          ]);
         //$service = Service::query()->findOrFail($request->service_id);
         $event->photographe->notify(new Rendezvous('Vous avez un nouveau rendez-vous dans la plateforme.'));
-        //$event->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $event->id));
+        $event->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $event->id));
     }
 }
