@@ -165,7 +165,7 @@ $(document).ready(function(){
                 if (data.length !== 0) {
                     let html1 = '<div class="form-group">' +
                         '<label for="schedule">Heure debut</label>' +
-                        '<select name="schedule_id" id="schedule" class="form-control">'
+                        '<select name="schedule_id" id="schedule_id" class="form-control">'
 
                     let html2 = ''
                     data.forEach(function (current) {
@@ -176,7 +176,7 @@ $(document).ready(function(){
                     let html3 = '</select> </div>'
                     let html11 = '<div class="form-group">' +
                         '<label for="schedule">Heure fin</label>' +
-                        '<select name="schedule_id" id="schedule" class="form-control">'
+                        '<select name="schedule_id2" id="schedule_id2" class="form-control">'
 
                     let html22 = ''
                     data.forEach(function (current) {
@@ -214,6 +214,7 @@ $(document).ready(function(){
         });
         var date_appointment = $("#date_appointment").val();
         var schedule = $("#schedule_id").val();
+        var schedule2 = $("#schedule_id2").val();
         var photographe_id = {{$service->user->id}};
         var service_id = {{ $service->id }};
         $.ajax({
@@ -222,6 +223,7 @@ $(document).ready(function(){
             data: {
                 date_appointment: date_appointment,
                 schedule: schedule,
+                schedule2: schedule2,
                 photographe_id: photographe_id,
                 service_id: service_id
             },

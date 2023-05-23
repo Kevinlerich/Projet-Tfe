@@ -270,15 +270,21 @@ class AccueilController extends Controller
 
     public function store_rdv(Request $request)
     {
+        $time = Scheduler::query()->findOrFail($request->schedule);
+        $time2 = Scheduler::query()->findOrFail($request->schedule2);
         $event = ModelsRendezVous::create([
             'client_id'=> Auth::user()->id,
             'photographe_id' => $request->photographe_id,
             'service_id' => $request->service_id,
              'date_appointment' => $request->date_appointment,
              'message' => $request->message,
-             'etat' => 0
+             'heure_debut' => $time->start,
+             'heure_fin' => $time->end,
+             'etat' => 0,
+             'contrat' => 0
          ]);
-        $service = Service::query()->findOrFail($request->service_id);
-        $event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
+        //$service = Service::query()->findOrFail($request->service_id);
+        $event->photographe->notify(new Rendezvous('Vous avez un nouveau rendez-vous dans la plateforme.'));
+        //$event->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $event->id));
     }
 }

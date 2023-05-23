@@ -57,8 +57,8 @@
                                 <td class="w-20 px-4 py-2 text-center">{{ $announce->client->name }}</td>
                             @endif
                             <td class="px-4 py-2 text-center">{{ $announce->date_appointment }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->scheduler?->start }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->scheduler?->end }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->heure_debut }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->heure_fin }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->service?->nom }}</td>
                             {{-- <td class="px-4 py-2 text-center">{{ $announce->message }}</td> --}}
                             <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Validé' : 'En attente de confirmation' }}</td>

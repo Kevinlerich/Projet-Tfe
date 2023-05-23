@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RendezVous;
 use App\Models\User;
 use App\Notifications\Rendezvous as NotificationsRendezvous;
+use App\Notifications\SendRendezVous;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +32,11 @@ class AgendaController extends Controller
         $rdv = RendezVous::query()->create([
             'client_id' => Auth::user()->id,
             'photographe_id' => $request->input('photographe_id'),
-            'debut' => $request->input('debut'),
-            'fin' => $request->input('fin'),
+            'service_id' => $request->input('service_id'),
+            'heure_debut' => $request->input('debut'),
+            'heure_fin' => $request->input('fin'),
             'etat' => 0,
+            'contrat' => 0,
         ]);
         $rdv->photographe->notify(new NotificationsRendezvous('Vous avez reçu une nouvelle date de rendez vous avec un client sur notre plateforme.'));
         $rdv->client->notify(new NotificationsRendezvous('Vous avez programmé un rendezvous avec le photographe '.$rdv->photographe->email));
@@ -47,7 +50,19 @@ class AgendaController extends Controller
         $agenda->etat = $agenda->etat == 1 ? 0 : 1;
         $agenda->save();
         $agenda->photographe->notify(new NotificationsRendezvous('Vous avez confirmé un rendez vous avec le client '. $agenda->client->email));
-        $agenda->client->notify(new NotificationsRendezvous('Votre rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name. '. Confirmer votre participation en cliquant sur le bouton ci-dessous.'));
+        $agenda->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $agenda->id));
+
+        //$agenda->client->notify(new NotificationsRendezvous('Votre rendez-vous du '. $agenda->debut . ' au '. $agenda->fin . ' a été validé par le photographe '. $agenda->photographe->name. '. Confirmer votre participation en cliquant sur le bouton ci-dessous.'));
+        return back();
+    }
+
+    public function confirmer_contrat($agenda_id)
+    {
+        $agenda = RendezVous::query()->findOrFail($agenda_id);
+        $agenda->contrat = 1;
+        $agenda->save();
+        $agenda->photographe->notify(new NotificationsRendezvous('Le client '. $agenda->client->email.' a accepté le contrat'));
+        $agenda->client->notify(new NotificationsRendezvous('Vous avez confirmé votre rendez-vous avec  '.$agenda->photographe->email));
         return back();
     }
 

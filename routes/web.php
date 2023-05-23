@@ -69,6 +69,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('create_agenda', [\App\Http\Controllers\AgendaController::class, 'create'])->name('create_agenda');
     Route::get('edit_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'edit'])->name('edit_agenda');
     Route::get('confirmer_agenda/{agenda_id}', [\App\Http\Controllers\AgendaController::class, 'confirmer'])->name('confirmer_agenda');
+    Route::get('confirmer_contrat/{agenda_id}', [\App\Http\Controllers\AgendaController::class, 'confirmer_contrat'])->name('confirmer_contrat');
     Route::put('update_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'update'])->name('update_agenda');
     Route::post('store_agenda/', [\App\Http\Controllers\AgendaController::class, 'store'])->name('store_agenda');
     Route::delete('delete_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'delete'])->name('delete_agenda');
