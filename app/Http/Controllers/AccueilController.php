@@ -243,7 +243,6 @@ class AccueilController extends Controller
             ->where('jours','<=', $request->date)
             ->where('jours_end','>=', $request->date)
             ->pluck('id');
-            //dd($disponibilities);
 
         if ($disponibilities->count() == 0){
             $data = [];//Scheduler::query()->get();

@@ -100,6 +100,7 @@
                         </div>
 
                         <div id="schedule"></div>
+                        <div id="schedule2"></div>
                         <div class="form-group">
                             <div id="button_submit"></div>
                         </div>
@@ -163,19 +164,30 @@ $(document).ready(function(){
                 $('#schedule').html('')
                 if (data.length !== 0) {
                     let html1 = '<div class="form-group">' +
-                        '<label for="schedule">Plage Horaire</label>' +
+                        '<label for="schedule">Heure debut</label>' +
                         '<select name="schedule_id" id="schedule" class="form-control">'
 
                     let html2 = ''
                     data.forEach(function (current) {
                         console.log(html2)
-                        html2 = html2 + '<option value="' + current.id + '">' + current.start + ' - ' + current.end + '</option>'
+                        html2 = html2 + '<option value="' + current.id + '">' + current.start +  '</option>'
                     })
 
                     let html3 = '</select> </div>'
+                    let html11 = '<div class="form-group">' +
+                        '<label for="schedule">Heure debut</label>' +
+                        '<select name="schedule_id" id="schedule" class="form-control">'
+
+                    let html22 = ''
+                    data.forEach(function (current) {
+                        console.log(html2)
+                        html22 = html22 + '<option value="' + current.id + '">' + current.end + '</option>'
+                    })
+                    let html33 = '</select> </div>'
                     let html4 = '<button id="takeRdv" type="submit" class="form-control btn btn-primary">Prendre le rendez vous</button>'
 
                     $('#schedule').html('' + html1 + html2 + html3)
+                    $('#schedule2').html('' + html11 + html22 + html33)
                     $("#button_submit").html(html4)
                     $("#button_submit").show()
                 } else {
