@@ -180,6 +180,7 @@ $(document).ready(function(){
                 } else {
                     alert("Pas de plage Horaire disponible à cette date")
                     $('#statut_select').val("RDV à planifier").change()
+                    $("#button_submit").hide();
                 }
 
                 $("#loading").hide();
