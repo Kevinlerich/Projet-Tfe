@@ -43,7 +43,7 @@
                         <th class="px-4 py-2">{{ __('Début') }}</th>
                         <th class="px-4 py-2">{{ __('Fin') }}</th>
                         <th class="px-4 py-2">{{ __('Service') }}</th>
-                        <th class="px-4 py-2">{{ __('Message') }}</th>
+                        {{-- <th class="px-4 py-2">{{ __('Message') }}</th> --}}
                         <th class="px-4 py-2">{{ __('Etat') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
@@ -57,10 +57,10 @@
                                 <td class="w-20 px-4 py-2 text-center">{{ $announce->client->name }}</td>
                             @endif
                             <td class="px-4 py-2 text-center">{{ $announce->date_appointment }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->scheduler->start }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->scheduler->end }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->scheduler?->start }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->scheduler?->end }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->service?->nom }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->message }}</td>
+                            {{-- <td class="px-4 py-2 text-center">{{ $announce->message }}</td> --}}
                             <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Validé' : 'En attente de confirmation' }}</td>
                             <td class="px-4 py-2 text-center">
                                 @if (Auth::user()->hasRole('client'))
