@@ -177,6 +177,7 @@ $(document).ready(function(){
 
                     $('#schedule').html('' + html1 + html2 + html3)
                     $("#button_submit").html(html4)
+                    $("#button_submit").show()
                 } else {
                     alert("Pas de plage Horaire disponible à cette date")
                     $('#statut_select').val("RDV à planifier").change()

@@ -33,6 +33,14 @@
                             </div>
 
                             <div class="sm:col-span-3">
+                                <label for="jours_end" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Date Fin') }}</label>
+                                <div class="mt-2">
+                                    <input type="date" name="jours_end" id="jours_end" autocomplete="jours_end" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
                                 <label for="debut" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Heure début') }}</label>
                                 <div class="mt-2">
                                     <input type="time" name="debut" value="{{ $disponibility->debut }}" id="debut" autocomplete="debut" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">

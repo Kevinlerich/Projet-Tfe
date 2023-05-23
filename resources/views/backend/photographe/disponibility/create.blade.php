@@ -24,9 +24,16 @@
                         <div class="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                             <div class="sm:col-span-3">
-                                <label for="jours" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Jours') }}</label>
+                                <label for="jours" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Date Début') }}</label>
                                 <div class="mt-2">
-                                    <input type="date" name="jours" id="jours" autocomplete="jours" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <input type="date" name="jours" min="<?php echo date("Y-m-d"); ?>" id="jours" autocomplete="jours" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+                                </div>
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="jours_end" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Date Fin') }}</label>
+                                <div class="mt-2">
+                                    <input type="date" name="jours_end" min="<?php echo date("Y-m-d"); ?>" id="jours_end" autocomplete="jours_end" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
 
                                 </div>
                             </div>
@@ -34,20 +41,20 @@
                             <div class="sm:col-span-3">
                                 <label for="debut" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Heure début') }}</label>
                                 <div class="mt-2">
-                                    <input type="time" name="debut" id="debut" autocomplete="debut" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <input type="time" min="06:00:00" max="23:00:00" name="debut" id="debut" autocomplete="debut" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="sm:col-span-3">
                                 <label for="fin" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Heure de fin') }}</label>
                                 <div class="mt-2">
-                                    <input type="time" name="fin" id="fin" autocomplete="fin" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <input type="time" min="06:00:00" max="23:00:00" name="fin" id="fin" autocomplete="fin" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-3">
                                 <label for="duration" class="block text-sm font-medium leading-6 text-gray-900">{{ __('Durée rendez-vous') }}</label>
                                 <div class="mt-2">
-                                    <input type="time" name="duration" id="duration" autocomplete="duration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <input type="time" min="06:00:00" max="23:00:00" name="duration" id="duration" autocomplete="duration" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>

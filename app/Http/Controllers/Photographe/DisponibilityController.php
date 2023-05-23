@@ -30,6 +30,7 @@ class DisponibilityController extends Controller
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'jours' => $request->input('jours'),
+            'jours_end' => $request->input('jours_end'),
             'duration' => $request->input('duration'),
         ]);
 
@@ -81,6 +82,7 @@ class DisponibilityController extends Controller
             'debut' => $request->input('debut'),
             'fin' => $request->input('fin'),
             'jours' => $request->input('jours'),
+            'jours_end' => $request->input('jours_end'),
             'duration' => $request->input('duration'),
         ]);
         self::createSchedule($disponibility);

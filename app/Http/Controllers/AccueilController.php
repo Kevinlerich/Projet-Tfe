@@ -240,7 +240,8 @@ class AccueilController extends Controller
     {
         $data_date=Carbon::createFromFormat('Y-m-d',$request->date)->format('Y-m-d');
         $disponibilities = Disponibility::query()
-            ->where('jours','=', $request->date)
+            ->where('jours','<=', $request->date)
+            ->where('jours_end','>=', $request->date)
             ->pluck('id');
             //dd($disponibilities);
 
@@ -279,6 +280,6 @@ class AccueilController extends Controller
              'etat' => 0
          ]);
         $service = Service::query()->findOrFail($request->service_id);
-        $event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
+        //$event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
     }
 }
