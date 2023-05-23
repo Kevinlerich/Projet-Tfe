@@ -9,12 +9,14 @@ use App\Models\Message;
 use App\Models\Photo;
 use App\Models\Portfolio;
 use App\Models\RendezVous as ModelsRendezVous;
+use App\Models\Scheduler;
 use App\Models\Service;
 use App\Models\Ville;
 use App\Notifications\Rendezvous;
 use App\Notifications\SendMessage;
 use App\Notifications\SendRendezVous;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class AccueilController extends Controller
@@ -232,5 +234,67 @@ class AccueilController extends Controller
              # code...
              break;
          }
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $appointments = ModelsRendezVous::query()
+            ->where('date_appointment', $request->date)
+            ->pluck('scheduler_id');
+
+        if ($appointments->count() === 0)
+            $data = Scheduler::all();
+        else
+            $data = Scheduler::query()
+                ->whereNotIn('id', $appointments)
+                ->get();
+
+        if ($request->date == now()->format('Y-m-d')) {
+            $hn = now()->format('H');
+
+            $return = [];
+            foreach ($data as $d) {
+                $h = explode(':', $d->debut)[0];
+                if ($h > $hn) {
+                    $return[] = $d;
+                }
+            }
+            return response()->json($return);
+        } else {
+            return response()->json($data);
+        }
+    }
+
+    public function calenderView(Request $request): JsonResponse
+    {
+
+        try {
+            $appointments = ModelsRendezVous::query()
+                ->whereNotNull('date_appointment')
+                ->with('scheduler')
+                ->whereDate('date_appointment', '>=', $request->start)
+                ->whereDate('date_appointment', '<=', $request->end)
+                ->get();
+
+            $return = [];
+            foreach ($appointments as $appointment) {
+                $return[] = [
+                    'id' => $appointment->id,
+                    'title' => 'Nom: ' . $appointment->name . ' subject: ' . $appointment->subject,
+                    'start' => $appointment->date_appointment . ' ' . $appointment->plage?->start,
+                    'end' => $appointment->date_appointment . ' ' . $appointment->plage?->end,
+                    'allDay' => false,
+                    'textColor' => $appointment->etat === 1 ? 'black' : '',
+                    'backgroundColor' => $appointment->etat === 1 ?
+                        'rgba(4,186,4,0.4)' :
+                        ($appointment->etat === 2 ? 'rgb(157,4,4)' : '')
+                ];
+            }
+
+            return response()->json($return);
+        } catch (\Exception $ex) {
+            return response()->json([]);
+        }
+
     }
 }

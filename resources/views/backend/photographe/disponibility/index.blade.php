@@ -24,9 +24,10 @@
                     <thead>
                     <tr class="bg-gray-100">
                         <th class="w-20 px-4 py-2">No</th>
+                        <th class="px-4 py-2">{{ __('Jours') }}</th>
                         <th class="px-4 py-2">{{ __('Début') }}</th>
                         <th class="px-4 py-2">{{ __('Fin') }}</th>
-                        <th class="px-4 py-2">{{ __('Etat') }}</th>
+                        <th class="px-4 py-2">{{ __('Durée') }}</th>
                         <th class="px-4 py-2">{{ __('Action') }}</th>
                     </tr>
                     </thead>
@@ -34,9 +35,10 @@
                     @foreach($disponibilities as $key => $announce)
                         <tr>
                             <td class="w-20 px-4 py-2 text-center">{{ $key+1 }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->jours }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->debut }}</td>
                             <td class="px-4 py-2 text-center">{{ $announce->fin }}</td>
-                            <td class="px-4 py-2 text-center">{{ $announce->etat == 1 ? 'Disponible' : 'Indisponible' }}</td>
+                            <td class="px-4 py-2 text-center">{{ $announce->duration }}</td>
                             <td class="px-4 py-2 text-center">
                                 <a href="{{ route('edit_disponibility', $announce->id) }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                                     {{ __('Modifier') }}

@@ -14,7 +14,14 @@ class RendezVous extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $dates = ['debut', 'fin'];
+    //protected $dates = ['debut', 'fin'];
+
+    public array $ETAT = [
+        'up_coming' => 'Up Coming',
+        'validated' => 'Validated',
+        'pass' => 'Pass',
+        'cancel' => 'Canceled'
+    ];
 
     public function client(): BelongsTo
     {
@@ -29,6 +36,11 @@ class RendezVous extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function scheduler(): BelongsTo
+    {
+        return $this->belongsTo(Scheduler::class);
     }
 /*
     public function getDebutAttribute()
