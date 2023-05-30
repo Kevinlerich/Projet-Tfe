@@ -48,7 +48,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('messages.index') }}" :active="request()->routeIs('my_messages')">
+                    <x-nav-link href="/chatify" :active="request()->routeIs('my_messages')">
                         {{ __('Message') }}
                     </x-nav-link>
                 </div>

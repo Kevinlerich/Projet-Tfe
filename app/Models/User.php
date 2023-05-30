@@ -23,6 +23,20 @@ class User extends Authenticatable implements  MustVerifyEmail
     use HasRoles;
     use HasPermissions;
 
+    public static function getProviderSettings(): array
+    {
+        return [
+            'alias' => 'user',
+            'searchable' => true,
+            'friendable' => true,
+            'devices' => true,
+            'default_avatar' => public_path('vendor/messenger/images/users.png'),
+            'cant_message_first' => [],
+            'cant_search' => [],
+            'cant_friend' => [],
+        ];
+    }
+
     /**
      * The attributes that are mass assignable.
      *
