@@ -29,11 +29,11 @@
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('my_disponibilities') }}" :active="request()->routeIs('my_disponibilities')">
                         {{ __('Mes Disponibilités') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
                 @endif
                 @if(\Illuminate\Support\Facades\Auth::user()->hasRole('client'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -42,11 +42,11 @@
                         </x-nav-link>
                     </div>
                 @endif
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('my_agenda') }}" :active="request()->routeIs('my_agenda')">
                         {{ __('Calendrier') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="/chatify" :active="request()->routeIs('my_messages')">
                         {{ __('Message') }}
