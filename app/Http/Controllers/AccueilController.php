@@ -19,6 +19,8 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Chatify\Facades\ChatifyMessenger as Chatify;
+
 class AccueilController extends Controller
 {
     public function accueil()
@@ -171,26 +173,39 @@ class AccueilController extends Controller
     public function contact_annonce(Request $request)
     {
         $annonce = Announce::query()->findOrFail($request->input('objet'));
-        $sms = Message::query()->create([
-            'expediteur_id' => Auth::user()->id,
-            'destinataire_id' => $request->input('destinataire_id'),
-            'objet' => $annonce->titre,
-            'contenu' => $request->input('message')
+        $message = Chatify::newMessage([
+            'from_id' => Auth::user()->id,
+            'to_id' => $request->input('to_id'),
+            'body' => htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
         ]);
-        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
+        $messageData = Chatify::parseMessage($message);
+            if (Auth::user()->id != $request['id']) {
+                Chatify::push("private-chatify.".$request->input('to_id'), 'messaging', [
+                    'from_id' => Auth::user()->id,
+                    'to_id' => $request->input('to_id'),
+                    'message' => Chatify::messageCard($messageData, true)
+                ]);
+            }
+        //$sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
         return back();
     }
 
     public function contact_service(Request $request)
     {
-        $service = Service::query()->findOrFail($request->input('objet'));
-        $sms = Message::query()->create([
-            'expediteur_id' => Auth::user()->id,
-            'destinataire_id' => $request->input('destinataire_id'),
-            'objet' => $service->nom,
-            'contenu' => $request->input('contenu')
+        $message = Chatify::newMessage([
+            'from_id' => Auth::user()->id,
+            'to_id' => $request->input('to_id'),
+            'body' => htmlentities(trim($request->input('contenu')), ENT_QUOTES, 'UTF-8'),
         ]);
-        $sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
+        $messageData = Chatify::parseMessage($message);
+            if (Auth::user()->id != $request['id']) {
+                Chatify::push("private-chatify.".$request->input('to_id'), 'messaging', [
+                    'from_id' => Auth::user()->id,
+                    'to_id' => $request->input('to_id'),
+                    'message' => Chatify::messageCard($messageData, true)
+                ]);
+            }
+        //$sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
         return back();
     }
 

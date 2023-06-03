@@ -78,8 +78,50 @@
 					<div class="text-center widget user">
 						<h4><a href="user-profile.html">{{ $service->user->name }}</a></h4>
 						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
-
+						{{-- <ul class="mt-20 list-inline">
+                            @auth
+                            @if ($service->user_id != auth()->user()->id)
+                            <li class="list-inline-item"><a href="{{ route('contact_service', $service->id) }}" class="my-1 btn btn-contact d-inline-block btn-primary px-lg-5 px-md-3">Contact</a></li>
+                            @endif
+                            @endauth
+                            @guest
+                            <li class="list-inline-item">Connectez-vous pour contacter</li>
+                            @endguest
+						</ul> --}}
 					</div>
+                    <div class="widget disclaimer">
+						<h5 class="widget-header">Prise de rendez-vous</h5>
+						@auth
+                        @if ($service->user_id != auth()->user()->id)
+                        <div id="calendar"></div>
+                        @else
+
+                        @endif
+                        @endauth
+                        @guest
+                            Connectez-vous pour prendre rendez-vous.
+                        @endguest
+					</div>
+                    <div class="widget disclaimer">
+                        @auth
+                        @if ($service->user_id != Auth::user()->id)
+                        @auth
+                        <h5 class="widget-header">Laisser un message</h5>
+                            <form action="{{ route('contact_service') }}" method="post">
+                                @csrf
+                                <!-- Message -->
+                                <div class="form-group mb-30">
+                                    <input type="hidden" name="to_id" value="{{ $service->user->id }}">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" name="contenu" id="contenu" rows="8" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-transparent">Laisser mon message</button>
+                            </form>
+                        @endauth
+
+                    @endif
+                        @endauth
+                    </div>
                     @guest
                     <h4>Connectez-vous pour contacter cet annonceur</h4>
                 @endguest
@@ -93,5 +135,114 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript">
 
+    $(document).ready(function () {
+        var SITEURL = "{{ url('/') }}";
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var calendar = $('#calendar').fullCalendar({
+                        editable: true,
+                        events: {!! $disponibilities !!},
+                        displayEventTime: false,
+                        editable: true,
+                        eventRender: function (event, element, view) {
+                            if (event.allDay === 'true') {
+                                    event.allDay = true;
+                            } else {
+                                    event.allDay = false;
+                            }
+                        },
+                        selectable: true,
+                        selectHelper: true,
+                        select: function (start, end, allDay) {
+                            var message = prompt('Votre message:');
+                            if (message) {
+                                var photographe_id = {{$service->user->id}};
+                                var service_id = {{$service->id}};
+                                var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                                var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+                                $.ajax({
+                                    url: SITEURL + "/fullcalenderAjax",
+                                    data: {
+                                        photographe_id: photographe_id,
+                                        service_id: service_id,
+                                        message: message,
+                                        start: start,
+                                        end: end,
+                                        type: 'add'
+                                    },
+                                    type: "POST",
+                                    success: function (data) {
+                                        displayMessage("Rendez-vous créer avec succès !!!");
+
+                                        calendar.fullCalendar('renderEvent',
+                                            {
+                                                id: data.id,
+                                                start: start,
+                                                end: end,
+                                                allDay: allDay
+                                            },true);
+
+                                        calendar.fullCalendar('unselect');
+                                    }
+                                });
+                            }
+                        },
+                        eventDrop: function (event, delta) {
+                            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
+                            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
+
+                            $.ajax({
+                                url: SITEURL + '/fullcalenderAjax',
+                                data: {
+                                    photographe_id: photographe_id,
+                                    service_id: service_id,
+                                    message: message,
+                                    start: start,
+                                    end: end,
+                                    id: event.id,
+                                    type: 'update'
+                                },
+                                type: "POST",
+                                success: function (response) {
+                                    displayMessage("Rendez vous mis à jour avec succès");
+                                }
+                            });
+                        },
+                        eventClick: function (event) {
+                            var deleteMsg = confirm("Voulez-vous vraiment supprimé ce rendez-vous?");
+                            if (deleteMsg) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: SITEURL + '/fullcalenderAjax',
+                                    data: {
+                                            id: event.id,
+                                            type: 'delete'
+                                    },
+                                    success: function (response) {
+                                        calendar.fullCalendar('removeEvents', event.id);
+                                        displayMessage("Rendez vous supprimé avec succès");
+                                    }
+                                });
+                            }
+                        }
+
+                    });
+
+        });
+
+        /*------------------------------------------
+        --------------------------------------------
+        Toastr Success Code
+        --------------------------------------------
+        --------------------------------------------*/
+        function displayMessage(message) {
+            toastr.success(message, 'Event');
+        }
+
+    </script>
 @endsection

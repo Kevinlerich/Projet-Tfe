@@ -51,7 +51,7 @@
 										</div>
 										<div class="form-group col-lg-3 col-md-6">
                                             <select name="ville_id" class="w-100 form-control mt-lg-1 mt-md-2">
-												<option>Villes</option>
+												<option>Provinces</option>
 												@foreach ($villes as $ville)
                                                     <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
                                                 @endforeach
