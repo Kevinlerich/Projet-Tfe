@@ -18,6 +18,7 @@ use Camya\Filament\Forms\Components\TitleWithSlugInput;
 class VilleResource extends Resource
 {
     protected static ?string $model = Ville::class;
+    protected static ?string $label = 'Provinces';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
