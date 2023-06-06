@@ -37,11 +37,9 @@ class VilleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nom'),
+                Tables\Columns\TextColumn::make('nom')->label('Nom province'),
                 Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
             ->filters([
