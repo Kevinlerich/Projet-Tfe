@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ville extends Model
@@ -21,5 +22,10 @@ class Ville extends Model
     public function announces(): HasMany
     {
         return $this->hasMany(Announce::class);
+    }
+
+    public function photographes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }

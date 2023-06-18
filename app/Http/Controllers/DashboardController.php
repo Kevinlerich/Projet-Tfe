@@ -14,4 +14,10 @@ class DashboardController extends Controller
         $services = Service::query()->orderBy('created_at', 'desc')->get();
         return view('dashboard', compact('annonces', 'services'));
     }
+
+    public function archive($id)
+    {
+        Announce::query()->where('id', '=', $id)->update(['archived' => 1]);
+        return back();
+    }
 }

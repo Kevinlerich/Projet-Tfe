@@ -54,15 +54,17 @@ class AnnounceResource extends Resource
                 Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('photo'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('archived')
+                    ->boolean(),
             ])
             ->filters([
-                //
+                Filter::make('archived')->label('Archive')
+                    ->query(fn (Builder $query): Builder => $query->where('archived', '=', 1)),
             ])
             ->actions([
+                Tables\Actions\Action::make('archived')->label('Archivé')
+                    ->url(fn (Announce $record): string  => route('archive', $record->id))
+                    ->requiresConfirmation(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

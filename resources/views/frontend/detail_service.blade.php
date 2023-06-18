@@ -71,12 +71,16 @@
 			<div class="col-lg-4">
 				<div class="sidebar">
 					 <div class="text-center widget price">
-						{{--<h4>Price</h4>
-						<p>$230</p> --}}
+						<h4>Lieux de travail préférés</h4>
+                         @auth
+                             @foreach(\Illuminate\Support\Facades\Auth::user()->provinces as $lieu)
+                                 <p>{{ $lieu->nom }}</p>
+                             @endforeach
+                         @endauth
 					</div>
 					<!-- User Profile widget -->
 					<div class="text-center widget user">
-						<h4><a href="user-profile.html">{{ $service->user->name }}</a></h4>
+						<h4><a href="#">{{ $service->user->name }}</a></h4>
 						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
 						{{-- <ul class="mt-20 list-inline">
                             @auth
@@ -90,7 +94,7 @@
 						</ul> --}}
 					</div>
                     <div class="widget disclaimer">
-						<h5 class="widget-header">Prise de rendez-vous</h5>
+                            <h5 class="widget-header">Contact</h5>
 						@auth
                         @if ($service->user_id != auth()->user()->id)
                         <div id="calendar"></div>
@@ -98,9 +102,6 @@
 
                         @endif
                         @endauth
-                        @guest
-                            Connectez-vous pour prendre rendez-vous.
-                        @endguest
 					</div>
                     <div class="widget disclaimer">
                         @auth

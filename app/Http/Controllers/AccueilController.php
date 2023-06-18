@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Disponibility;
 use App\Models\Message;
 use App\Models\Photo;
+use App\Models\PhotographeProvince;
 use App\Models\Portfolio;
 use App\Models\RendezVous as ModelsRendezVous;
 use App\Models\Scheduler;
@@ -25,7 +26,7 @@ class AccueilController extends Controller
 {
     public function accueil()
     {
-        $annonces = Announce::query()->get();
+        $annonces = Announce::query()->where('archived', '!=', 1)->get();
         $services = Service::query()->orderBy('created_at', 'desc')->get();
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
@@ -150,9 +151,8 @@ class AccueilController extends Controller
             'villes' => $villes,
             'service' => $service,
             'disponibilities' => json_encode($calendar_books),
-            'portfolio' => $portfolio
+            'portfolio' => $portfolio,
         ];
-        //dd($data);
         return view('frontend.detail_service', $data);
     }
 

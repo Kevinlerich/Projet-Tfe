@@ -74,6 +74,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('store_agenda/', [\App\Http\Controllers\AgendaController::class, 'store'])->name('store_agenda');
     Route::delete('delete_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'delete'])->name('delete_agenda');
 
+    // Travail routes
+    Route::get('travails', [\App\Http\Controllers\Photographe\TravailController::class, 'index'])->name('list_travails');
+    Route::get('create-travail', [\App\Http\Controllers\Photographe\TravailController::class, 'create'])->name('create_travail');
+    Route::post('post-create-travail', [\App\Http\Controllers\Photographe\TravailController::class, 'store'])->name('post_create_travail');
+    Route::get('edit-travail/{id}', [\App\Http\Controllers\Photographe\TravailController::class, 'edit'])->name('edit_travail');
+    Route::put('update_edit-travail/{id}', [\App\Http\Controllers\Photographe\TravailController::class, 'update'])->name('update_edit_travail');
+    Route::delete('delete-travail/{id}', [\App\Http\Controllers\Photographe\TravailController::class, 'destroy'])->name('delete_travail');
     /**
      * Client route
      */
@@ -88,4 +95,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Message routes
     Route::post('reply-message/{id}', 'App\Http\Controllers\MessageController@reply_message')->name('reply_message');
     Route::resource('messages', 'App\Http\Controllers\MessageController');
+
+    Route::get('archive/{id}', [\App\Http\Controllers\DashboardController::class, 'archive'])->name('archive');
 });

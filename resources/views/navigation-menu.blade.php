@@ -24,6 +24,12 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('list_travails') }}" :active="request()->routeIs('list_travails')">
+                        {{ __('Lieu de travail préféré') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('list_portfolio') }}" :active="request()->routeIs('list_portfolio')">
                         {{ __('Mon Portfolio') }}
                     </x-nav-link>
