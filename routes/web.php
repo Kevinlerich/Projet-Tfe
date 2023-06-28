@@ -17,22 +17,11 @@ use App\Http\Controllers\Photographe\ServiceController;
 */
 
 Route::get('/', [AccueilController::class, 'accueil'])->name('accueil');
-Route::get('search/', [AccueilController::class, 'search'])->name('search');
-Route::get('search_annonce/', [AccueilController::class, 'search_annonce'])->name('search_annonce');
 Route::get('services', [AccueilController::class, 'services'])->name('services');
-Route::get('annonces', [AccueilController::class, 'annonces'])->name('annonces');
-Route::get('detail_service/{slug}', [AccueilController::class, 'detail_service'])->name('detail_service');
+Route::get('service/{id}', [AccueilController::class, 'detail_service'])->name('detail_service');
 Route::get('detail_annonce/{slug}', [AccueilController::class, 'detail_annonce'])->name('detail_annonce');
-Route::get('category_service/{category_slug}', [AccueilController::class, 'category_service'])->name('category_service');
-Route::get('category_annonce/{category_slug}', [AccueilController::class, 'category_annonce'])->name('category_annonce');
-
-Route::post('fullcalenderAjax', [AccueilController::class, 'ajax'])->name('full_calendar');
-Route::post('schedule/appointment', [AccueilController::class, 'index'])->name('available.schedule');
-Route::post('store/rdv', [AccueilController::class, 'store_rdv'])->name('store_rdv');
 
 Route::get('contact', [AccueilController::class, 'contact'])->name('contact');
-Route::post('post_contact_annonce', [AccueilController::class, 'contact_annonce'])->name('contact_annonce')->middleware('auth');;
-Route::post('post_contact_service', [AccueilController::class, 'contact_service'])->name('contact_service')->middleware('auth');;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
@@ -56,45 +45,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::put('update_portfolio/{id}', [\App\Http\Controllers\Photographe\PortfolioController::class, 'update'])->name('update_portfolio');
     Route::delete('delete_portfolio/{id}', [\App\Http\Controllers\Photographe\PortfolioController::class, 'delete'])->name('delete_portfolio');
 
-    // Disponibilité route
-    Route::get('my_disponibilities', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'index'])->name('my_disponibilities');
-    Route::get('create_disponibility', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'create'])->name('create_disponibility');
-    Route::get('edit_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'edit'])->name('edit_disponibility');
-    Route::put('update_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'update'])->name('update_disponibility');
-    Route::post('store_disponibility', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'store'])->name('store_disponibility');
-    Route::delete('delete_disponibility/{id}', [\App\Http\Controllers\Photographe\DisponibilityController::class, 'delete'])->name('delete_disponibility');
-
-    // agenda route
-    Route::get('my_agenda', [\App\Http\Controllers\AgendaController::class, 'index'])->name('my_agenda');
-    Route::get('create_agenda', [\App\Http\Controllers\AgendaController::class, 'create'])->name('create_agenda');
-    Route::get('edit_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'edit'])->name('edit_agenda');
-    Route::get('confirmer_agenda/{agenda_id}', [\App\Http\Controllers\AgendaController::class, 'confirmer'])->name('confirmer_agenda');
-    Route::get('confirmer_contrat/{agenda_id}', [\App\Http\Controllers\AgendaController::class, 'confirmer_contrat'])->name('confirmer_contrat');
-    Route::put('update_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'update'])->name('update_agenda');
-    Route::post('store_agenda/', [\App\Http\Controllers\AgendaController::class, 'store'])->name('store_agenda');
-    Route::delete('delete_agenda/{id}', [\App\Http\Controllers\AgendaController::class, 'delete'])->name('delete_agenda');
-
-    // Travail routes
-    Route::get('travails', [\App\Http\Controllers\Photographe\TravailController::class, 'index'])->name('list_travails');
-    Route::get('create-travail', [\App\Http\Controllers\Photographe\TravailController::class, 'create'])->name('create_travail');
-    Route::post('post-create-travail', [\App\Http\Controllers\Photographe\TravailController::class, 'store'])->name('post_create_travail');
-    Route::get('edit-travail/{id}', [\App\Http\Controllers\Photographe\TravailController::class, 'edit'])->name('edit_travail');
-    Route::put('update_edit-travail/{id}', [\App\Http\Controllers\Photographe\TravailController::class, 'update'])->name('update_edit_travail');
-    Route::delete('delete-travail/{id}', [\App\Http\Controllers\Photographe\TravailController::class, 'destroy'])->name('delete_travail');
     /**
      * Client route
      */
     // annonces
     Route::get('my_announces', [\App\Http\Controllers\Client\AnnounceController::class, 'index'])->name('my_announces');
     Route::get('create_annonce', [\App\Http\Controllers\Client\AnnounceController::class, 'create'])->name('create_annonce');
-    Route::post('store_annonce', [\App\Http\Controllers\Client\AnnounceController::class, 'store'])->name('store_annonce');
-    Route::get('edit_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'edit'])->name('edit_annonce');
-    Route::put('update_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'update'])->name('update_annonce');
-    Route::delete('delete_annonce/{id}', [\App\Http\Controllers\Client\AnnounceController::class, 'delete'])->name('delete_annonce');
-
-    // Message routes
-    Route::post('reply-message/{id}', 'App\Http\Controllers\MessageController@reply_message')->name('reply_message');
-    Route::resource('messages', 'App\Http\Controllers\MessageController');
-
-    Route::get('archive/{id}', [\App\Http\Controllers\DashboardController::class, 'archive'])->name('archive');
 });
