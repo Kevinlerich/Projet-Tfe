@@ -13,8 +13,9 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
 
-class User extends Authenticatable implements  MustVerifyEmail
+class User extends Authenticatable implements  MustVerifyEmail, FilamentUser
 {
     use HasApiTokens;
     use HasFactory;
@@ -109,5 +110,10 @@ class User extends Authenticatable implements  MustVerifyEmail
     public function provinces(): BelongsToMany
     {
         return $this->belongsToMany(Ville::class);
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return str_ends_with($this->email, '@admin.com');
     }
 }

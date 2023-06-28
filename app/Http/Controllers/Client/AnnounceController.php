@@ -35,6 +35,7 @@ class AnnounceController extends Controller
             'slug' => Str::slug($request->input('titre')),
             'description' => $request->input('description'),
             'ville_id' => $request->input('ville_id'),
+            'date_announce' => $request->input('date_announce'),
         ]);
 
         return redirect()->route('my_announces');
@@ -58,6 +59,7 @@ class AnnounceController extends Controller
             'slug' => Str::slug($request->input('titre')),
             'description' => $request->input('description'),
             'ville_id' => $request->input('ville_id'),
+            'date_announce' => $request->input('date_announce'),
         ]);
         return redirect()->route('my_announces');
     }

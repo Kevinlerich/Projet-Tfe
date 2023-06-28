@@ -38,6 +38,9 @@ class AnnounceResource extends Resource
                     fieldTitle: 'titre', // The name of the field in your model that stores the title.
                     fieldSlug: 'slug', // The name of the field in your model that will store the slug.
                 ),
+                Forms\Components\DatePicker::make('date_announce')
+                    ->label('Date annonce')
+                    ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->required(),
 
@@ -51,11 +54,9 @@ class AnnounceResource extends Resource
                 Tables\Columns\TextColumn::make('user.name'),
                 Tables\Columns\TextColumn::make('category.id'),
                 Tables\Columns\TextColumn::make('titre'),
-                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('date_announce'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('photo'),
-                Tables\Columns\TextColumn::make('archived')
-                    ->boolean(),
+                Tables\Columns\BooleanColumn::make('archived'),
             ])
             ->filters([
                 Filter::make('archived')->label('Archive')
