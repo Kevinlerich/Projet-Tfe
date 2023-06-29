@@ -37,10 +37,9 @@
 								<form method="get" action="{{ route('search') }}">
                                     @csrf
 									<div class="form-row">
-										{{-- <div class="form-group col-xl-4 col-lg-3 col-md-6">
-											<input name="text" disabled type="text" class="my-2 form-control my-lg-1" id="inputtext4"
-												placeholder="Que recherchez-vous ?">
-										</div> --}}
+										<div class="form-group col-xl-2 col-lg-2 col-md-2">
+
+										</div>
 										<div class="form-group col-lg-3 col-md-6">
 											<select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">
 												<option>Categories</option>
@@ -51,7 +50,7 @@
 										</div>
 										<div class="form-group col-lg-3 col-md-6">
                                             <select name="ville_id" class="w-100 form-control mt-lg-1 mt-md-2">
-												<option>Provinces</option>
+												<option selected disabled value="">Provinces</option>
 												@foreach ($villes as $ville)
                                                     <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
                                                 @endforeach

@@ -71,10 +71,10 @@
 			<div class="col-lg-4">
 				<div class="sidebar">
 					 <div class="text-center widget price">
-						<h4>Lieux de travail préférés</h4>
+						<h2>Lieux de travail préférés</h2>
                          @auth
-                             @foreach(\Illuminate\Support\Facades\Auth::user()->provinces as $lieu)
-                                 <p>{{ $lieu->nom }}</p>
+                             @foreach($lieux as $lieu)
+                                 <p>{{ $lieu->province?->nom }}</p>
                              @endforeach
                          @endauth
 					</div>
@@ -82,50 +82,30 @@
 					<div class="text-center widget user">
 						<h4><a href="#">{{ $service->user->name }}</a></h4>
 						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
-						{{-- <ul class="mt-20 list-inline">
-                            @auth
-                            @if ($service->user_id != auth()->user()->id)
-                            <li class="list-inline-item"><a href="{{ route('contact_service', $service->id) }}" class="my-1 btn btn-contact d-inline-block btn-primary px-lg-5 px-md-3">Contact</a></li>
+					</div>
+                    <div class="widget disclaimer">
+                        @auth
+                            @if ($service->user_id != Auth::user()->id)
+                                @auth
+                                <h5 class="widget-header">Laisser un message</h5>
+                                    <form action="{{ route('contact_service') }}" method="post">
+                                        @csrf
+                                        <!-- Message -->
+                                        <div class="form-group mb-30">
+                                            <input type="hidden" name="to_id" value="{{ $service->user->id }}">
+                                            <label for="message">Message</label>
+                                            <textarea id="message" class="form-control" name="message" rows="8" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-transparent">Laisser mon message</button>
+                                    </form>
+                                @endauth
+
                             @endif
-                            @endauth
-                            @guest
-                            <li class="list-inline-item">Connectez-vous pour contacter</li>
-                            @endguest
-						</ul> --}}
-					</div>
-                    <div class="widget disclaimer">
-                            <h5 class="widget-header">Contact</h5>
-						@auth
-                        @if ($service->user_id != auth()->user()->id)
-                        <div id="calendar"></div>
-                        @else
-
-                        @endif
-                        @endauth
-					</div>
-                    <div class="widget disclaimer">
-                        @auth
-                        @if ($service->user_id != Auth::user()->id)
-                        @auth
-                        <h5 class="widget-header">Laisser un message</h5>
-                            <form action="{{ route('contact_service') }}" method="post">
-                                @csrf
-                                <!-- Message -->
-                                <div class="form-group mb-30">
-                                    <input type="hidden" name="to_id" value="{{ $service->user->id }}">
-                                    <label for="message">Message</label>
-                                    <textarea class="form-control" name="contenu" id="contenu" rows="8" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-transparent">Laisser mon message</button>
-                            </form>
-                        @endauth
-
-                    @endif
                         @endauth
                     </div>
                     @guest
-                    <h4>Connectez-vous pour contacter cet annonceur</h4>
-                @endguest
+                        <h4>Connectez-vous pour contacter ce photographe</h4>
+                    @endguest
 				</div>
 			</div>
 

@@ -38,7 +38,6 @@ class AccueilController extends Controller
 
     public function search(Request $request)
     {
-        $text = $request->input('text');
         $services = Service::query()->Where('category_id', '=',$request->input('category_id'))
         ->Where('ville_id', '=',$request->input('ville_id'))
         ->orderBy('created_at', 'desc')
@@ -137,6 +136,7 @@ class AccueilController extends Controller
         $portfolio = Portfolio::query()->where('service_id','=', $service->id)->first();
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
+        $lieux = PhotographeProvince::query()->where('photographe_id','=', $service->user_id)->get();
         $disponibilities = Disponibility::query()->where('user_id', '=', $service->user->id)->get();
         $calendar_books = [];
         foreach($disponibilities as $dispo)
@@ -152,6 +152,7 @@ class AccueilController extends Controller
             'service' => $service,
             'disponibilities' => json_encode($calendar_books),
             'portfolio' => $portfolio,
+            'lieux' => $lieux,
         ];
         return view('frontend.detail_service', $data);
     }
@@ -195,7 +196,7 @@ class AccueilController extends Controller
         $message = Chatify::newMessage([
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
-            'body' => htmlentities(trim($request->input('contenu')), ENT_QUOTES, 'UTF-8'),
+            'body' => htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
         ]);
         $messageData = Chatify::parseMessage($message);
             if (Auth::user()->id != $request['id']) {

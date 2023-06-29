@@ -27,20 +27,23 @@ class AnnounceResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
+                    ->label('Auteur')
                     ->required(),
 
                 Forms\Components\Select::make('ville_id')
                 ->relationship('ville', 'nom')
+                ->label('Province')
                 ->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'nom')
+                    ->label('Categorie')
                     ->required(),
                 TitleWithSlugInput::make(
                     fieldTitle: 'titre', // The name of the field in your model that stores the title.
                     fieldSlug: 'slug', // The name of the field in your model that will store the slug.
                 ),
-                Forms\Components\DatePicker::make('date_announce')
-                    ->label('Date annonce')
+                Forms\Components\DateTimePicker::make('date_announce')
+                    ->label('Date evenement')
                     ->required(),
                 Forms\Components\RichEditor::make('description')
                     ->required(),
@@ -52,12 +55,14 @@ class AnnounceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('category.id'),
+                Tables\Columns\TextColumn::make('user.name')->label('Auteur'),
+                Tables\Columns\TextColumn::make('category.nom')->label('Categorie'),
                 Tables\Columns\TextColumn::make('titre'),
-                Tables\Columns\TextColumn::make('date_announce'),
+                Tables\Columns\TextColumn::make('date_announce')
+                    ->dateTime()
+                    ->label('Date evenement'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\BooleanColumn::make('archived'),
+                Tables\Columns\BooleanColumn::make('archived')->label('Archive?'),
             ])
             ->filters([
                 Filter::make('archived')->label('Archive')

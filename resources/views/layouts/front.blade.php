@@ -70,7 +70,11 @@
                             @endguest
                             @auth
                             <li class="nav-item">
-								<a class="nav-link login-button" href="{{ route('dashboard') }}">Mon espace</a>
+                                @if(str_ends_with(\Illuminate\Support\Facades\Auth::user()->email, '@admin.com'))
+                                    <a class="nav-link login-button" href="/admin">Administration</a>
+                                @else
+                                    <a class="nav-link login-button" href="{{ route('dashboard') }}">Mon espace</a>
+                                @endif
 							</li>
                             @endauth
 						</ul>

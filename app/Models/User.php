@@ -109,7 +109,7 @@ class User extends Authenticatable implements  MustVerifyEmail, FilamentUser
 
     public function provinces(): BelongsToMany
     {
-        return $this->belongsToMany(Ville::class);
+        return $this->belongsToMany(Ville::class, 'provinces');
     }
 
     public function canAccessFilament(): bool

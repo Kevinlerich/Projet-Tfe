@@ -18,4 +18,9 @@ class PhotographeProvince extends Model
     {
         return $this->belongsTo(Ville::class);
     }
+
+    public function photographe(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -27,12 +27,15 @@ class ServiceResource extends Resource
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
+                    ->label('Auteur')
                     ->required(),
-                    Forms\Components\Select::make('ville_id')
-                ->relationship('ville', 'nom')
-                ->required(),
+                Forms\Components\Select::make('ville_id')
+                    ->relationship('ville', 'nom')
+                    ->label('Province')
+                    ->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'nom')
+                    ->label('Categorie')
                     ->required(),
                 TitleWithSlugInput::make(
                     fieldTitle: 'nom', // The name of the field in your model that stores the title.
@@ -48,8 +51,8 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('category.nom'),
+                Tables\Columns\TextColumn::make('user.name')->label('Auteur'),
+                Tables\Columns\TextColumn::make('category.nom')->label('Categorie'),
                 Tables\Columns\TextColumn::make('nom'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('created_at')

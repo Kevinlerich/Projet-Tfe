@@ -11,17 +11,17 @@
                                 <input name="text" disabled type="text" class="my-2 form-control my-lg-1" id="inputtext4"
                                     placeholder="Que recherchez-vous ?">
                             </div> --}}
-                            <div class="form-group col-lg-3 col-md-6">
+                            <div class="form-group col-lg-4 col-md-6">
                                 <select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">
-                                    <option>Categories</option>
+                                    <option selected disabled>Categories</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" {{ $category->id == Request::query('category_id') ? 'selected' : ''}}>{{ $category->nom }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-lg-3 col-md-6">
+                            <div class="form-group col-lg-4 col-md-6">
                                 <select name="ville_id" class="w-100 form-control mt-lg-1 mt-md-2">
-                                    <option>Province</option>
+                                    <option selected disabled>Provinces</option>
                                     @foreach ($villes as $ville)
                                         <option value="{{ $ville->id }}" {{ $ville->id == Request::query('ville_id') ? 'selected' : '' }}>{{ $ville->nom }}</option>
                                     @endforeach

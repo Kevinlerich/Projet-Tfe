@@ -26,6 +26,6 @@ class Ville extends Model
 
     public function photographes(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class,'users');
     }
 }
