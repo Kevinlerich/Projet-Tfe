@@ -13,6 +13,8 @@ class Announce extends Model
 
     protected $guarded = [];
 
+    protected array $dates = ['created_at', 'updated_at', 'date_announce'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
