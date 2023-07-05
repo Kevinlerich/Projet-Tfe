@@ -26,9 +26,10 @@ class AnnounceArchived extends Command
      */
     public function handle(): void
     {
-        $date_to_archived = \Carbon\Carbon::today()->subDays(30); // 30 jours
+        $date_to_archived = \Carbon\Carbon::today()->subDays(30)->toDateTimeString(); // 30 jours
         Announce::query()
-            ->where('created_at', '>=', $date_to_archived)
+            ->orWhere('created_at', '>=', $date_to_archived)
+            ->orWhere('created_at', '<=', $date_to_archived)
             ->update([
                 'archived' => 1
         ]);
