@@ -123,7 +123,8 @@ class AccueilController extends Controller
 
     public function annonces()
     {
-        $annonces = Announce::query()->orderBy('created_at', 'desc')->get();
+        $annonces = Announce::query()->where('archived', '!=', 1)
+            ->orderBy('created_at', 'desc')->get();
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
         return view('frontend.annonces', compact('annonces',
