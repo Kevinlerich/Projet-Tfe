@@ -95,7 +95,7 @@
                                 <a href="{{ route('detail_annonce', $annonce->slug) }}">{{ $annonce->titre }}</a>
                             </h3>
                             <p class="text-sm font-semibold leading-6 text-gray-600">{!! ($annonce->description) !!}</p>
-                            <p class="text-sm font-semibold leading-6 text-indigo-600">Par: {{ $annonce->user->name }} {{ $annonce->created_at->diffForHumans() }}</p>
+{{--                            <p class="text-sm font-semibold leading-6 text-indigo-600">Par: {{ $annonce->user->name }} {{ $annonce->created_at->diffForHumans() }}</p>--}}
                           </div>
                         </div>
                       </li>

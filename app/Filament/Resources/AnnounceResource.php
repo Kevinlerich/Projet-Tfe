@@ -43,8 +43,7 @@ class AnnounceResource extends Resource
                     fieldSlug: 'slug', // The name of the field in your model that will store the slug.
                 ),
                 Forms\Components\DateTimePicker::make('date_announce')
-                    ->label('Date evenement')
-                    ->required(),
+                    ->label('Date evenement'),
                 Forms\Components\RichEditor::make('description')
                     ->required(),
 
