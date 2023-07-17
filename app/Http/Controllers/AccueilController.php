@@ -40,6 +40,7 @@ class AccueilController extends Controller
     {
         $services = Service::query()->Where('category_id', '=',$request->input('category_id'))
         ->Where('ville_id', '=',$request->input('ville_id'))
+        ->Where('id', '=',$request->input('portfolio_id'))
         ->orderBy('created_at', 'desc')
         ->get();
         $categories = Category::query()->get();

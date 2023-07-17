@@ -37,9 +37,6 @@
 								<form method="get" action="{{ route('search') }}">
                                     @csrf
 									<div class="form-row">
-										<div class="form-group col-xl-2 col-lg-2 col-md-2">
-
-										</div>
 										<div class="form-group col-lg-3 col-md-6">
 											<select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">
 												<option>Categories</option>
@@ -54,7 +51,16 @@
 												@foreach ($villes as $ville)
                                                     <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
                                                 @endforeach
-											</select>										</div>
+											</select>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-md-6">
+                                            <select name="portfolio_id" class="w-100 form-control mt-lg-1 mt-md-2">
+												<option selected disabled value="">Portfolio</option>
+												@foreach ($services as $service)
+                                                    <option value="{{ $service->id }}">{{ $service->nom }}</option>
+                                                @endforeach
+											</select>
+                                        </div>
 										<div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
 											<button type="submit" class="btn btn-primary active w-100">Rechercher</button>
 										</div>
