@@ -39,10 +39,10 @@ class AccueilController extends Controller
     public function search(Request $request)
     {
         $services = Service::query()->Where('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
-        ->Where('id', '=',$request->input('portfolio_id'))
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->Where('ville_id', '=',$request->input('ville_id'))
+            ->orderBy('created_at', 'desc')
+            ->get();
+        //->Where('id', '=',$request->input('portfolio_id'))
         $categories = Category::query()->get();
         $villes = Ville::query()->get();
         session()->flashInput($request->input());
@@ -139,20 +139,10 @@ class AccueilController extends Controller
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
         $lieux = PhotographeProvince::query()->where('photographe_id','=', $service->user_id)->get();
-        $disponibilities = Disponibility::query()->where('user_id', '=', $service->user->id)->get();
-        $calendar_books = [];
-        foreach($disponibilities as $dispo)
-        {
-            $calendar_books[] = [
-                'start' => Carbon::parse($dispo->debut),
-                'end' => Carbon::parse($dispo->fin)
-            ];
-        }
         $data = [
             'categories' => $categories,
             'villes' => $villes,
             'service' => $service,
-            'disponibilities' => json_encode($calendar_books),
             'portfolio' => $portfolio,
             'lieux' => $lieux,
         ];
@@ -180,6 +170,7 @@ class AccueilController extends Controller
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
             'body' => htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
+            'attachment' =>  null,
         ]);
         $messageData = Chatify::parseMessage($message);
             if (Auth::user()->id != $request['id']) {
@@ -199,6 +190,7 @@ class AccueilController extends Controller
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
             'body' => htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
+            'attachment' =>  null,
         ]);
         $messageData = Chatify::parseMessage($message);
             if (Auth::user()->id != $request['id']) {
@@ -208,7 +200,6 @@ class AccueilController extends Controller
                     'message' => Chatify::messageCard($messageData, true)
                 ]);
             }
-        //$sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
         return back();
     }
 
