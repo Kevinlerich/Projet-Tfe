@@ -32,8 +32,8 @@ class AccueilController extends Controller
 
     public function search(Request $request)
     {
-        $services = Service::query()->Where('category_id', '=',$request->input('category_id'))
-            ->Where('ville_id', '=',$request->input('ville_id'))
+        $services = Service::query()->orWhere('category_id', '=',$request->input('category_id'))
+            ->orWhere('ville_id', '=',$request->input('ville_id'))
             ->orderBy('created_at', 'desc')
             ->get();
         //->Where('id', '=',$request->input('portfolio_id'))
