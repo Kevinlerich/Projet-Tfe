@@ -4,18 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Announce;
 use App\Models\Category;
-use App\Models\Disponibility;
 use App\Models\Message;
 use App\Models\Photo;
 use App\Models\PhotographeProvince;
 use App\Models\Portfolio;
-use App\Models\RendezVous as ModelsRendezVous;
-use App\Models\Scheduler;
 use App\Models\Service;
 use App\Models\Ville;
-use App\Notifications\Rendezvous;
-use App\Notifications\SendMessage;
-use App\Notifications\SendRendezVous;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -124,12 +118,28 @@ class AccueilController extends Controller
 
     public function annonces()
     {
-        $annonces = Announce::query()->where('archived', '!=', 1)
-            ->orderBy('created_at', 'desc')->get();
-        $categories = Category::query()->inRandomOrder()->get();
-        $villes = Ville::query()->inRandomOrder()->get();
-        return view('frontend.annonces', compact('annonces',
-         'categories', 'villes'));
+        if (Auth::user()) {
+            $annonces = [];
+            $viles = PhotographeProvince::query()->where('photographe_id', '=', Auth::user()->id)->get();
+            foreach ($viles as $ville) {
+                $announces = Announce::query()->where('ville_id', '=', $ville->province_id)
+                                        ->where('archived', '!=', 1)
+                                        ->orderBy('created_at', 'desc')
+                                        ->get();
+                array_push($annonces, ...$announces);
+            }
+            $categories = Category::query()->inRandomOrder()->get();
+            $villes = Ville::query()->inRandomOrder()->get();
+            return view('frontend.annonces', compact('annonces',
+                'categories', 'villes'));
+        } else {
+            $annonces = Announce::query()->where('archived', '!=', 1)
+                ->orderBy('created_at', 'desc')->get();
+            $categories = Category::query()->inRandomOrder()->get();
+            $villes = Ville::query()->inRandomOrder()->get();
+            return view('frontend.annonces', compact('annonces',
+                'categories', 'villes'));
+        }
     }
 
     public function detail_service($slug)
@@ -165,7 +175,7 @@ class AccueilController extends Controller
 
     public function contact_annonce(Request $request)
     {
-        $annonce = Announce::query()->findOrFail($request->input('objet'));
+        //$annonce = Announce::query()->findOrFail($request->input('objet'));
         $message = Chatify::newMessage([
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
@@ -203,7 +213,7 @@ class AccueilController extends Controller
         return back();
     }
 
-    public function ajax(Request $request)
+    /*public function ajax(Request $request)
     {
         switch ($request->type) {
             case 'add':
@@ -295,5 +305,5 @@ class AccueilController extends Controller
         //$service = Service::query()->findOrFail($request->service_id);
         $event->photographe->notify(new Rendezvous('Vous avez un nouveau rendez-vous dans la plateforme.'));
         //$event->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $event->id));
-    }
+    }*/
 }

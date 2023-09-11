@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('disponibilities', function (Blueprint $table) {
-            $table->date('jours')->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('current_team_id');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('disponibilities', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }
