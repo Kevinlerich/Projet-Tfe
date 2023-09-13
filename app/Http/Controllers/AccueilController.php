@@ -118,20 +118,22 @@ class AccueilController extends Controller
 
     public function annonces()
     {
-        if (Auth::user()->hasRole('photographe')) {
-            $annonces = [];
-            $viles = PhotographeProvince::query()->where('photographe_id', '=', Auth::user()->id)->get();
-            foreach ($viles as $ville) {
-                $announces = Announce::query()->where('ville_id', '=', $ville->province_id)
-                                        ->where('archived', '!=', 1)
-                                        ->orderBy('created_at', 'desc')
-                                        ->get();
-                array_push($annonces, ...$announces);
+        if (Auth::user()) {
+            if (Auth::user()->hasRole('photographe')){
+                $annonces = [];
+                $viles = PhotographeProvince::query()->where('photographe_id', '=', Auth::user()->id)->get();
+                foreach ($viles as $ville) {
+                    $announces = Announce::query()->where('ville_id', '=', $ville->province_id)
+                        ->where('archived', '!=', 1)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+                    array_push($annonces, ...$announces);
+                }
+                $categories = Category::query()->inRandomOrder()->get();
+                $villes = Ville::query()->inRandomOrder()->get();
+                return view('frontend.annonces', compact('annonces',
+                    'categories', 'villes'));
             }
-            $categories = Category::query()->inRandomOrder()->get();
-            $villes = Ville::query()->inRandomOrder()->get();
-            return view('frontend.annonces', compact('annonces',
-                'categories', 'villes'));
         } else {
             $annonces = Announce::query()->where('archived', '!=', 1)
                 ->orderBy('created_at', 'desc')->get();
