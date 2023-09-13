@@ -13,7 +13,7 @@
 					<h2>{{ $annonce->titre }}</h2>
 					<ul class="list-inline">
 						<li class="list-inline-item">par <a href="#">{{ $annonce->user->name }}</a></li>
-						<li class="list-inline-item">{{ $annonce->created_at->diffForHumans() }}</li>
+						<li class="list-inline-item">{{ $annonce->date_announce }}</li>
 					</ul>
 					<p>{!! $annonce->description !!}</p>
 

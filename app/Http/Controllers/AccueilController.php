@@ -118,7 +118,7 @@ class AccueilController extends Controller
 
     public function annonces()
     {
-        if (Auth::user()) {
+        if (Auth::user()->hasRole('photographe')) {
             $annonces = [];
             $viles = PhotographeProvince::query()->where('photographe_id', '=', Auth::user()->id)->get();
             foreach ($viles as $ville) {
