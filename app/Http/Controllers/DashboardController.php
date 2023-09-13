@@ -19,11 +19,22 @@ class DashboardController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->where('user_id', '!=', Auth::user()->id)
                 ->get();*/
-        $annonces = DB::table('announces')
+        /*$annonces = DB::table('announces')
                         ->join('photographe_provinces','announces.ville_id', '=', 'photographe_provinces.province_id')
                         ->join('users', 'announces.user_id', '!=', 'users.id')
                         ->select('announces.*')
-                        ->get();
+                        ->get();*/
+        $annonces = [];
+        $viles = PhotographeProvince::query()->where('photographe_id', '=', Auth::user()->id)->get();
+        if($viles){
+            foreach ($viles as $ville) {
+                $announces = Announce::query()->where('ville_id', '=', $ville->province_id)
+                    ->where('archived', '!=', 1)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                array_push($annonces, ...$announces);
+            }
+        }
         $services = Service::query()
             ->orderBy('created_at', 'desc')
             ->get();
