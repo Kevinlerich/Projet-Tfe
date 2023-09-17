@@ -65,13 +65,14 @@ class ServiceController extends Controller
         $service->slug = Str::slug($request->input('nom'));
         $service->description = $request->input('description');
         $service->ville_id = $request->input('ville_id');
-        $photo = $request->file('image_service');
-        if (!Storage::disk('public')->exists( 'services')) {
-            Storage::makeDirectory('public/services', 0777);
-        }
-        $path = 'services/' . uniqid() . '.' . $photo->extension();
-        Image::make($request->file('image_service'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
-        if (isset($photo)) {
+
+        if ($request->hasFile('image_service')) {
+            $photo = $request->file('image_service');
+            if (!Storage::disk('public')->exists( 'services')) {
+                Storage::makeDirectory('public/services', 0777);
+            }
+            $path = 'services/' . uniqid() . '.' . $photo->extension();
+            Image::make($request->file('image_service'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
             $service->image_service = $path;
         }
         $service->save();
