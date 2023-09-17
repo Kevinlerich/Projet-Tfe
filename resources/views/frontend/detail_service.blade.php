@@ -37,7 +37,7 @@
 
 					<!-- product slider -->
 					<div class="product-slider">
-                        @if ($portfolio->photos != null)
+                        @if (isset($portfolio->photos))
                             @foreach ($portfolio->photos as $photo)
                                 <div class="my-4 product-slider-item" data-image="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}">
                                     <img class="img-fluid w-100" src="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}" alt="portfolio">
