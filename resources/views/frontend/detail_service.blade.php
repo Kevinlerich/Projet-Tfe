@@ -30,8 +30,8 @@
 					<div class="product-meta">
 						<ul class="list-inline">
 							<li class="list-inline-item"><i class="fa fa-user-o"></i> Par <a href="#">{{ $service->user->name }}</a></li>
-							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Categorie<a href="{{ route('category_service', $service->category->slug) }}">{{ $service->category->nom }}</a></li>
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Lieu<a href="{{ route('category_service', $service->category->slug) }}">{{ $service->ville->nom }}</a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Categorie<a href="{{ route('category_service', $service->category->slug) }}">{{ $service?->category->nom }}</a></li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Lieu<a href="{{ route('category_service', $service->category->slug) }}">{{ $service?->ville->nom }}</a></li>
 						</ul>
 					</div>
 
@@ -39,13 +39,13 @@
 					<div class="product-slider">
                         @if ($portfolio?->photos != null)
                             @foreach ($portfolio?->photos as $photo)
-                                <div class="my-4 product-slider-item" data-image="{{ asset('storage/portfolios/'.$photo->chemin_photo) }}">
-                                    <img class="img-fluid w-100" src="{{ asset('storage/portfolios/'.$photo->chemin_photo) }}" alt="product-img">
+                                <div class="my-4 product-slider-item" data-image="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}">
+                                    <img class="img-fluid w-100" src="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}" alt="product-img">
                                 </div>
                             @endforeach
                         @else
-                            <div class="my-4 product-slider-item" data-image="{{ asset('storage/'.$service->image_service) }}">
-                                <img class="img-fluid w-100" src="{{ asset('storage/'.$service->image_service) }}" alt="product-img">
+                            <div class="my-4 product-slider-item" data-image="{{ asset('storage/'.$service?->image_service) }}">
+                                <img class="img-fluid w-100" src="{{ asset('storage/'.$service?->image_service) }}" alt="product-img">
                             </div>
                         @endif
 					</div>
