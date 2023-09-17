@@ -45,7 +45,6 @@ class AccueilController extends Controller
 
     public function search_annonce(Request $request)
     {
-        $text = $request->input('text');
         $startWeek = Carbon::now()->subWeek()->startOfWeek();
         $month = Carbon::now()->subMonth();
         $yesterday = Carbon::yesterday();
@@ -56,37 +55,43 @@ class AccueilController extends Controller
 
         if ($request->input('date') == 'one week')
         {
-            $annonces = Announce::query()->Where('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
-        ->WhereBetween('created_at', [$startWeek, $endWeek])
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->WhereBetween('created_at', [$startWeek, $endWeek])->orderBy('created_at', 'desc')
         ->get();
         } elseif($request->input('date') == 'one month') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
-        ->Where('created_at', '<', $month)
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhere('created_at', '<', $month)
+                ->orderBy('created_at', 'desc')
         ->get();
         } elseif($request->input('date') == 'today') {
-            $annonces = Announce::query()->Where('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
-        ->Where('created_at', '<=', $today)
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhere('created_at', '<=', $today)
+                ->orderBy('created_at', 'desc')
         ->get();
         } elseif($request->input('date') == 'yesterday') {
-            $annonces = Announce::query()->Where('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
-        ->Where('created_at', '<=', $yesterday)
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        ->orWhere('created_at', '<=', $yesterday)
         ->get();
-        } else {
-            $annonces = Announce::query()->Where('category_id', '=',$request->input('category_id'))
-        ->Where('ville_id', '=',$request->input('ville_id'))
+        } elseif(isset($category)) {
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
+        ->orWhere('ville_id', '=',$request->input('ville_id'))
+                ->orderBy('created_at', 'desc')
         ->get();
+        } elseif (isset($ville)) {
+            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
+                ->orWhere('ville_id', '=',$request->input('ville_id'))
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
 
         $categories = Category::query()->get();
         $villes = Ville::query()->get();
         session()->flashInput($request->input());
-        return view('frontend.search_annonce',
-         compact('annonces', 'categories',
-          'villes'));
+        return view('frontend.search_annonce', compact('annonces', 'categories', 'villes'));
     }
 
     public function category_service($category_slug)
