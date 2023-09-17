@@ -81,15 +81,17 @@ class AccueilController extends Controller
         ->orWhere('date_announce', '<=', $yesterday->format('Y-m-d'))
                 ->where('archived', '=', 0)
         ->get();
-        } elseif(isset($category)) {
-            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
-        ->orWhere('ville_id', '=',$request->input('ville_id'))
+        } elseif(isset($category) && is_numeric($category)) {
+            $annonces = Announce::query()
                 ->where('archived', '=', 0)
-                ->orderBy('date_announce', 'desc')
-        ->get();
-        } elseif (isset($ville)) {
-            $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
+                ->where('category_id', '=',$request->input('category_id'))
                 ->orWhere('ville_id', '=',$request->input('ville_id'))
+                ->orderBy('date_announce', 'desc')
+                ->get();
+        } elseif (isset($ville) && is_numeric($ville)) {
+            $annonces = Announce::query()
+                ->orWhere('category_id', '=',$request->input('category_id'))
+                ->where('ville_id', '=',$request->input('ville_id'))
                 ->where('archived', '=', 0)
                 ->orderBy('date_announce', 'desc')
                 ->get();
