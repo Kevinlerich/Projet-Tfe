@@ -60,21 +60,20 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $service = Service::query()->findOrFail($id);
+
+        if ($request->hasFile('image_service')) {
+            $photo = $request->file('image_service');
+
+            $path = 'services/' . uniqid() . '.' . $photo->extension();
+            Image::make($photo)->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
+            $service->image_service = $path;
+        }
+
         $service->category_id = $request->input('category_id');
         $service->nom = $request->input('nom');
         $service->slug = Str::slug($request->input('nom'));
         $service->description = $request->input('description');
         $service->ville_id = $request->input('ville_id');
-
-        if ($request->hasFile('image_service')) {
-            $photo = $request->file('image_service');
-            if (!Storage::disk('public')->exists( 'services')) {
-                Storage::makeDirectory('public/services', 0777);
-            }
-            $path = 'services/' . uniqid() . '.' . $photo->extension();
-            Image::make($request->file('image_service'))->resize(750, 500)->save(public_path() . "/storage/" .$path, 90);
-            $service->image_service = $path;
-        }
         $service->save();
         return redirect()->route('list_service');
     }
