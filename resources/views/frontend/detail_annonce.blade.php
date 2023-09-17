@@ -14,6 +14,7 @@
 					<ul class="list-inline">
 						<li class="list-inline-item">par <a href="#">{{ $annonce->user->name }}</a></li>
 						<li class="list-inline-item">{{ $annonce->date_announce }}</li>
+						<li class="list-inline-item">{{ $annonce->ville->nom }}</li>
 					</ul>
 					<p>{!! $annonce->description !!}</p>
 

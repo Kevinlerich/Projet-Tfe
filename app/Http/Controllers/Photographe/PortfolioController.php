@@ -75,7 +75,7 @@ class PortfolioController extends Controller
         if ($photos) {
             foreach ($photos as $imagegallery) {
                 $currentDate = Carbon::now()->toDateString();
-                $gallery_name = $currentDate.'-'.uniqid().'.'.$imagegallery->getClientOriginalExtension();
+                $gallery_name = $currentDate.'-'.uniqid().'.'.$imagegallery->extension();
 
                 $path = Image::make($imagegallery)->save($gallery_name, 90);
                 Storage::disk('public')->put('portfolios/'.$gallery_name, $path);
