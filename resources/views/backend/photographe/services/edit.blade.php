@@ -63,6 +63,13 @@
                                     </textarea>
                                 </div>
                             </div>
+                            <div class="sm:col-span-3">
+                                <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Image</label>
+                                <div class="mt-2">
+                                    <input type="file" name="image_service" id="image_service" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+                                </div>
+                            </div>
                         </div>
                         <div class="flex items-center justify-end mt-6 gap-x-6">
                             <button type="button" class="text-sm font-semibold leading-6 text-gray-900">{{ __('Cancel') }}</button>
