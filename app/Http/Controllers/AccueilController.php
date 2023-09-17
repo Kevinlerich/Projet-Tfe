@@ -57,33 +57,39 @@ class AccueilController extends Controller
         {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
+                ->where('archived', '!=', 1)
         ->WhereBetween('created_at', [$startWeek, $endWeek])->orderBy('created_at', 'desc')
         ->get();
         } elseif($request->input('date') == 'one month') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhere('created_at', '<', $month)
+                ->where('archived', '!=', 1)
                 ->orderBy('created_at', 'desc')
         ->get();
         } elseif($request->input('date') == 'today') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
-        ->orWhere('created_at', '<=', $today)
+        ->orWhere('created_at', '=', $today)
+                ->where('archived', '!=', 1)
                 ->orderBy('created_at', 'desc')
         ->get();
         } elseif($request->input('date') == 'yesterday') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
         ->orWhere('created_at', '<=', $yesterday)
+                ->where('archived', '!=', 1)
         ->get();
         } elseif(isset($category)) {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
+                ->where('archived', '!=', 1)
                 ->orderBy('created_at', 'desc')
         ->get();
         } elseif (isset($ville)) {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
                 ->orWhere('ville_id', '=',$request->input('ville_id'))
+                ->where('archived', '!=', 1)
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
@@ -227,98 +233,4 @@ class AccueilController extends Controller
             }
         return back();
     }
-
-    /*public function ajax(Request $request)
-    {
-        switch ($request->type) {
-            case 'add':
-                 $event = ModelsRendezVous::create([
-                    'client_id'=> Auth::user()->id,
-                    'photographe_id' => $request->photographe_id,
-                    'service_id' => $request->service_id,
-                     'debut' => $request->start,
-                     'fin' => $request->end,
-                     'message' => $request->message,
-                     'etat' => 0
-                 ]);
-                 $service = Service::query()->findOrFail($request->service_id);
-                 $event->photographe->notify(new SendRendezVous('Vous avez un nouveau rendez-vous dans la plateforme.', $service->slug));
-
-                 return response()->json($event);
-             break;
-
-             case 'update':
-                 $event = ModelsRendezVous::query()->findOrFail($request->id)->update([
-                     'debut' => $request->start,
-                     'fin' => $request->end,
-                     'message' => $request->message,
-                     'etat' => 0
-                 ]);
-
-                 return response()->json($event);
-             break;
-
-             case 'delete':
-                 $event = ModelsRendezVous::query()->findOrFail($request->id)->delete();
-
-                 return response()->json($event);
-             break;
-
-             default:
-             # code...
-             break;
-         }
-    }
-
-    public function index(Request $request): JsonResponse
-    {
-        $data_date=Carbon::createFromFormat('Y-m-d',$request->date)->format('Y-m-d');
-        $disponibilities = Disponibility::query()
-            ->where('jours','<=', $request->date)
-            ->where('jours_end','>=', $request->date)
-            ->pluck('id');
-
-        if ($disponibilities->count() == 0){
-            $data = [];//Scheduler::query()->get();
-        } else {
-            $data = Scheduler::query()
-                ->where('disponibility_id','=', $disponibilities)
-                ->get();
-        }
-
-        if ($data_date == now()->format('Y-m-d')) {
-            $hn = now()->format('H');
-
-            $return = [];
-            foreach ($data as $d) {
-                $h = explode(':', $d->debut)[0];
-                if ($h > $hn) {
-                    $return[] = $d;
-                }
-            }
-            return response()->json($return);
-        } else {
-            return response()->json($data);
-        }
-    }
-
-    public function store_rdv(Request $request)
-    {
-        $time = Scheduler::query()->findOrFail($request->schedule);
-        $time2 = Scheduler::query()->findOrFail($request->schedule2);
-        $event = ModelsRendezVous::create([
-            'client_id'=> Auth::user()->id,
-            'photographe_id' => $request->photographe_id,
-            'service_id' => $request->service_id,
-             'date_appointment' => $request->date_appointment,
-             'message' => $request->message,
-             'heure_debut' => $time->start,
-             'heure_fin' => $time->end,
-             'etat' => 0,
-             'contrat' => 0
-         ]);
-        //$service = Service::query()->findOrFail($request->service_id);
-        $event->photographe->notify(new Rendezvous('Vous avez un nouveau rendez-vous dans la plateforme.'));
-        //$event->client->notify(new SendRendezVous('Votre rendez-vous a été accepté par le photographe. Cliquer sur le lien ci-dessous pour valider le contrat.', $event->id));
-    }*/
 }
