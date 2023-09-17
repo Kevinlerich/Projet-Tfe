@@ -57,40 +57,41 @@ class AccueilController extends Controller
         {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->where('archived', '!=', 1)
-        ->WhereBetween('created_at', [$startWeek, $endWeek])->orderBy('created_at', 'desc')
+                ->where('archived', '=', 0)
+        ->WhereBetween('date_announce', [$startWeek, $endWeek])
+                ->orderBy('date_announce', 'desc')
         ->get();
         } elseif($request->input('date') == 'one month') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
-        ->orWhere('created_at', '<', $month)
-                ->where('archived', '!=', 1)
-                ->orderBy('created_at', 'desc')
+        ->orWhere('date_announce', '<', $month)
+                ->where('archived', '=', 0)
+                ->orderBy('date_announce', 'desc')
         ->get();
         } elseif($request->input('date') == 'today') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
-        ->orWhere('created_at', '=', $today)
-                ->where('archived', '!=', 1)
-                ->orderBy('created_at', 'desc')
+        ->orWhere('date_announce', '=', $today->format('Y-m-d'))
+                ->where('archived', '=', 0)
+                ->orderBy('date_announce', 'desc')
         ->get();
         } elseif($request->input('date') == 'yesterday') {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
-        ->orWhere('created_at', '<=', $yesterday)
-                ->where('archived', '!=', 1)
+        ->orWhere('date_announce', '<=', $yesterday->format('Y-m-d'))
+                ->where('archived', '=', 0)
         ->get();
         } elseif(isset($category)) {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
         ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->where('archived', '!=', 1)
-                ->orderBy('created_at', 'desc')
+                ->where('archived', '=', 0)
+                ->orderBy('date_announce', 'desc')
         ->get();
         } elseif (isset($ville)) {
             $annonces = Announce::query()->orWhere('category_id', '=',$request->input('category_id'))
                 ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->where('archived', '!=', 1)
-                ->orderBy('created_at', 'desc')
+                ->where('archived', '=', 0)
+                ->orderBy('date_announce', 'desc')
                 ->get();
         }
 
