@@ -1,11 +1,11 @@
 @extends('layouts.front')
 
 @section('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 @endsection
 
@@ -37,15 +37,15 @@
 
 					<!-- product slider -->
 					<div class="product-slider">
-                        @if ($portfolio?->photos != null)
-                            @foreach ($portfolio?->photos as $photo)
+                        @if ($portfolio->photos != null)
+                            @foreach ($portfolio->photos as $photo)
                                 <div class="my-4 product-slider-item" data-image="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}">
-                                    <img class="img-fluid w-100" src="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}" alt="product-img">
+                                    <img class="img-fluid w-100" src="{{ asset('storage/portfolios/'.$photo?->chemin_photo) }}" alt="portfolio">
                                 </div>
                             @endforeach
                         @else
                             <div class="my-4 product-slider-item" data-image="{{ asset('storage/'.$service?->image_service) }}">
-                                <img class="img-fluid w-100" src="{{ asset('storage/'.$service?->image_service) }}" alt="product-img">
+                                <img class="img-fluid w-100" src="{{ asset('storage/'.$service?->image_service) }}" alt="service">
                             </div>
                         @endif
 					</div>
@@ -115,106 +115,9 @@
 </section>
 @endsection
 
-{{--@section('scripts')
+@section('scripts')
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        var SITEURL = "{{ url('/') }}";
-        $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        var calendar = $('#calendar').fullCalendar({
-                        editable: true,
-                        events: {!! $disponibilities !!},
-                        displayEventTime: false,
-                        editable: true,
-                        eventRender: function (event, element, view) {
-                            if (event.allDay === 'true') {
-                                    event.allDay = true;
-                            } else {
-                                    event.allDay = false;
-                            }
-                        },
-                        selectable: true,
-                        selectHelper: true,
-                        select: function (start, end, allDay) {
-                            var message = prompt('Votre message:');
-                            if (message) {
-                                var photographe_id = {{$service->user->id}};
-                                var service_id = {{$service->id}};
-                                var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                                var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-                                $.ajax({
-                                    url: SITEURL + "/fullcalenderAjax",
-                                    data: {
-                                        photographe_id: photographe_id,
-                                        service_id: service_id,
-                                        message: message,
-                                        start: start,
-                                        end: end,
-                                        type: 'add'
-                                    },
-                                    type: "POST",
-                                    success: function (data) {
-                                        displayMessage("Rendez-vous créer avec succès !!!");
-
-                                        calendar.fullCalendar('renderEvent',
-                                            {
-                                                id: data.id,
-                                                start: start,
-                                                end: end,
-                                                allDay: allDay
-                                            },true);
-
-                                        calendar.fullCalendar('unselect');
-                                    }
-                                });
-                            }
-                        },
-                        eventDrop: function (event, delta) {
-                            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
-                            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-
-                            $.ajax({
-                                url: SITEURL + '/fullcalenderAjax',
-                                data: {
-                                    photographe_id: photographe_id,
-                                    service_id: service_id,
-                                    message: message,
-                                    start: start,
-                                    end: end,
-                                    id: event.id,
-                                    type: 'update'
-                                },
-                                type: "POST",
-                                success: function (response) {
-                                    displayMessage("Rendez vous mis à jour avec succès");
-                                }
-                            });
-                        },
-                        eventClick: function (event) {
-                            var deleteMsg = confirm("Voulez-vous vraiment supprimé ce rendez-vous?");
-                            if (deleteMsg) {
-                                $.ajax({
-                                    type: "POST",
-                                    url: SITEURL + '/fullcalenderAjax',
-                                    data: {
-                                            id: event.id,
-                                            type: 'delete'
-                                    },
-                                    success: function (response) {
-                                        calendar.fullCalendar('removeEvents', event.id);
-                                        displayMessage("Rendez vous supprimé avec succès");
-                                    }
-                                });
-                            }
-                        }
-
-                    });
-
-        });
 
         /*------------------------------------------
         --------------------------------------------
@@ -226,4 +129,4 @@
         }
 
     </script>
-@endsection--}}
+@endsection
