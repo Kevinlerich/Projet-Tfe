@@ -35,7 +35,7 @@
                                                 document.getElementById('del-category-{{ $fav->id }}').submit();">
                                     {{ __('Supprimer') }}
                                 </a>
-                                <form action="{{route('delete_annonce', $fav->id)}}" method="POST" id="del-category-{{$fav->id}}" style="display:none;">
+                                <form action="{{route('delete_favoris', $fav->id)}}" method="POST" id="del-category-{{$fav->id}}" style="display:none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>
