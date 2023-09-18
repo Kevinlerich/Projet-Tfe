@@ -254,7 +254,7 @@ class AccueilController extends Controller
         return back();
     }
 
-    public function ajouter_favoris($id)
+    public function ajouter_favoris(Request $request, $id)
     {
         ChFavorite::query()->create([
             'user_id' => Auth::user()->id,
