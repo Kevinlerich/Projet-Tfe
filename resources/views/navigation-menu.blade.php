@@ -43,8 +43,13 @@
                 @endif
                 @if(\Illuminate\Support\Facades\Auth::user()->hasRole('client'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link href="{{ route('my_announces') }}" :active="request()->routeIs('list_portfolio')">
+                        <x-nav-link href="{{ route('my_announces') }}" :active="request()->routeIs('my_announces')">
                             {{ __('Mes Annonces') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link href="{{ route('list_favoris') }}" :active="request()->routeIs('list_favoris')">
+                            {{ __('Mes favoris') }}
                         </x-nav-link>
                     </div>
                 @endif
