@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Photo;
 use App\Models\Portfolio;
 use App\Models\Service;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ class PortfolioController extends Controller
                 $photo->save();
             }
         }
+        Toastr::success('notification', 'Ajoute avec succes');
 
         return back();
     }
@@ -85,6 +87,8 @@ class PortfolioController extends Controller
                 $photo->save();
             }
         }
+        Toastr::success('notification', 'Modifie avec succes');
+
         return redirect()->route('list_portfolio');
     }
 
@@ -99,6 +103,8 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::query()->findOrFail($id);
         $portfolio->delete();
+        Toastr::success('notification', 'Supprime avec succes');
+
         return back();
     }
 }

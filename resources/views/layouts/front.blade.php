@@ -29,6 +29,7 @@
   <link href="{{ asset('plugins/slick/slick.css') }}" rel="stylesheet">
   <link href="{{ asset('plugins/slick/slick-theme.css') }}" rel="stylesheet">
   <link href="{{ asset('plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 @yield('styles')
@@ -138,7 +139,8 @@ Essential Scripts
 <script src="{{ asset('plugins/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
 @yield('scripts')
 <script src="{{ asset('js/script.js') }}"></script>
-
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 </body>
 
 </html>

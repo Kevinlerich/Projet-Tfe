@@ -82,6 +82,9 @@
 					<div class="text-center widget user">
 						<h4><a href="#">{{ $service->user->name }}</a></h4>
 						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
+						<p class="member-time">
+                            <a href="{{ route('ajouter_favoris', $service->user_id) }}" class="btn btn-success btn-sm">Ajouter aux favoris</a>
+                        </p>
 					</div>
                     <div class="widget disclaimer">
                         @auth

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announce;
 use App\Models\Category;
-use App\Models\Message;
+use App\Models\ChFavorite;
 use App\Models\Photo;
 use App\Models\PhotographeProvince;
 use App\Models\Portfolio;
@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\Ville;
 use App\Notifications\SendMessage;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -227,6 +228,7 @@ class AccueilController extends Controller
             }
             $user = User::findOrFail($request->input('to_id'));
         $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id));
+        Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }
 
@@ -248,6 +250,17 @@ class AccueilController extends Controller
             }
         $user = User::findOrFail($request->input('to_id'));
         $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id));
+        Toastr::success('notification', 'Votre message a ete envoye avec succes');
+        return back();
+    }
+
+    public function ajouter_favoris($id)
+    {
+        ChFavorite::query()->create([
+            'user_id' => Auth::user()->id,
+            'favorite_id' => $id
+        ]);
+        Toastr::success('notification', 'Photographe ajoute avec succes');
         return back();
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\Ville;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -45,6 +46,8 @@ class ServiceController extends Controller
             'image_service' => $path,
             'ville_id' => $request->input('ville_id'),
         ]);
+        Toastr::success('notification', 'Ajoute avec succes');
+
         return redirect()->route('list_service');
     }
 
@@ -75,6 +78,8 @@ class ServiceController extends Controller
         $service->description = $request->input('description');
         $service->ville_id = $request->input('ville_id');
         $service->save();
+        Toastr::success('notification', 'Modifie avec succes');
+
         return redirect()->route('list_service');
     }
 
@@ -82,6 +87,8 @@ class ServiceController extends Controller
     {
         $service = Service::query()->findOrFail($id);
         $service->delete();
+        Toastr::success('notification', 'Supprime avec succes');
+
         return back();
     }
 }

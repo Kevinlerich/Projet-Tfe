@@ -79,4 +79,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('messages', 'App\Http\Controllers\MessageController');
 
     Route::get('archive/{id}', [\App\Http\Controllers\DashboardController::class, 'archive'])->name('archive');
+
+    Route::post('ajouter-favoris/{id}', [AccueilController::class, 'ajouter_favoris'])->name('ajouter_favoris');
 });
