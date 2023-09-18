@@ -30,7 +30,7 @@
                         <tr>
                             <td class="w-20 px-4 py-2 text-center">{{ $key+1 }}</td>
                             <td class="px-4 py-2 text-center">
-                                <a title="Voir mes services" href="{{ route('photographe_services', $fav->favorite_id) }}" class="badge badge-primary">
+                                <a title="Voir mes services" href="{{ route('photographe_services', $fav->favorite_id) }}" class="text-white bg-blue-500">
                                     {{ $fav->getPhotographe($fav->favorite_id) }}
                                 </a>
                             </td>
