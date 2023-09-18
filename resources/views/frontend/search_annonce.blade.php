@@ -25,6 +25,7 @@
                                         <ul class="mt-2 mb-3 list-inline">
                                             <li class="list-inline-item"><a href="{{ route('category_annonce', $annonce->category->slug) }}"> <i class="fa fa-folder-open-o"></i> {{ $annonce->category->nom }}</a></li>
                                             <li class="list-inline-item"><a href="{{ route('category_annonce', $annonce->category->slug) }}"><i class="fa fa-calendar"></i>{{ \Carbon\Carbon::parse($annonce->date_announce)->format('d-m-Y') }}</a></li>
+                                            <li class="list-inline-item"><a href="{{ route('category_annonce', $annonce->category->slug) }}"><i class="fa fa-location-arrow"></i>{{ $annonce->ville->nom }}</a></li>
                                         </ul>
                                         <p class="pr-5">
                                             {!! Str::substr($annonce->description,0,10) !!}

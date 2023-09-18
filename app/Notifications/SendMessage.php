@@ -40,7 +40,7 @@ class SendMessage extends Notification
     {
         return (new MailMessage)
                     ->line($this->text)
-                    ->action('Votre message ici', url('messages/'.$this->message))
+                    ->action('Votre message ici', url('chatify/'.$this->message))
                     ->line('Thank you for using our application!');
     }
 

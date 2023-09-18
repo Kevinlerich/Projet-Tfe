@@ -9,7 +9,9 @@ use App\Models\Photo;
 use App\Models\PhotographeProvince;
 use App\Models\Portfolio;
 use App\Models\Service;
+use App\Models\User;
 use App\Models\Ville;
+use App\Notifications\SendMessage;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -95,7 +97,7 @@ class AccueilController extends Controller
         } elseif (isset($ville) && is_numeric($ville)) {
             $annonces = Announce::query()
                 ->orWhere('category_id', '=',$request->input('category_id'))
-                ->where('ville_id', '=',$request->input('ville_id'))
+                ->orWhere('ville_id', '=',$request->input('ville_id'))
                 ->where('archived', '=', 0)
                 ->orderBy('date_announce', 'desc')
                 ->get();
@@ -223,7 +225,8 @@ class AccueilController extends Controller
                     'message' => Chatify::messageCard($messageData, true)
                 ]);
             }
-        //$sms->destinataire->notify(new SendMessage('Vous avez reçu un message: '.$sms->contenu.'', $sms->id));
+            $user = User::findOrFail($request->input('to_id'));
+        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id));
         return back();
     }
 
@@ -243,6 +246,8 @@ class AccueilController extends Controller
                     'message' => Chatify::messageCard($messageData, true)
                 ]);
             }
+        $user = User::findOrFail($request->input('to_id'));
+        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id));
         return back();
     }
 }
