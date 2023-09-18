@@ -80,5 +80,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     Route::get('archive/{id}', [\App\Http\Controllers\DashboardController::class, 'archive'])->name('archive');
 
-    Route::post('ajouter-favoris/{id}', [AccueilController::class, 'ajouter_favoris'])->name('ajouter_favoris');
+    Route::get('ajouter-favoris/{id}', [AccueilController::class, 'ajouter_favoris'])->name('ajouter_favoris');
+    Route::delete('retirer-favoris/{id}', [AccueilController::class, 'retirer_favoris'])->name('retirer_favoris');
 });

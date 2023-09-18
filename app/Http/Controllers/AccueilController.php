@@ -185,12 +185,15 @@ class AccueilController extends Controller
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
         $lieux = PhotographeProvince::query()->where('photographe_id','=', $service->user_id)->get();
+        $favoris = ChFavorite::query()->where('favorite_id', $service->user_id)
+            ->where('user_id', Auth::user()->id)->get();
         $data = [
             'categories' => $categories,
             'villes' => $villes,
             'service' => $service,
             'portfolio' => $portfolio,
             'lieux' => $lieux,
+            'favoris' => $favoris,
         ];
         return view('frontend.detail_service', $data);
     }
@@ -256,11 +259,19 @@ class AccueilController extends Controller
 
     public function ajouter_favoris(Request $request, $id)
     {
-        ChFavorite::query()->create([
+        ChFavorite::query()->updateOrCreate([
             'user_id' => Auth::user()->id,
             'favorite_id' => $id
         ]);
         Toastr::success('notification', 'Photographe ajoute avec succes');
+        return back();
+    }
+
+    public function retirer_favoris(Request $request, $id)
+    {
+        $fav = ChFavorite::query()->findOrFail($id);
+        $fav->delete();
+        Toastr::success('notification', 'Photographe retirer avec succes');
         return back();
     }
 }

@@ -83,7 +83,18 @@
 						<h4><a href="#">{{ $service->user->name }}</a></h4>
 						<p class="member-time">Membre {{ $service->user->created_at->diffForHumans() }}</p>
 						<p class="member-time">
-                            <a href="{{ route('ajouter_favoris', $service->user_id) }}" class="btn btn-success btn-sm">Ajouter aux favoris</a>
+                            @if(count($favoris)>0)
+                                <a class="btn btn-danger btn-sm" onclick="event.preventDefault();
+                                                document.getElementById('del-category-{{ $favoris[0] }}').submit();">
+                                    Retirer des favoris
+                                </a>
+                        <form action="{{route('retirer_favoris', $favoris[0])}}" method="POST" id="del-category-{{$favoris[0]}}" style="display:none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                            @else
+                                <a href="{{ route('ajouter_favoris', $service->user_id) }}" class="btn btn-success btn-sm">Ajouter aux favoris</a>
+                            @endif
                         </p>
 					</div>
                     <div class="widget disclaimer">
