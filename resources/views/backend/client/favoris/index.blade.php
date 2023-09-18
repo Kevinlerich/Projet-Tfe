@@ -29,7 +29,6 @@
                     @foreach($favoris as $key => $fav)
                         <tr>
                             <td class="w-20 px-4 py-2 text-center">{{ $key+1 }}</td>
-                            <td class="px-4 py-2 text-center">{{ $fav->titre }}</td>
                             <td class="px-4 py-2 text-center">{{ $fav->getPhotographe($fav->favorite_id) }}</td>
                             <td class="px-4 py-2 text-center">
                                 <a class="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"  onclick="event.preventDefault();
