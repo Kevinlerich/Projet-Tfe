@@ -185,17 +185,28 @@ class AccueilController extends Controller
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
         $lieux = PhotographeProvince::query()->where('photographe_id','=', $service->user_id)->get();
-        $favoris = ChFavorite::query()->where('favorite_id', $service->user_id)
-            ->where('user_id', Auth::user()->id)->get();
-        $data = [
-            'categories' => $categories,
-            'villes' => $villes,
-            'service' => $service,
-            'portfolio' => $portfolio,
-            'lieux' => $lieux,
-            'favoris' => $favoris,
-        ];
+        if (Auth::user()){
+            $favoris = ChFavorite::query()->where('favorite_id', $service->user_id)
+                ->where('user_id', Auth::user()->id)->get();
+            $data = [
+                'categories' => $categories,
+                'villes' => $villes,
+                'service' => $service,
+                'portfolio' => $portfolio,
+                'lieux' => $lieux,
+                'favoris' => $favoris,
+            ];
+        } else {
+            $data = [
+                'categories' => $categories,
+                'villes' => $villes,
+                'service' => $service,
+                'portfolio' => $portfolio,
+                'lieux' => $lieux,
+            ];
+        }
         return view('frontend.detail_service', $data);
+
     }
 
     public function detail_annonce($slug)
