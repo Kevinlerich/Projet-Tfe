@@ -85,4 +85,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     Route::get('liste-favoris', [\App\Http\Controllers\Client\FavorisController::class, 'index'])->name('list_favoris');
     Route::delete('supprimer-favoris/{id}', [\App\Http\Controllers\Client\FavorisController::class, 'destroy'])->name('delete_favoris');
+    Route::get('photographe-services/{id}', [\App\Http\Controllers\Client\FavorisController::class, 'services'])->name('photographe_services');
 });
