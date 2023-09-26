@@ -19,6 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Chatify\Facades\ChatifyMessenger as Chatify;
+use Illuminate\Support\Facades\DB;
 
 class AccueilController extends Controller
 {
@@ -49,66 +50,36 @@ class AccueilController extends Controller
 
     public function search_annonce(Request $request)
     {
-        $startWeek = Carbon::now()->subWeek()->startOfWeek();
-        $month = Carbon::now()->subMonth();
-        $yesterday = Carbon::yesterday();
-        $today = Carbon::today();
-        $endWeek = Carbon::now()->subWeek()->endOfWeek();
-        $category = $request->input('category_id');
-        $ville = $request->input('ville_id');
+        $query = Announce::query();//DB::table('announces');
 
-        if ($request->input('date') == 'one week')
-        {
-            $annonces = Announce::query()
-                ->orWhere('category_id', '=',$request->input('category_id'))
-                ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->where('archived', '=', 0)
-                ->whereBetween('date_announce', [$startWeek, $endWeek])
-                ->orderBy('date_announce', 'desc')
-                ->get();
-        } elseif($request->input('date') == 'one month') {
-            $annonces = Announce::query()
-                ->orWhere('category_id', '=',$request->input('category_id'))
-                ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->orWhere('date_announce', '<', $month)
-                ->where('archived', '=', 0)
-                ->orderBy('date_announce', 'desc')
-                ->get();
-        } elseif($request->input('date') == 'today') {
-            $annonces = Announce::query()
-                ->orWhere('category_id', '=',$request->input('category_id'))
-                ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->orWhere('date_announce', '=', $today->format('Y-m-d'))
-                ->where('archived', '=', 0)
-                //->orderBy('date_announce', 'desc')
-                ->get();
-        } elseif($request->input('date') == 'yesterday') {
-            $annonces = Announce::query()
-                ->orWhere('category_id', '=',$request->input('category_id'))
-                ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->orWhere('date_announce', '<=', $yesterday->format('Y-m-d'))
-                ->where('archived', '=', 0)
-                ->get();
-        } elseif(isset($category) && is_numeric($category)) {
-            $annonces = Announce::query()
-                ->where('archived', '=', 0)
-                ->where('category_id', '=',$request->input('category_id'))
-                ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->orderBy('date_announce', 'desc')
-                ->get();
-        } elseif (isset($ville) && is_numeric($ville)) {
-            $annonces = Announce::query()
-                ->orWhere('category_id', '=',$request->input('category_id'))
-                ->orWhere('ville_id', '=',$request->input('ville_id'))
-                ->where('archived', '=', 0)
-                ->orderBy('date_announce', 'desc')
-                ->get();
-        }else{
-            $annonces = Announce::query()
-                ->where('archived', '=', 0)
-                ->orderBy('date_announce', 'desc')
-                ->get();
+        // Filtre par catégorie
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->input('category_id'));
         }
+
+        // Filtre par ville
+        if ($request->has('ville_id')) {
+            $query->where('ville_id', $request->input('ville_id'));
+        }
+
+        // Filtre par date
+        if ($request->has('date')) {
+            $dateFilter = $request->input('date');
+
+            // En fonction de la valeur du sélecteur de date, ajustez la condition de recherche
+            if ($dateFilter === \Carbon\Carbon::today()) {
+                $query->whereDate('date_publication', \Carbon\Carbon::today());
+            } elseif ($dateFilter === \Carbon\Carbon::yesterday()) {
+                $query->whereDate('date_publication', \Carbon\Carbon::yesterday());
+            } elseif ($dateFilter === \Carbon\Carbon::now()->subMonth()) {
+                $query->whereDate('date_publication', '>=', \Carbon\Carbon::now()->subMonth());
+            }
+        }
+
+        $query->where('archived', '=', 0);
+        $query->orderBy('date_announce', 'desc');
+
+        $annonces = $query->get();
 
         $categories = Category::query()->get();
         $villes = Ville::query()->get();
@@ -231,7 +202,7 @@ class AccueilController extends Controller
         $message = Chatify::newMessage([
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
-            'body' => htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
+            'body' => 'L\'annonce '.route('detail_annonce', $annonce->slug). 'Message: '. htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
             'attachment' =>  null,
         ]);
         $messageData = Chatify::parseMessage($message);
@@ -243,7 +214,7 @@ class AccueilController extends Controller
                 ]);
             }
             $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id, $annonce->slug));
+        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body. ' concernant l\'annonce: '.route('detail_annonce', $annonce->slug), $user->id));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }
@@ -255,7 +226,7 @@ class AccueilController extends Controller
         $message = Chatify::newMessage([
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
-            'body' => htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
+            'body' => 'Le service '. route('detail_service', $service->slug). ' et le Message: '.htmlentities(trim($request->input('message')), ENT_QUOTES, 'UTF-8'),
             'attachment' =>  null,
         ]);
         $messageData = Chatify::parseMessage($message);
@@ -267,7 +238,7 @@ class AccueilController extends Controller
                 ]);
             }
         $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendService('Vous avez reçu un message: '.$message->body, $user->id, $service->slug));
+        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body. ' concernant le service: '.route('detail_service', $service->slug), $user->id, ));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }

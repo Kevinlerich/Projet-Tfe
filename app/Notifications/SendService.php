@@ -13,16 +13,14 @@ class SendService extends Notification
 
     protected $text;
     protected $message;
-    protected $data_id;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($text, $message, $data_id)
+    public function __construct($text, $message)
     {
         $this->text = $text;
         $this->message = $message;
-        $this->data_id = $data_id;
     }
 
     /**
@@ -42,8 +40,8 @@ class SendService extends Notification
     {
         return (new MailMessage)
             ->line($this->text)
-            ->action('Votre message ici', url('chatify/'.$this->message. ' et le detail du service ici :', url('detail_service', $this->data_id)))
-            ->line('Thank you for using our application!');
+            ->action('Lire le message', url('chatify/'.$this->message))
+            ->line('Merci d\'avoir utilise notre application');
     }
 
     /**

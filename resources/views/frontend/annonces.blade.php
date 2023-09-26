@@ -2,6 +2,12 @@
 @section('title')
     Annonces
 @endsection
+@section('styles')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+@endsection
 @section('content')
 
 @include('layouts.search_annonce')
@@ -42,4 +48,11 @@
         </div>
     </div>
 </section>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('input[name="date"]').daterangepicker();
+        });
+    </script>
 @endsection

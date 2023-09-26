@@ -13,7 +13,7 @@
                             </div> --}}
                             <div class="form-group col-lg-3 col-md-6">
                                 <select name="category_id" class="w-100 form-control mt-lg-1 mt-md-2">
-                                    <option>Categories</option>
+                                    <option selected disabled>Categories</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" {{ $category->id == Request::query('category_id') ? 'selected' : ''}}>{{ $category->nom }}</option>
                                     @endforeach
@@ -21,7 +21,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-6">
                                 <select name="ville_id" class="w-100 form-control mt-lg-1 mt-md-2">
-                                    <option>Provinces</option>
+                                    <option selected disabled>Provinces</option>
                                     @foreach ($villes as $ville)
                                         <option value="{{ $ville->id }}" {{ $ville->id == Request::query('ville_id') ? 'selected' : '' }}>{{ $ville->nom }}</option>
                                     @endforeach
@@ -30,10 +30,9 @@
                             <div class="form-group col-lg-3 col-md-6">
                                 <select name="date" class="w-100 form-control mt-lg-1 mt-md-2">
                                     <option selected disabled>Date</option>
-                                    <option value="today">Aujourd'hui</option>
-                                    <option value="yesterday">Hier</option>
-                                    <option value="one week">1 semaine</option>
-                                    <option value="one month">1 mois</option>
+                                    <option value="{{ \Carbon\Carbon::today() }}">Aujourd'hui</option>
+                                    <option value="{{ \Carbon\Carbon::yesterday() }}">Hier</option>
+                                    <option value="{{ \Carbon\Carbon::now()->subMonth() }}">1 mois</option>
                                 </select>
                             </div>
                             <div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
