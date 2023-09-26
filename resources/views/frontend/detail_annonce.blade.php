@@ -34,6 +34,7 @@
 						<!-- Message -->
 						<div class="form-group mb-30">
                             <input type="hidden" name="to_id" value="{{ $annonce->user->id }}">
+                            <input type="hidden" name="annonce_id" value="{{ $annonce->id }}">
 							<label for="message">Message</label>
 							<textarea class="form-control" name="message" id="message" rows="8" required></textarea>
 						</div>

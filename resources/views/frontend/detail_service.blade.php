@@ -111,6 +111,7 @@
                                         <!-- Message -->
                                         <div class="form-group mb-30">
                                             <input type="hidden" name="to_id" value="{{ $service->user->id }}">
+                                            <input type="hidden" name="service_id" value="{{ $service->id }}">
                                             <label for="message">Message</label>
                                             <textarea id="message" class="form-control" name="message" rows="8" required></textarea>
                                         </div>

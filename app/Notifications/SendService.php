@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendMessage extends Notification
+class SendService extends Notification
 {
     use Queueable;
 
@@ -41,9 +41,9 @@ class SendMessage extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line($this->text)
-                    ->action('Votre message ici', url('chatify/'.$this->message. ' et le detail de l\'annonce ici :', url('detail_annonce', $this->data_id)))
-                    ->line('Thank you for using our application!');
+            ->line($this->text)
+            ->action('Votre message ici', url('chatify/'.$this->message. ' et le detail du service ici :', url('detail_service', $this->data_id)))
+            ->line('Thank you for using our application!');
     }
 
     /**

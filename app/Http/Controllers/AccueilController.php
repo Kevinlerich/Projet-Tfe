@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\Ville;
 use App\Notifications\SendMessage;
+use App\Notifications\SendService;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -225,7 +226,8 @@ class AccueilController extends Controller
 
     public function contact_annonce(Request $request)
     {
-        //$annonce = Announce::query()->findOrFail($request->input('objet'));
+        $annonce_id = $request->input('annonce_id');
+        $annonce = Announce::query()->findOrFail($annonce_id);
         $message = Chatify::newMessage([
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
@@ -241,13 +243,15 @@ class AccueilController extends Controller
                 ]);
             }
             $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id));
+        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id, $annonce->slug));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }
 
     public function contact_service(Request $request)
     {
+        $service_id = $request->input('service_id');
+        $service = Service::query()->findOrFail($service_id);
         $message = Chatify::newMessage([
             'from_id' => Auth::user()->id,
             'to_id' => $request->input('to_id'),
@@ -263,7 +267,7 @@ class AccueilController extends Controller
                 ]);
             }
         $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendMessage('Vous avez reçu un message: '.$message->body, $user->id));
+        $user->notify(new SendService('Vous avez reçu un message: '.$message->body, $user->id, $service->slug));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }
