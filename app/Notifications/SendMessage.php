@@ -38,9 +38,13 @@ class SendMessage extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line($this->text)
+            ->line('Vous avez reçu un message dont le contenu est: ' . $this->message->body)
+            ->line('Concernant le service:')
+            ->action('Lien vers le détail du service', route('detail_service', $this->service->slug))
+            ->action('Lire le message', url('chatify/'.$this->message));
+                    /*->line($this->text)
                     ->action('Votre message ici', url('chatify/'.$this->message))
-                    ->line('Merci d\'avoir utilise notre application');
+                    ->line('Merci d\'avoir utilise notre application');*/
     }
 
     /**
