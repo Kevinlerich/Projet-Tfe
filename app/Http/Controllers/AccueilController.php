@@ -68,11 +68,11 @@ class AccueilController extends Controller
 
             // En fonction de la valeur du sélecteur de date, ajustez la condition de recherche
             if ($dateFilter === \Carbon\Carbon::today()) {
-                $query->whereDate('date_publication', \Carbon\Carbon::today());
-            } elseif ($dateFilter === \Carbon\Carbon::yesterday()) {
-                $query->whereDate('date_publication', \Carbon\Carbon::yesterday());
+                $query->whereDate('date_announce', \Carbon\Carbon::today());
+            } elseif ($dateFilter === \Carbon\Carbon::yesterday()->format('Y-m-d')) {
+                $query->whereDate('date_announce', \Carbon\Carbon::yesterday());
             } elseif ($dateFilter === \Carbon\Carbon::now()->subMonth()) {
-                $query->whereDate('date_publication', '>=', \Carbon\Carbon::now()->subMonth());
+                $query->whereDate('date_announce', '>=', \Carbon\Carbon::now()->subMonth());
             }
         }
 
@@ -238,7 +238,7 @@ class AccueilController extends Controller
                 ]);
             }
         $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body. ' concernant le service: '.route('detail_service', $service->slug), $user->id, ));
+        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body. ' concernant le service: '.route('detail_service', $service->slug), $user->id ));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }
