@@ -69,7 +69,7 @@ class AccueilController extends Controller
             // En fonction de la valeur du sélecteur de date, ajustez la condition de recherche
             if ($dateFilter == \Carbon\Carbon::today()) {
                 $query->whereDate('date_announce', \Carbon\Carbon::today());
-            } elseif ($dateFilter == \Carbon\Carbon::yesterday()->format('Y-m-d')) {
+            } elseif ($dateFilter == \Carbon\Carbon::yesterday()) {
                 $query->whereDate('date_announce', \Carbon\Carbon::yesterday());
             } elseif ($dateFilter == \Carbon\Carbon::now()->subMonth()) {
                 $query->whereDate('date_announce', '>=', \Carbon\Carbon::now()->subMonth());
