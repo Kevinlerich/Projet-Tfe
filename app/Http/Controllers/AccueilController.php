@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifAnnonce;
+use App\Mail\Notification;
 use App\Models\Announce;
 use App\Models\Category;
 use App\Models\ChFavorite;
@@ -20,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AccueilController extends Controller
 {
@@ -214,7 +217,9 @@ class AccueilController extends Controller
                 ]);
             }
             $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant l\'annonce: <a href="'.route('detail_annonce', $annonce->slug).'">Lien vers le détail du service</a>', $user->id, $annonce));
+        Mail::to($user->email)->queue(new NotifAnnonce($message->id, $annonce_id));
+
+        //$user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant l\'annonce: <a href="'.route('detail_annonce', $annonce->slug).'">Lien vers le détail du service</a>', $user->id, $annonce));
 
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
@@ -239,7 +244,8 @@ class AccueilController extends Controller
                 ]);
             }
         $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant le service: <a href="'.route('detail_service', $service->slug).'">Lien vers le détail du service</a>', $user->id, $service));
+        Mail::to($user->email)->queue(new Notification($message->id, $service_id));
+        //$user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant le service: <a href="'.route('detail_service', $service->slug).'">Lien vers le détail du service</a>', $user->id, $service));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }

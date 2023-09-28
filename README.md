@@ -25,3 +25,6 @@ MAIL_FROM_ADDRESS="username@example.com"
 MAIL_FROM_NAME="${APP_NAME}"`
 4. Sur votre terminal, lancer cette commande: `php artisan storage:link` qui permet de creer un dossier symbolique dand le dossier `public`
 5. Pour lancer l'application, taper `php artisan serve`
+6. Panel administratif: `localhost:8000/admin`
+7. Entrer les identifiants suivants: `email@example.com` et le mot de passe: `motepasse`
+8. Taper la commande `php artisan queue:work` ou `php artisan queue:listen` pour lancer l'ecoute des travaux de l'application au niveau de l'archivage des annonces.

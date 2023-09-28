@@ -42,7 +42,6 @@ class SendMessage extends Notification
         return (new MailMessage)
             ->line('Vous avez reçu un message dont le contenu est: ' . $this->message)
             ->line('Concernant annonce:')
-            ->action('Lien vers le détail annonce', route('detail_annonce', $this->service->slug))
             ->action('Lire le message', url('chatify/'.$this->message));
                     /*->line($this->text)
                     ->action('Votre message ici', url('chatify/'.$this->message))
