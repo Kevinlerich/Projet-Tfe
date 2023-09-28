@@ -156,7 +156,7 @@ class AccueilController extends Controller
     {
         $service = Service::query()->where('slug', $slug)->first();
         $portfolio = Portfolio::query()->where('service_id','=', $service->id)->first();
-        //$photos = Photo::query()->where('port')
+
         $categories = Category::query()->inRandomOrder()->get();
         $villes = Ville::query()->inRandomOrder()->get();
         $lieux = PhotographeProvince::query()->where('photographe_id','=', $service->user_id)->get();

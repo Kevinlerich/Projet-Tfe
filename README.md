@@ -27,4 +27,5 @@ MAIL_FROM_NAME="${APP_NAME}"`
 5. Pour lancer l'application, taper `php artisan serve`
 6. Panel administratif: `localhost:8000/admin`
 7. Entrer les identifiants suivants: `email@example.com` et le mot de passe: `motepasse`
-8. Taper la commande `php artisan queue:work` ou `php artisan queue:listen` pour lancer l'ecoute des travaux de l'application au niveau de l'archivage des annonces.
+8. Taper la commande `php artisan schedule:work
+   `  pour lancer l'ecoute des travaux de l'application au niveau de l'archivage des annonces.

@@ -30,31 +30,38 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         $portfolio = new Portfolio();
-        $portfolio->service_id = $request->input('service_id');
-        $portfolio->user_id = Auth::user()->id;
-        $portfolio->save();
+        $service = $request->input('service_id');
+        $check = Portfolio::query()->where('service_id', $service)->get();
+        if ($check) {
+            Toastr::success('notification', 'Ce service existe deja.');
+            return back();
+        } else {
+            $portfolio->service_id = $request->input('service_id');
+            $portfolio->user_id = Auth::user()->id;
+            $portfolio->save();
 
-        // store photos
-        $photos = $request->file('chemin_photo');
-        if (!Storage::disk('public')->exists('portfolios')) {
-            Storage::makeDirectory('public/portfolios', 0777);
-        }
-        if ($photos) {
-            foreach ($photos as $imagegallery) {
-                $currentDate = Carbon::now()->toDateString();
-                $gallery_name = $currentDate.'-'.uniqid().'.'.$imagegallery->getClientOriginalExtension();
-
-                $path = Image::make($imagegallery)->save($gallery_name, 90);
-                Storage::disk('public')->put('portfolios/'.$gallery_name, $path);
-                $photo = new Photo();
-                $photo->portfolio_id = $portfolio->id;
-                $photo->chemin_photo = $gallery_name;
-                $photo->save();
+            // store photos
+            $photos = $request->file('chemin_photo');
+            if (!Storage::disk('public')->exists('portfolios')) {
+                Storage::makeDirectory('public/portfolios', 0777);
             }
-        }
-        Toastr::success('notification', 'Ajoute avec succes');
+            if ($photos) {
+                foreach ($photos as $imagegallery) {
+                    $currentDate = Carbon::now()->toDateString();
+                    $gallery_name = $currentDate.'-'.uniqid().'.'.$imagegallery->getClientOriginalExtension();
 
-        return back();
+                    $path = Image::make($imagegallery)->save($gallery_name, 90);
+                    Storage::disk('public')->put('portfolios/'.$gallery_name, $path);
+                    $photo = new Photo();
+                    $photo->portfolio_id = $portfolio->id;
+                    $photo->chemin_photo = $gallery_name;
+                    $photo->save();
+                }
+            }
+            Toastr::success('notification', 'Ajoute avec succes');
+
+            return back();
+        }
     }
 
     public function edit($id)
