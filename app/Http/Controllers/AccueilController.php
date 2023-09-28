@@ -214,7 +214,7 @@ class AccueilController extends Controller
                 ]);
             }
             $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant l\'annonce: <a href="'.route('detail_annonce', $annonce->slug).'">Lien vers le détail du service</a>', $user->id));
+        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant l\'annonce: <a href="'.route('detail_annonce', $annonce->slug).'">Lien vers le détail du service</a>', $user->id, $annonce));
 
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
@@ -239,7 +239,7 @@ class AccueilController extends Controller
                 ]);
             }
         $user = User::findOrFail($request->input('to_id'));
-        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant le service: <a href="'.route('detail_service', $service->slug).'">Lien vers le détail du service</a>', $user->id));
+        $user->notify(new SendService('Vous avez reçu un message dont le contenu est: '.$message->body.' concernant le service: <a href="'.route('detail_service', $service->slug).'">Lien vers le détail du service</a>', $user->id, $service));
         Toastr::success('notification', 'Votre message a ete envoye avec succes');
         return back();
     }

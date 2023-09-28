@@ -13,14 +13,16 @@ class SendService extends Notification
 
     protected $text;
     protected $message;
+    protected $service;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($text, $message)
+    public function __construct($text, $message, $service)
     {
         $this->text = $text;
         $this->message = $message;
+        $this->service = $service;
     }
 
     /**
@@ -39,7 +41,7 @@ class SendService extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Vous avez reçu un message dont le contenu est: ' . $this->message->body)
+            ->line('Vous avez reçu un message dont le contenu est: ' . $this->message)
             ->line('Concernant le service:')
             ->action('Lien vers le détail du service', route('detail_service', $this->service->slug))
             ->action('Lire le message', url('chatify/'.$this->message))
